@@ -1,0 +1,5 @@
+char - character
+iter - iterator
+rect - rectangle
+Txtr - Texture
+vtx  - vertex

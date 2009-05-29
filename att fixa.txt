@@ -1,0 +1,51 @@
+-  Kör med 3 lägen för ett state?
+	1: Exakt 1 barn aktivt
+	2: Alla barn aktiva
+	3: Godtyckliga barn vara aktiva
+
+   istället för 2 som jag kör nu, paralell = true/false
+
+-  Kunna lägga till states och ta bort states ur trädet under körning.
+   Detta för att kunna ploppa upp nya fönster som är oberoende av varandra i ett visst delträd.
+   Man kan inte veta hur många fönster som kommer att öppnas, därför vill man kunna lägga till nya under körning.
+
+
+-  Fixa så att active children hanteras på ett bättre sätt. skall state lägga in sig i active children?
+-  lägga in initNamespace funktion i SGui?
+-  skriv inline till funktioner i h filer korrekt (även konstruktorer)
+-  HItta på nytt namn till funktionen Rect::intersectWidth
+-  Eventuellt skippa glTranslate i State::renderTree och istället använda globalPos som skickas med.
+-  Lägg till möjlighet till clipping för mouse events också (använd samma clipping rektangle)
+
+-  Fixa antingen multipelt arv med gemensam stamfader angående Rect och CRect
+   eller använda bara CRect överallt fast med virtuella funktuioner så man kan overrida setPos mm.
+
+-  Fixa const TreeIter i State så att treeSize funktionen kan vara const.
+-  Kan paralell verkligen vara public? Man får väl inte ändra den
+   under körning? StateHndlr förutsätter väl att den ej ändras?
+
+-  Börja ej med understreck på defines är reserverat!!!
+
+-  Ej köra att states och renderings objekt har en position, utan definiera positionen
+   hos föräldern till objektet istället? (Föräldern sparar ett par bestående av objektet och en position)
+
+-  Kanske dumt nu pga att mouse over skickas efter att alla states har startats,
+   men mouse away skickas allt eftersom varje state avslutas.
+
+-  Se till att om man flyttar ActionSurface objekt så måste alla lokala mouse positions att updateras
+
+-  Image konstruktorer, göra om lite grann size skall kunna autosättas med hjälp av storlek på Txtr
+-  Minnesläckage i Text::writeFieldTOVtxArr  TextUnits ??
+-  State konstruktor, konstruktor anropet till basklassen CRect kanske skall vara en annan position?
+	hur göra med negativa positioner vid klick osv?
+-  State ärver av Slot, men kanske bara tillfälligt, Slot har medlemsfunktioner som getChild osv.. 
+   konceptet krockar med States egna children. kombinera koncepten så att man kan varva med states och slotsequences.
+   Går det att använda XML för att strukturera detta o i hur stor utsträckning?
+
+-  Fixa så att det finns en Bas-Rektangel som inte håller sin egna position utan bara är ett "interface" för rektanglar.
+   (Använd virtuella funktioner för att hämta psotion och size)
+   Då kan man skapa en variant av en sådan bas-rektangel som bara länkar vidare en annan rektangel.
+
+
+-  Bugg med action surfaces. Om 2 st ligger brevid varandra så kan den blanda ihop dem när man för musen mellan dom.
+   Kanske även påverkar med clippning vilket förstör så att mouse_away inte skickas.

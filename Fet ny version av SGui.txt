@@ -1,0 +1,37 @@
+1.  Istället för paralell = true/false så har man 3 lägen:   activity = all,one,any    istället.. 
+2.  Gå tillbaks till den gamla idén med bara States för att ändra utséende. (Se över motorn för att se om States kan göras lättare)
+    Fördelen med detta är att Event hanteringen kanske kan göras lättare. (Nästan alla events kommer bara att ändra states)
+    Se över om det är möjligt att States själva skickar events mellan varandra istället för att man har event recievers.
+    Action Surfaces kommer naturligtvis behövas men det kan ju vara ett eget special state
+3.  Lättare States: 
+	3.1. Ha flera varianter på states som är 1 children, 2 children, 3 children  o.s.v.
+	     Då behövs ingen vektor för att spara barnen i dessa states.
+	3.2. Kanske inte ha RenderObj att lagra i State så som det är nu utan istället använda States som "RenderObj"
+	     Alltså dedikerade States för olika typer av uppritning.
+4.  Mer dynamiskt StateTree:  State trädet behöver bli mer dynamiskt med möjlighet att lägga till och ta bort states under körningen.
+    Tillåt dock inte att lägga till states under tiden man går in och ut ur states. Då läggs istället dessa state på kö för att läggas in i trädet så snart det genomfört byten klart.
+    Hm.. eller det beror kanske på.. man kanske vill att det är det nya statet som skall "entras"
+    Man skall kunna lägga till ett helt delträd på en gång. Alltså tillåta mergning av träd. Detta får dock inte leda till krångel
+    med ID nummer. Man måste enkelt kunna identifiera states. Kanske  använda "sökvägar" i state trädet? Så att man lokalt kan uttrycka states
+    utan att övriga trädet påverkar. Man kanske skall ha en datastruktur för "commonFathers" men inte uppdatera den med en gång utan istället spara ett resultat i den
+    när man bytt state "live". Nej! Sökvägar är lösningen till detta också! Med sökvägar behövs ingen CommonFathers-structur längre. Men det är bättre att starta
+    ifrån botten (trädets rot) när man vill hitta Common Father. Då blir algoritmen O(n) Och med sökvägar behöver man ju inte följa en massa pekare och läsa i många objekt
+    utan bara jämföra sökvägarna med varandra. (Blir antingen en lång sträng eller en array av integers beroende på vilken lösning man gör.)
+    Kanske använda integer namn på states? T.ex. root::int_state_1::13    Kan representera antingen Enums och/eller kanske värden som t.ex. ett pixel värde.
+    I sökvägar kan man byta ut enskilda delar mot variabler. T.ex. root:&active_column:image_state    en variabel kan ersätta en enskild nod men kanske även flera noder på en gång..
+
+5.  Tänk på att försöka stödja input rutor. Text fält där man kan skriva och kanske även där man kan hoppa upp och ner rad för rad.. även console-fönster liknande lösningar.
+6.  Många grafiska objekt brukar ha borders. Se till att borders inte blir alltför omständigt.
+7.  "EventRecievers" Är det möjlight att använda t.ex. en slags EventReciever (kanske samma som som finns nu) som har minst ett ensamt integer värde som kan tolkas som "vad som helst"
+    Sändare och mottagare kan t.ex. använda samma enum lista och därmed ändå använda symboliska namn.
+8.  Skall positioner verkligen vara en dela av objekten själva? Ifall det inte är det så kan samma renderbara objekt vara medlem av flera andra.
+    (Men om vi byter till states-only blir det inte svårt att göra det möjligt för ett state att vara medlem av flera andra states (krångligt med funktionella medlemsvariabler)
+9.  Håll fula C bibliotek utanför SGui projektet genom att använda en "gränssnitts-dll" som sköter kommunikation med opengl (Då kan den dll filen bytas ut också om man vill mot ett helt annat interface)
+10. Fundera på i vilken riktning y positionerna skall öka. (enklast igentligen att ha från toppen och nedåt som windows, istället för som openGL)
+11. Olika state bör kunna "samverka" om samma objekt? T.ex. samma knapp öppnar och stänger någonting.
+    Man vill helst inte ha if sats som frågar vilket state vi är i för att byta state. Man vill ju kanske ha olika instanser av event recievers beroende på vilket state vi är i.
+    (Alltså knappen som är ett eget state-tree skall helst samverka med andra states vid sidan av. (Eller nån annan lösning, men detta är problemet iaf)
+12. Se till att skriva om koden och fixa mouse_away och mouse_over tile buggarna i samband med ActionSurfaces
+13. Går det att få reuse av komponenter genom att använda opengl matris operationer? alltså rita samma objekt på flera ställen med olika translations?
+14. Använd unicode i projektet
+15. Använd d_assert och r_assert eller motsvarande (ännu fler nivåer kanske)
