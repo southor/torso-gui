@@ -42,12 +42,12 @@ namespace SGui
 	{
 		if (statesStack.empty())
 		{
-			assert(root); // Is not allowed to call ++ if this is the end iterator.
+			dAssert(root); // Is not allowed to call ++ if this is the end iterator.
 			root = NULL;
 		}
 		else
 		{					
-			assert(statesStack.back() != endStack.back()); // We must be at an element
+			dAssert(statesStack.back() != endStack.back()); // We must be at an element
 
 			++statesStack.back();
 		
@@ -69,7 +69,7 @@ namespace SGui
 	{
 		if (statesStack.empty())
 		{
-			assert(root);
+			dAssert(root);
 			return root;
 		}
 		else
@@ -110,7 +110,7 @@ namespace SGui
 
 	//void State::exitFrom(StateHndlr *stateHndlr)
 	//{
-	//	assert(active);
+	//	dAssert(active);
 	//	
 	//	if (isLeaf())
 	//	{
@@ -127,7 +127,7 @@ namespace SGui
 	//	}
 	//	else
 	//	{
-	//		assert(activeChild);
+	//		dAssert(activeChild);
 	//		activeChild->exitFrom(stateHndlr);			
 	//	}
 
@@ -138,11 +138,11 @@ namespace SGui
 
 	//void State::exitTo(StateHndlr *stateHndlr, State *state)
 	//{
-	//	assert(active); // TODO correct?
+	//	dAssert(active); // TODO correct?
 	//	
 	//	if ((this != state) && (childActivity == 0))
 	//	{
-	//		assert(parent);
+	//		dAssert(parent);
 	//		
 	//		exit();
 	//		--(parent->childActivity);
@@ -162,13 +162,13 @@ namespace SGui
 	//			 * Must be this case becuase otherwise the child would also
 	//			 * been active and then this call should not have happen.
 	//			 */
-	//			assert(!paralell);
+	//			dAssert(!paralell);
 
 	//			activeChild->enterTo(stateHndlr);
 	//		}
 	//		else
 	//		{
-	//			assert(isLeaf());
+	//			dAssert(isLeaf());
 	//		}
 	//	}
 	//	else
@@ -183,7 +183,7 @@ namespace SGui
 	//		else
 	//		{
 	//			// This is the root state
-	//			assert((childActivity == 0) || !paralell);
+	//			dAssert((childActivity == 0) || !paralell);
 
 	//			enterTo(stateHndlr);
 	//		}
@@ -193,7 +193,7 @@ namespace SGui
 
 	//void State::enterTo(StateHndlr *stateHndlr)
 	//{
-	//	assert(!active);
+	//	dAssert(!active);
 	//	
 	//	active = true;
 	//	if (parent) ++(parent->childActivity);
@@ -214,7 +214,7 @@ namespace SGui
 	//	}
 	//	else
 	//	{
-	//		assert(activeChild);
+	//		dAssert(activeChild);
 	//		activeChild->enterTo(stateHndlr);			
 	//	}
 
@@ -275,12 +275,12 @@ namespace SGui
 
 	void State::addChild(State *state, int id)
 	{
-		assert(!this->active);
-		assert(!state->active);	
-		assert(state->isLeaf());
+		dAssert(!this->active);
+		dAssert(!state->active);	
+		dAssert(state->isLeaf());
 		
 		State *root = getRoot();
-		assert(root->getId() == 0);
+		dAssert(root->getId() == 0);
 
 		int greatestId = 0;
 		TreeIter it = root->treeBegin();
@@ -343,7 +343,7 @@ namespace SGui
 						return;
 					}					
 				}
-				assert(false); // if reaching here something is wrong
+				dAssert(false); // if reaching here something is wrong
 			}
 		}
 	}
@@ -482,7 +482,7 @@ namespace SGui
 
 	bool State::handleMouseMoveEvent(const Rect &parentUsedClipRect, Pos mousePos, bool indirect)
 	{	
-		assert(active);
+		dAssert(active);
 
 		bool hitOccured = false;
 
@@ -505,7 +505,7 @@ namespace SGui
 			}
 			else if (!isLeaf())
 			{
-				assert(activeChild);
+				dAssert(activeChild);
 				hitOccured = hitOccured || activeChild->handleMouseMoveEvent(usedClipRect, mousePos, hitOccured || indirect);
 			}
 

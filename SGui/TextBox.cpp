@@ -17,10 +17,10 @@ namespace SGui
 		: RenderObj(pos, size), font(font), xAlign(xAlign), yAlign(yAlgin), textString(textString), autoUpdate(autoUpdate),  updateNeeded(true),
 		  nVtx(0), vtxArr(NULL), colorArr(NULL), txtrCoordArr(NULL)
 	{
-		//assert(checkFlags(xAlign, ALLOWED_X_ALIGNS));
-		//assert(checkFlags(yAlign, ALLOWED_Y_ALIGNS));
-		assert(checkAlternative(xAlign, N_X_ALIGNS));
-		assert(checkAlternative(yAlign, N_Y_ALIGNS));
+		//dAssert(checkFlags(xAlign, ALLOWED_X_ALIGNS));
+		//dAssert(checkFlags(yAlign, ALLOWED_Y_ALIGNS));
+		dAssert(checkAlternative(xAlign, N_X_ALIGNS));
+		dAssert(checkAlternative(yAlign, N_Y_ALIGNS));
 		
 		updateVtxArrs();
 	}
@@ -37,7 +37,7 @@ namespace SGui
 
 	bool TextBox::updateVtxArrs()
 	{						
-		assert(isConsistent());
+		dAssert(isConsistent());
 		
 		if (nVtx > 0)
 		{
@@ -118,7 +118,7 @@ namespace SGui
 
 	void TextBox::render()
 	{ 
-		assert(!updateNeeded);
+		dAssert(!updateNeeded);
 		
 		if (nVtx > 0)
 		{			

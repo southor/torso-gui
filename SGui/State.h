@@ -217,7 +217,7 @@ namespace SGui
 		 */
 		inline void addChild(State *state)
 		{
-			assert(state->id == 0);
+			dAssert(state->id == 0);
 			addChild(state, 0);		
 		}
 

@@ -5,6 +5,7 @@
 #include "basic_includes.h"
 //#include "gl_includes.h"
 #include "gl_declares.h"
+#include "macros.h"
 
 #include <map>
 #include <string>
@@ -84,23 +85,23 @@ namespace SGui
 		inline uint getHeight() const						{ return height; }
 		inline Vec getSize() const							{ return Vec(width, height); }
 
-		inline const Pixel4 *getPixels() const				{ assert(hasImage());
+		inline const Pixel4 *getPixels() const				{ dAssert(hasImage());
 															  return pixels; }
 
-		inline Pixel4 *getPixelsForChanging()				{ assert(hasImage());
+		inline Pixel4 *getPixelsForChanging()				{ dAssert(hasImage());
 													          return pixels; }
 
 		inline uint getPixelIndex(uint x, uint y) const		{ return y*(width) + x; }
 
-		inline const Pixel4 &getPixel(uint i) const			{ assert(hasImage());
+		inline const Pixel4 &getPixel(uint i) const			{ dAssert(hasImage());
 															  if (!(i < width*height))
-																assert(i < width*height);
+																dAssert(i < width*height);
 															  return pixels[i]; }
 
 		Pixel4 getInterpoolatedPixel(float x, float y) const;
 
-		inline void setPixel(uint i, const Pixel4 &pixel)	{ assert(hasImage());
-															  assert(i < width*height);
+		inline void setPixel(uint i, const Pixel4 &pixel)	{ dAssert(hasImage());
+															  dAssert(i < width*height);
 															  pixels[i] = pixel; }
 
 		inline const Pixel4 &getPixel(uint x, uint y) const			{ return getPixel(getPixelIndex(x, y)); }		

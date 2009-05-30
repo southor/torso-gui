@@ -15,7 +15,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	
 
 	std::cout << "Test State Gui" << std::endl;
-	SGui::testFiles(); // TODO, maybe initing opengl should be done before testFiles, otherwise problems with texture ids might appear.
+	SGui::testFiles("../Test/graphics/fonts"); // TODO, maybe initing opengl should be done before testFiles, otherwise problems with texture ids might appear.
 
 	
 
@@ -88,19 +88,20 @@ int _tmain(int argc, _TCHAR* argv[])
 	
 
 
-
+	//SGui::pln("test70");
 
 
 
 
 	window.run();
+	//SGui::pln("test75");
 	window.stateHndlr.exitTree();
 
 	//char a[32];
 	//std::cin >> a;
 	
 
-
+	
 
 
 	return 0;

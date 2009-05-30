@@ -57,7 +57,7 @@ namespace SGui
 					   defaultYAlign(defaultXAlign)
 		{
 			//TODO use exceptions?
-			assert(checkAlternative(direction, N_DIRECTIONS));
+			dAssert(checkAlternative(direction, N_DIRECTIONS));
 
 			
 		}

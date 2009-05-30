@@ -21,7 +21,7 @@ namespace SGui
 			T value;
 
 			Action()														{}
-			Action(T *target) : target(NULL)								{ assert(target == NULL); }
+			Action(T *target) : target(NULL)								{ dAssert(target == NULL); }
 			Action(T *target, T value) : target(target), value(value)		{}
 
 			inline static Action getDefaultAction()							{ return Action(NULL); }

@@ -14,7 +14,7 @@ namespace SGui
 
 	Text::WhiteSpace::WhiteSpace(const Font *font, char whiteSpaceChar, int mods) : c(whiteSpaceChar)
 	{				
-		assert(isWhiteSpace(whiteSpaceChar));				
+		dAssert(isWhiteSpace(whiteSpaceChar));				
 		incWidth(font->getCharWidth(whiteSpaceChar, mods));
 	}
 
@@ -132,8 +132,8 @@ namespace SGui
 
 	Text::Text(Font *font, const char *textString) : font(font), textUnits()
 	{
-		assert(font);
-		assert(textString);
+		dAssert(font);
+		dAssert(textString);
 		
 		static const char RETURN[] = "/n";
 		int returnLength = static_cast<int>(std::strlen(RETURN));
@@ -174,7 +174,7 @@ namespace SGui
 						++textString;
 						
 						// must be a full hex color specification
-						assert(atLeastLength(textString, 6));
+						dAssert(atLeastLength(textString, 6));
 
 						currentColor = Color(textString);
 						textString += 6;
@@ -193,7 +193,7 @@ namespace SGui
 					break;
 					default:
 						// TODO what to do in releaes mode, and what to do in debug?
-						assert(false); //character not allowed
+						dAssert(false); //character not allowed
 					};
 
 					if (modBit != 0)
@@ -205,14 +205,14 @@ namespace SGui
 						}
 						else
 						{
-							assert(beginEq(OFF_STRING, offLength, textString));
+							dAssert(beginEq(OFF_STRING, offLength, textString));
 							currentMods &= ~modBit;
 							textString += offLength;
 						}							
 						modBit = 0;
 					}
 					
-					assert(*textString == END_CHAR);
+					dAssert(*textString == END_CHAR);
 					++textString;
 				}
 			}
@@ -241,10 +241,10 @@ namespace SGui
 
 	void Text::writeFieldToVtxArr(gl_float *vtxArr, gl_float *colorArr, gl_float *txtrCoordArr, Pos pos, Vec fieldSize, int xAlign, int yAlign, float size)
 	{
-		//assert(checkFlags(xAlign, ALLOWED_X_ALIGNS));
-		//assert(checkFlags(yAlign, ALLOWED_Y_ALIGNS));
-		assert(checkAlternative(xAlign, N_X_ALIGNS));
-		assert(checkAlternative(yAlign, N_Y_ALIGNS));
+		//dAssert(checkFlags(xAlign, ALLOWED_X_ALIGNS));
+		//dAssert(checkFlags(yAlign, ALLOWED_Y_ALIGNS));
+		dAssert(checkAlternative(xAlign, N_X_ALIGNS));
+		dAssert(checkAlternative(yAlign, N_Y_ALIGNS));
 		
 		Unit *textUnit;
 		
@@ -285,7 +285,7 @@ namespace SGui
 						// must split.
 						Unit *newUnit = textUnit->split(fieldSize.x);
 						lPos.x += textUnit->writeToVtxArr(currVtxArr, currColorArr, currTxtrCoordArr, pos + lPos, size);
-						assert(textUnit->getNReturns() == 0);
+						dAssert(textUnit->getNReturns() == 0);
 						
 						textUnits[i] = newUnit;
 					}

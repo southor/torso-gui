@@ -27,7 +27,7 @@ namespace SGui
 
 	//bool ActionSurface::handleMouseEvent(State *state, int id, int mouseEvent, bool indirect, Pos eventPos)
 	//{
-	//	assert(checkFlags(mouseEvent, ALL_MOUSE_EVENTS));
+	//	dAssert(checkFlags(mouseEvent, ALL_MOUSE_EVENTS));
 	//	
 	//	bool hit = (covering(eventPos) && (acceptIndirectEvents || !indirect));
 	//	bool acceptsOverAwayEvents = (filter(MOUSE_OVER_TILE | MOUSE_AWAY_FROM_TILE) != 0);
@@ -60,8 +60,8 @@ namespace SGui
 	//			}
 	//			else
 	//			{
-	//				assert(checkFlags(mouseEvent, ALL_MOUSE_BUTTON_EVENTS)); // Only mouse button events should be left
-	//				assert(checkFlags(ALL_MOUSE_BUTTON_EVENTS, ALL_GRID_EVENTS)); // Should be grid events
+	//				dAssert(checkFlags(mouseEvent, ALL_MOUSE_BUTTON_EVENTS)); // Only mouse button events should be left
+	//				dAssert(checkFlags(ALL_MOUSE_BUTTON_EVENTS, ALL_GRID_EVENTS)); // Should be grid events
 	//				
 	//				int filteredGridEvent = filter(mouseEvent);
 	//				if (eventReciever && filteredGridEvent)
@@ -98,7 +98,7 @@ namespace SGui
 
 	void ActionSurface::handleMouseButtonEvent(State *state, int id, int mouseButtonEvent)
 	{
-		assert(checkFlags(mouseButtonEvent, ALL_MOUSE_BUTTON_EVENTS_BITS));
+		dAssert(checkFlags(mouseButtonEvent, ALL_MOUSE_BUTTON_EVENTS_BITS));
 		
 		if (mouseIsOver())
 		{

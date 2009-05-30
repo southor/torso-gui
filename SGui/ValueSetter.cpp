@@ -12,12 +12,12 @@ namespace SGui
 	template <typename T>
 	void ValueSetter<T>::recieveEvent(const GridEventInfo &info)
 	{
-		assert(between(info.gridEvent, 0, N_GRID_EVENTS-1));		
+		dAssert(between(info.gridEvent, 0, N_GRID_EVENTS-1));		
 
 		const Action &action = actionList[info.gridEvent];
 		if (action.target)
 		{
-			//assert( absFun(static_cast<int>(*(action.target)) - static_cast<int>(action.value)) <= 1);
+			//dAssert( absFun(static_cast<int>(*(action.target)) - static_cast<int>(action.value)) <= 1);
 			*(action.target) = action.value;
 
 			info.gridPos.

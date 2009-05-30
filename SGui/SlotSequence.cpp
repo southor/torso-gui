@@ -32,7 +32,7 @@ namespace SGui
 		}
 		else
 		{
-			assert(direction == VERTICAL);
+			dAssert(direction == VERTICAL);
 			for(; it != end; ++it)
 			{
 				resultTension += it->updateSize(tension);
@@ -70,7 +70,7 @@ namespace SGui
 		}
 		else
 		{
-			assert(direction == VERTICAL);
+			dAssert(direction == VERTICAL);
 			for(; it != end; ++it)
 			{
 				it->setY(offset);

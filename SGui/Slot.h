@@ -94,13 +94,13 @@ namespace SGui
 
 		//bool childIsSlotSequence() const
 		//{
-		//	assert(isConsistent());
+		//	dAssert(isConsistent());
 		//	return slotSequence;
 		//}
 
 		//bool childIsObj() const
 		//{
-		//	assert(isConsistent());
+		//	dAssert(isConsistent());
 		//	return obj;
 		//}
 

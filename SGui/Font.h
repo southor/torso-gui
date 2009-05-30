@@ -4,6 +4,7 @@
 #include "basic.h"
 #include "Txtr.h"
 #include "function_templates.h"
+#include "macros.h"
 
 #include <vector>
 #include <string>
@@ -104,7 +105,7 @@ namespace SGui
 
 		inline gl_uint getTxtrId() const						{ return combinedFontTxtrId; }
 		
-		inline int getCharWidth(char c, int mods) const		{ assert(checkFlags(mods, ALLOWED_MODS));
+		inline int getCharWidth(char c, int mods) const		{ dAssert(checkFlags(mods, ALLOWED_MODS));
 															  return charWidths[mods][c]; }
 
 		inline int getCharHeight()							{ return charHeight; }

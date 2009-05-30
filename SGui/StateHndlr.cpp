@@ -2,6 +2,7 @@
 #define _STATE_GUI_STATE_HANDLER_CPP_
 
 #include "StateHndlr.h"
+#include "functions.h"
 //#include "function_templates.h"
 #include <limits>
 #include <iostream>
@@ -20,7 +21,7 @@ namespace SGui
 
 	StateHndlr::StatePairArr::StatePairArr(int nStates) : nStates(nStates)
 	{
-		assert(nStates >= 0);
+		dAssert(nStates >= 0);
 		
 		arr = new State*[nStates * nStates];
 		zeroFun(arr, nStates * nStates);
@@ -33,9 +34,9 @@ namespace SGui
 	
 	void StateHndlr::StatePairArr::insert(State *state1, State *state2, State *mapState)
 	{
-		assert(state1->isConsistent());
-		assert(state2->isConsistent());
-		assert(mapState->isConsistent());
+		dAssert(state1->isConsistent());
+		dAssert(state2->isConsistent());
+		dAssert(mapState->isConsistent());
 				
 		arr[state1->getId()*nStates + state2->getId()] = mapState;
 		arr[state2->getId()*nStates + state1->getId()] = mapState;
@@ -43,8 +44,8 @@ namespace SGui
 			
 	State* StateHndlr::StatePairArr::get(State *state1, State *state2)
 	{
-		assert(state1->isConsistent());
-		assert(state2->isConsistent());
+		dAssert(state1->isConsistent());
+		dAssert(state2->isConsistent());
 
 		return get(state1->getId(), state2->getId());
 	}
@@ -58,8 +59,8 @@ namespace SGui
 
 	void StateHndlr::recFillCommonFathers(State *a, State *b, State *commonFather)
 	{
-		assert(a && b && commonFather);
-		assert(commonFathers);
+		dAssert(a && b && commonFather);
+		dAssert(commonFathers);
 		
 		if (commonFathers->get(a, b) == NULL)
 		{
@@ -95,7 +96,7 @@ namespace SGui
 		}
 		else
 		{
-			assert(commonFathers->get(a, b) == commonFather);
+			dAssert(commonFathers->get(a, b) == commonFather);
 		}
 	}
 
@@ -109,12 +110,12 @@ namespace SGui
 		if (storedCommonFather == NULL)
 			recFillCommonFathers(a, b, commonFather);
 		else	
-			assert(storedCommonFather == commonFather);
+			dAssert(storedCommonFather == commonFather);
 	}
 
 	void StateHndlr::stateExitFrom(State *state)
 	{
-		assert(state->active);
+		dAssert(state->active);
 		
 		if (state->isLeaf())
 		{
@@ -131,7 +132,7 @@ namespace SGui
 		}
 		else
 		{
-			assert(state->activeChild);
+			dAssert(state->activeChild);
 			stateExitFrom(state->activeChild);			
 		}
 
@@ -140,11 +141,11 @@ namespace SGui
 
 	void StateHndlr::stateExitTo(State *state, State *toState)
 	{
-		assert(state->active); // TODO correct?
+		dAssert(state->active); // TODO correct?
 		
 		if ((state != toState) && (state->childActivity == 0))
 		{
-			assert(state->parent);
+			dAssert(state->parent);
 			
 			state->executeExit();
 			stateExitTo(state->parent, toState);
@@ -163,13 +164,13 @@ namespace SGui
 				 * Must be this case becuase otherwise the child would also
 				 * been active and then this call should not have happen.
 				 */
-				assert(!state->paralell);
+				dAssert(!state->paralell);
 
 				stateEnterTo(state->activeChild);				
 			}
 			else
 			{
-				assert(state->isLeaf());
+				dAssert(state->isLeaf());
 			}
 			return state->activeChild;
 			
@@ -186,7 +187,7 @@ namespace SGui
 			else
 			{
 				// This is the root state
-				assert((state->childActivity == 0) || !state->paralell);
+				dAssert((state->childActivity == 0) || !state->paralell);
 
 				stateEnterTo(state);
 
@@ -198,7 +199,7 @@ namespace SGui
 
 	void StateHndlr::stateEnterTo(State *state)
 	{
-		assert(!state->active);
+		dAssert(!state->active);
 		
 		state->active = true;
 		if (state->parent) ++(state->parent->childActivity);
@@ -219,7 +220,7 @@ namespace SGui
 		}
 		else
 		{
-			assert(state->activeChild);
+			dAssert(state->activeChild);
 			stateEnterTo(state->activeChild);			
 		}
 
@@ -237,7 +238,7 @@ namespace SGui
 
 	StateHndlr::~StateHndlr()
 	{
-		assert(activeStateLeaves.size() == 0); // TODO use exceptions
+		dAssert(activeStateLeaves.size() == 0); // TODO use exceptions
 		if (commonFathers) delete commonFathers;
 	}
 
@@ -247,8 +248,8 @@ namespace SGui
 		this->root = root;
 		
 		
-		assert(root->recIsConsistent());
-		//assert(!(flags & ~SET_IDS));
+		dAssert(root->recIsConsistent());
+		//dAssert(!(flags & ~SET_IDS));
 		//
 		//// set id's
 		//if (flags & SET_IDS)
@@ -284,7 +285,7 @@ namespace SGui
 		}
 
 
-		assert(activeStateLeaves.size() == 0);
+		dAssert(activeStateLeaves.size() == 0);
 	}
 
 	State* StateHndlr::getState(const std::string &name)
@@ -296,7 +297,7 @@ namespace SGui
 
 	void StateHndlr::enterState(State *state)
 	{
-		assert(root);
+		dAssert(root);
 
 		if (state->active == false)
 		{
@@ -313,7 +314,7 @@ namespace SGui
 					currentLeaf = activeStateLeaves.back();
 					activeStateLeaves.pop_back();
 					State *commonState = getCommonFather(state, currentLeaf);
-					assert(commonState);
+					dAssert(commonState);
 					if (commonState->paralell) activeStateLeaves.push_front(currentLeaf);
 					//else currentLeaf->exitTo(this, commonState);
 					else stateExitTo(currentLeaf, commonState);
@@ -329,7 +330,7 @@ namespace SGui
 			//lowestInactiveState->getUsedClipRect(clipRect);
 			//clipRect.setPos(clipRect.getPos() + lowestInactiveState->getPos()); // to parent coordinates
 			//
-			//assert(lowestInactiveState);
+			//dAssert(lowestInactiveState);
 			//lowestInactiveState->handleMouseMoveEvent(clipRect, false, mousePos);
 
 			
@@ -339,7 +340,7 @@ namespace SGui
 
 	void StateHndlr::restartState(State *state)
 	{
-		assert(root);
+		dAssert(root);
 
 		stateExitFrom(state);
 		
@@ -372,7 +373,8 @@ namespace SGui
 
 	void StateHndlr::exitTree()
 	{
-		assert(root);
+		dAssert(root);
+		//pln("exitTree: 15");
 		
 		//TODO correct? should we not pop back one at a time?
 		ActiveStateLeaves::iterator iter = activeStateLeaves.begin();

@@ -27,7 +27,7 @@ namespace SGui
 	void Font::loadCharWidths(const char *filename, uchar maxWidth, uchar *charWidths)
 	{
 		std::ifstream file(filename);
-		assert(file.good());
+		dAssert(file.good());
 
 		uchar in;
 		for(int i=0; i<N_CHARS; ++i)
@@ -37,7 +37,7 @@ namespace SGui
 			if (in > maxWidth)
 			{
 				in = maxWidth;
-				//assert(in <= maxWidth);
+				//dAssert(in <= maxWidth);
 			}
 			charWidths[i] = in;			
 		}
@@ -57,7 +57,7 @@ namespace SGui
 	Font::Font(const char *fontDirectory, Vec fontImageNCharacters)
 		: fontImageNCharacters(fontImageNCharacters)
 	{
-		assert(std::strlen(MOD_SYMBOLS) == N_MODS);
+		dAssert(std::strlen(MOD_SYMBOLS) == N_MODS);
 
 		const int &B = B_BIT;
 		const int &U = U_BIT;
@@ -80,7 +80,7 @@ namespace SGui
 			this->fontImagePos[B|U|I] = Pos(1, 2);			
 		break;
 		default:
-			assert(false);
+			dAssert(false);
 		break;
 		}
 
@@ -169,7 +169,7 @@ namespace SGui
 	
 	int Font::writeCharToVtxArr(char c, int mods, Color3f color, gl_float *vtxArr, gl_float *colorArr, gl_float *txtrCoordArr, Pos pos, float size) const
 	{		
-		assert((mods >= 0) && checkFlags(mods, ALLOWED_MODS));
+		dAssert((mods >= 0) && checkFlags(mods, ALLOWED_MODS));
 
 
 		// Write to vertex array

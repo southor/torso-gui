@@ -5,8 +5,10 @@
 
 //#include "gl_includes.h"
 #include "basic_includes.h"
+#include "macros.h"
 
 #include "gl_includes.h"
+
 
 namespace SGui
 {
@@ -27,7 +29,7 @@ namespace SGui
 
 	void Box::setDisplayList(GLenum mode)
 	{
-		assert(sizeof(GLint) == sizeof(int));
+		dAssert(sizeof(GLint) == sizeof(int));
 		
 		glNewList(displayList, mode);			
 			renderTo();

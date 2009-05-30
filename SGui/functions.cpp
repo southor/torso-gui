@@ -2,15 +2,17 @@
 #define _STATE_GUI_FUNCTIONS_CPP_
 
 #include "functions.h"
+#include <iostream>
 
 #include "basic_includes.h"
+#include "macros.h"
 
 namespace SGui
 {
 	
 	int strNEq(const char *str1, const char *str2)
 	{
-		assert(str1 && str2);
+		dAssert(str1 && str2);
 		
 		const char *originalStr1 = str1;
 		while((*str1 == *str2) && (*str1 != '\0'))
@@ -30,15 +32,15 @@ namespace SGui
 
 	bool beginEq(const char *shortStr, int shortStrLength, const char *longStr)
 	{
-		assert(shortStrLength >= 0);
-		assert(std::strlen(shortStr) == shortStrLength);
+		dAssert(shortStrLength >= 0);
+		dAssert(std::strlen(shortStr) == shortStrLength);
 
 		return (strNEq(shortStr, longStr) == shortStrLength);
 	}
 
 	int strLenLimit(const char *str, int limit)
 	{
-		assert(str);
+		dAssert(str);
 		int i;
 		for(i=0; i<limit; ++i)
 		{
@@ -68,20 +70,25 @@ namespace SGui
 		}
 		else
 		{
-			assert(false); // not an acceptable character
+			dAssert(false); // not an acceptable character
 			return 0;
 		}
 	}
 
 	int readHexByte(const char *str)
 	{
-		assert(atLeastLength(str, 2));
+		dAssert(atLeastLength(str, 2));
 
 		int returnVal = 0;
 		returnVal += readHexChar(str[0]) * 16;
 		returnVal += readHexChar(str[1]);
 
 		return returnVal;
+	}
+
+	void pln(const char *str)
+	{
+		std::cout << str << std::endl;
 	}
 
 };

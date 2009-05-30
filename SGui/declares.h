@@ -9,7 +9,7 @@
 //#include <GL/gl.h>
 //#include <GL/glu.h>
 //
-//#include "assert.h"
+//#include "dAssert.h"
 
 #define NULL 0
 

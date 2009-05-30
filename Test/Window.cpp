@@ -3,6 +3,7 @@
 
 #include "Window.h"
 #include "Txtr.h"
+#include "macros.h"
 
 
 Window::Window() : screen(NULL), stateHndlr()//, font(NULL)
@@ -19,16 +20,11 @@ Window::~Window()
 
 void Window::run()
 {
-	bool running = true;
-	while(running)
+	while(true)
 	{
-		running = !pollEvents();
+		if (pollEvents()) break;
 		
 		render();
-
-
-
-
 		SDL_GL_SwapBuffers();
 	}
 }	
@@ -179,7 +175,7 @@ void Window::init()
 	screen = SDL_SetVideoMode(w, h, bpp, flags);
 	if (screen == 0)
 	{
-		assert(false);
+		rAssert(false);
 		//throw EXCEPTION("Failed to set video mode");
 	}
 	

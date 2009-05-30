@@ -5,43 +5,43 @@
 
 namespace SGui
 {
-	void testFiles()
+	void testFiles(const char *fontsPath)
 	{
 		// ----------- testing State ------------
 		
 		State *state1 = new State();
 		
-		assert(state1->isConsistent());
-		assert(state1->getNChildren() == 0);
-		assert(state1->getTreeSize() == 1);
+		dAssert(state1->isConsistent());
+		dAssert(state1->getNChildren() == 0);
+		dAssert(state1->getTreeSize() == 1);
 
 		State *state2 = new State();
 		
-		assert(state2->isConsistent());
+		dAssert(state2->isConsistent());
 		
 		state1->addChild(state2);
 
-		assert(state1->getNChildren() == 1);
-		assert(state1->getTreeSize() == 2);
-		assert(state2->getTreeSize() == 1);
-		assert(state1->childrenBegin() != state1->childrenEnd());
-		assert(*(state1->childrenBegin()) == state2);
+		dAssert(state1->getNChildren() == 1);
+		dAssert(state1->getTreeSize() == 2);
+		dAssert(state2->getTreeSize() == 1);
+		dAssert(state1->childrenBegin() != state1->childrenEnd());
+		dAssert(*(state1->childrenBegin()) == state2);
 
 		State *state3 = new State();
 
 		state1->addChild(state3);
 
-		assert(state1->getTreeSize() == 3);
+		dAssert(state1->getTreeSize() == 3);
 		
 		State::TreeIter iter = state1->treeBegin();
 		
-		assert(*iter == state2);
+		dAssert(*iter == state2);
 		++iter;
-		assert(*iter == state3);
+		dAssert(*iter == state3);
 		++iter;
-		assert(*iter == state1);
+		dAssert(*iter == state1);
 		++iter;
-		assert(iter == state1->treeEnd());
+		dAssert(iter == state1->treeEnd());
 
 
 
@@ -55,21 +55,31 @@ namespace SGui
 		//stateHndlr->setStateTree(state1, StateHndlr::SET_IDS);
 		stateHndlr->setStateTree(state1);
 
-		assert(stateHndlr->getCommonFather(state1, state1) == state1);
-		assert(stateHndlr->getCommonFather(state1, state2) == state1);
-		assert(stateHndlr->getCommonFather(state1, state3) == state1);
-		assert(stateHndlr->getCommonFather(state2, state2) == state2);
-		assert(stateHndlr->getCommonFather(state2, state3) == state1);
-		assert(stateHndlr->getCommonFather(state3, state3) == state3);
+		dAssert(stateHndlr->getCommonFather(state1, state1) == state1);
+		dAssert(stateHndlr->getCommonFather(state1, state2) == state1);
+		dAssert(stateHndlr->getCommonFather(state1, state3) == state1);
+		dAssert(stateHndlr->getCommonFather(state2, state2) == state2);
+		dAssert(stateHndlr->getCommonFather(state2, state3) == state1);
+		dAssert(stateHndlr->getCommonFather(state3, state3) == state3);
 
 
 
 		// --------- testing Text ----------
 
-		Font font("../Test/graphics/fonts/arial");
+		//Font font("../Test/graphics/fonts/arial");
+
+		std::string fontsPathStr(fontsPath);
+		std::string fontArialPathStr;
+
+		if (fontsPathStr.length() > 0)
+			fontArialPathStr = fontsPathStr + ((fontsPathStr[fontsPathStr.length()-1] == '/') ? "arial" : "/arial");
+		else
+			fontArialPathStr = "arial";
+		
+		Font font(fontArialPathStr.c_str());
 
 		Text text(&font, "hello world");
-		assert(text.getNChars() == 10);
+		dAssert(text.getNChars() == 10);
 
 
 		// -------------- cleanup ---------------

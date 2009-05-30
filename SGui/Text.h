@@ -24,7 +24,7 @@ namespace SGui
 
 			inline void incWidth(int value)
 			{
-				assert(value >= 0);
+				dAssert(value >= 0);
 				this->width += value;
 			}
 			
@@ -36,7 +36,7 @@ namespace SGui
 
 			//virtual bool isWord()						{ return false; }
 
-			//virtual Word* toWord()						{ assert(false);
+			//virtual Word* toWord()						{ dAssert(false);
 			//											  return NULL; }
 
 			virtual bool isSpace()						{return false; }
@@ -61,7 +61,7 @@ namespace SGui
 			virtual Unit* split(int maxWidth)
 			{
 				// A unit have zero width, split should not be called.
-				assert(false);
+				dAssert(false);
 				return NULL;
 			}
 
@@ -128,7 +128,7 @@ namespace SGui
 
 			Char(char c, int mods, Color color) : c(c), mods(mods), color(color)
 			{
-				assert(isConsistent());
+				dAssert(isConsistent());
 			}
 
 			inline int getWidth(const Font *font)				{ return font->getCharWidth(c, mods); }
@@ -172,9 +172,9 @@ namespace SGui
 			inline void addChar(Char &textChar)
 			{ 
 				// once you have added a return, only more returns is allowed to be added.
-				assert(getNReturns() == 0);
+				dAssert(getNReturns() == 0);
 				
-				assert(textChar.isConsistent());
+				dAssert(textChar.isConsistent());
 				
 				incWidth(textChar.getWidth(font));
 				textChars.push_back(textChar);

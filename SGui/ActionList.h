@@ -3,6 +3,7 @@
 
 #include "Events.h"
 #include "function_templates.h"
+#include <iostream>
 
 #include "basic_includes.h"
 
@@ -26,13 +27,13 @@ namespace SGui
 
 		Action& operator [](int gridEvent)
 		{
-			assert(between(gridEvent, 0, N_GRID_EVENTS-1));
+			dAssert(between(gridEvent, 0, N_GRID_EVENTS-1));
 			return actions[gridEvent];
 		}
 
 		const Action& operator [](int gridEvent) const
 		{
-			assert(between(gridEvent, 0, N_GRID_EVENTS-1));
+			dAssert(between(gridEvent, 0, N_GRID_EVENTS-1));
 			return actions[gridEvent];
 		}
 	};

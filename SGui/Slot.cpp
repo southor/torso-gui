@@ -24,7 +24,7 @@ namespace SGui
 	
 	WRectIfc* Slot::getChild() const
 	{
-		assert(isConsistent());
+		dAssert(isConsistent());
 		
 		WRectIfc *rect = slotSequence;
 		return obj ? obj : (slot ? slot : rect);

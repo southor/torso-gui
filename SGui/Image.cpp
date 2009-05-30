@@ -196,7 +196,7 @@ namespace SGui
 
 	void Image::applyOperations(int operations)
 	{		
-		assert(checkFlags(operations, ALLOWED_OPERATIONS));
+		dAssert(checkFlags(operations, ALLOWED_OPERATIONS));
 		if (operations | MIRROR_X) mirrorX();
 		else if (operations | MIRROR_Y) mirrorY();
 		if (operations | ROTATE_LEFT) rotateLeft();

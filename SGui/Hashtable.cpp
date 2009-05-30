@@ -9,7 +9,7 @@ namespace SGui
 	Hashtable<Element, NullElement, Key, HashFunction>
 		::Hashtable(int size)
 	{
-		assert(size >= 0);
+		dAssert(size >= 0);
 		elements = new ElementGroup[size];
 	}
 
@@ -19,7 +19,7 @@ namespace SGui
 	{
 		HashFunction hashFunction;
 		int i = hashFunction(key);
-		assert(i >= 0);
+		dAssert(i >= 0);
 		elements[i].push_back(e);
 	}
 

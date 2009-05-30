@@ -107,7 +107,7 @@ namespace SGui
 		State* getState(const std::string &name);
 
 		State* getCommonFather(State *a, State *b)		{ State *state = commonFathers->get(a, b);
-																		 assert(state);
+																		 dAssert(state);
 																		 return state; }
 		
 		void enterState(State *state);

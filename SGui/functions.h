@@ -31,6 +31,8 @@ namespace SGui
 
 	int readHexByte(const char *str);
 
+	void pln(const char *str);
+
 };
 
 #endif

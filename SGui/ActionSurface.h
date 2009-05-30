@@ -73,7 +73,7 @@ namespace SGui
 						EventReciever *eventReciever = NULL)
 			: eventReciever(eventReciever), mouseGridPos(-1, -1), gridEventFilter(DEFAULT_GRID_EVENT_FILTER), acceptIndirectEvents(false)
 		{
-			//assert(checkFlags(gridEventFilter, ALL_GRID_EVENTS_BITS));			
+			//dAssert(checkFlags(gridEventFilter, ALL_GRID_EVENTS_BITS));			
 			setPos(pos);
 			setGrid(gridRectSize, nGridRects);
 		}
@@ -85,7 +85,7 @@ namespace SGui
 		ActionSurface(const Pos &pos, const Vec &size, EventReciever *eventReciever = NULL)
 			: ConcreteRectIfc(pos, size), gridRectSize(size), eventReciever(eventReciever), gridEventFilter(DEFAULT_GRID_EVENT_FILTER), acceptIndirectEvents(false)
 		{
-			//assert(checkFlags(gridEventFilter, ALL_GRID_EVENTS_BITS));
+			//dAssert(checkFlags(gridEventFilter, ALL_GRID_EVENTS_BITS));
 		}
 
 		//inline int getGridEventFilter()									{ return gridEventFilter; }

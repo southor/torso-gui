@@ -22,18 +22,18 @@ namespace SGui
 
 	void StateSwitcher::recieveEvent(const GridEventInfo &info)
 	{
-		assert(between(info.gridEvent, 0, N_GRID_EVENTS-1));		
+		dAssert(between(info.gridEvent, 0, N_GRID_EVENTS-1));		
 
 		const Action &action = actionList[info.gridEvent];
 
 		if (action.type == Action::ENTER_STATE)
 		{
-			assert(stateHndlr);
+			dAssert(stateHndlr);
 			stateHndlr->enterState(action.stateId);
 		}
 		else if (action.type == Action::RESTART_STATE)
 		{
-			assert(stateHndlr);
+			dAssert(stateHndlr);
 			stateHndlr->restartState(action.stateId);
 		}
 

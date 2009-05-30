@@ -29,7 +29,7 @@ namespace SGui
 
 	Txtr::Txtr(const Txtr &txtr) : pixels(NULL), width(txtr.getWidth()), height(txtr.getHeight())
 	{
-		assert(txtr.isConsistent());
+		dAssert(txtr.isConsistent());
 		
 		if (txtr.hasImage())
 		{
@@ -68,8 +68,8 @@ namespace SGui
 
 	Txtr &Txtr::operator=(const Txtr &txtr)
 	{
-		assert(txtr.isConsistent());
-		assert(isConsistent());
+		dAssert(txtr.isConsistent());
+		dAssert(isConsistent());
 		
 		removeImage();
 
@@ -105,9 +105,9 @@ namespace SGui
 	                  
 	Txtr::Pixel4 Txtr::getInterpoolatedPixel(float x, float y) const
 	{
-		assert(between(x, 0.0f, static_cast<float>(width)-1.0f));
+		dAssert(between(x, 0.0f, static_cast<float>(width)-1.0f));
 		if (!between(y, 0.0f, static_cast<float>(height)-1.0f))
-			assert(between(y, 0.0f, static_cast<float>(height)-1.0f));
+			dAssert(between(y, 0.0f, static_cast<float>(height)-1.0f));
 
 		uint leftX = static_cast<uint>(x);
 		uint lowY = static_cast<uint>(y);
@@ -161,7 +161,7 @@ namespace SGui
 
 		if ((w == 0) || (h == 0))
 		{
-			assert((w == 0) && (h == 0));
+			dAssert((w == 0) && (h == 0));
 		}
 		else
 		{			
@@ -175,7 +175,7 @@ namespace SGui
 
 	bool Txtr::removeImage()
 	{
-		assert(isConsistent());
+		dAssert(isConsistent());
 		
 		if (hasImage())
 		{
@@ -222,7 +222,7 @@ namespace SGui
 
 	GLuint Txtr::add(const char *name)
 	{
-		assert(isConsistent());
+		dAssert(isConsistent());
 
 		std::string nameStr(name);
 		GLuint txtrId; // result variable
@@ -346,8 +346,8 @@ namespace SGui
 
 	void Txtr::loadColors(const char *fileName, bool initialize)
 	{
-		assert(isConsistent());
-		assert(!hasImage() || !initialize);
+		dAssert(isConsistent());
+		dAssert(!hasImage() || !initialize);
 
 		GLuint w;
 		GLuint h;
@@ -380,8 +380,8 @@ namespace SGui
 
 	void Txtr::loadAlpha(const char *fileName, GLubyte defaultAlpha, bool initialize)
 	{	
-		assert(isConsistent());
-		assert(!hasImage() || !initialize);
+		dAssert(isConsistent());
+		dAssert(!hasImage() || !initialize);
 		
 		GLuint w;
 		GLuint h;	
@@ -466,7 +466,7 @@ namespace SGui
 		if((!(imageFile.good())) || fileName == NULL)
 		{
 			pixels = NULL;
-			assert(false);
+			dAssert(false);
 		}
 		else
 		{
@@ -528,7 +528,7 @@ namespace SGui
 
 	GLuint Txtr::createDefaultTxtr()
 	{
-		//assert(defaultTxtr == NULL);
+		//dAssert(defaultTxtr == NULL);
 		
 		Pixel4 pixel(127, 127, 127, 255);
 
