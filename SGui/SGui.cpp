@@ -7,6 +7,7 @@ namespace SGui
 {
 	void initNamespace()
 	{
+		SGui::Txtr::clearLoaded();
 		SGui::Txtr::createDefaultTxtr();
 	}
 	

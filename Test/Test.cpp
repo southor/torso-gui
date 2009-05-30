@@ -12,15 +12,19 @@
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	SGui::initNamespace();
+	
 
 	std::cout << "Test State Gui" << std::endl;
-	SGui::testFiles();
+	SGui::testFiles(); // TODO, maybe initing opengl should be done before testFiles, otherwise problems with texture ids might appear.
 
 	
 
 	
-	Window window;
+
+	Window window; // opengl init, must be performed before init namespace because loaded opengl textures will be cleared/wasted by opengl, in newer versions.
+
+	SGui::initNamespace();
+
 
 	SGui::Font font("../Test/graphics/fonts/arial");
 
@@ -35,11 +39,13 @@ int _tmain(int argc, _TCHAR* argv[])
 
 
 	SGui::Image imageBG("../Test/graphics/bg.bmp", SGui::Pos(0, 0), SGui::Vec(window.getWidth(), window.getHeight()));
+	//SGui::Image imageBG(font.getTxtrId(), SGui::Pos(0, 0), SGui::Vec(window.getWidth(), window.getHeight()));
+	//SGui::Image imageBG("../Test/graphics/fonts/arial/image_.bmp", SGui::Pos(0, 0), SGui::Vec(window.getWidth(), window.getHeight()));
 	root.renderObjs.push_back(&imageBG);
 
 	SGui::Txtr arrowTxtr(SGui::Txtr::Pixel3(127, 64, 255), "../Test/graphics/arrow-alpha.bmp");
 	GLuint arrowTxtrId = arrowTxtr.add("../Test/graphics/arrow.bmp");
-		//arrowTxtr.add("../Test/graphics/arrow.bmp");
+	//arrowTxtr.add("../Test/graphics/arrow.bmp");
 	SGui::Image arrowDownImage(arrowTxtrId, SGui::Pos(100, 200), SGui::Vec(arrowTxtr.getWidth(), arrowTxtr.getHeight()));	
 	SGui::Box scrollAreaBox(arrowDownImage.getTopLeft(), SGui::Vec(arrowDownImage.getWidth(), 100), SGui::Color4f(0.5f, 0.25f, 1.0f, 1.0f), 1);
 	SGui::Box scrollerBox(scrollAreaBox.getPos() + SGui::Vec(2, 2), scrollAreaBox.getSize() - SGui::Vec(4, 35), SGui::Color4f(1.0f, 0.5f, 1.0f, 1.0f));

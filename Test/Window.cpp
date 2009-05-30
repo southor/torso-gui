@@ -2,6 +2,7 @@
 #define _STATE_GUI_TEST_WINDOW_CPP_
 
 #include "Window.h"
+#include "Txtr.h"
 
 
 Window::Window() : screen(NULL), stateHndlr()//, font(NULL)
@@ -214,6 +215,7 @@ void Window::init()
 	
 	glEnable(GL_SCISSOR_TEST);
 
+	//SGui::Txtr::clearLoaded();
 
 }
 

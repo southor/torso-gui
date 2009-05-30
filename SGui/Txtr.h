@@ -146,6 +146,9 @@ namespace SGui
 		static GLuint loadAdd(const char *colorsFileName, const char *alphaFileName);
 		static GLuint loadAdd(Pixel3 color, const char *alphaFileName);
 		
+		// Clears the texture ids pool.
+		static void clearLoaded();
+
 
 		// Should be called one time before
 		static GLuint createDefaultTxtr();

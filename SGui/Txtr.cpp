@@ -222,13 +222,14 @@ namespace SGui
 	{
 		assert(isConsistent());
 
-		GLuint txtrId;
-		if (hasImage())
-		{
-			std::map<std::string, GLuint>::iterator it = txtrIdPool.find(std::string(name));
-			if (it == txtrIdPool.end())
-			{
+		std::string nameStr(name);
+		GLuint txtrId; // result variable
 
+		std::map<std::string, GLuint>::iterator it = txtrIdPool.find(nameStr);
+		if (it == txtrIdPool.end())
+		{
+			if (hasImage())
+			{
 				glGenTextures(1, &txtrId);
  				glBindTexture(GL_TEXTURE_2D, txtrId);
 				glTexImage2D(GL_TEXTURE_2D, 0, 4, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (const GLvoid*)pixels);		
@@ -238,23 +239,54 @@ namespace SGui
 				glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 				glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 				glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
-				// add to pool
-				txtrIdPool[std::string(name)] = txtrId;
 			}
 			else
 			{
-				// get from pool
-				txtrId = it->second;
+				txtrId = defaultTxtr;
 			}
+
+			// add to pool
+			txtrIdPool[nameStr] = txtrId;
 		}
 		else
 		{
-			txtrId = defaultTxtr;
-
-			// add to pool
-			txtrIdPool[std::string(name)] = txtrId;
+			// get from pool
+			txtrId = it->second;
 		}
+
+
+		//if (hasImage())
+		//{
+		//	std::map<std::string, GLuint>::iterator it = txtrIdPool.find(std::string(name));
+		//	if (it == txtrIdPool.end())
+		//	{
+
+		//		glGenTextures(1, &txtrId);
+ 	//			glBindTexture(GL_TEXTURE_2D, txtrId);
+		//		glTexImage2D(GL_TEXTURE_2D, 0, 4, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (const GLvoid*)pixels);		
+		//		
+		//		// Perform these here?
+		//		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		//		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		//		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		//		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+		//		// add to pool
+		//		txtrIdPool[std::string(name)] = txtrId;
+		//	}
+		//	else
+		//	{
+		//		// get from pool
+		//		txtrId = it->second;
+		//	}
+		//}
+		//else
+		//{
+		//	txtrId = defaultTxtr;
+
+		//	// add to pool
+		//	txtrIdPool[std::string(name)] = txtrId;
+		//}
 		
 		return txtrId;
 	}
@@ -547,7 +579,7 @@ namespace SGui
 		return loadAddN(colorsFileName, colorsFileName, alpha, transparentColor, antiAliasing);
 	}
 
-	GLuint Txtr::loadAdd( const char *colorsFileName, const char *alphaFileName)
+	GLuint Txtr::loadAdd(const char *colorsFileName, const char *alphaFileName)
 	{
 		return loadAddN(colorsFileName, colorsFileName, alphaFileName);
 	}
@@ -555,6 +587,11 @@ namespace SGui
 	GLuint Txtr::loadAdd(Pixel3 color, const char *alphaFileName)
 	{
 		return loadAddN(alphaFileName, color, alphaFileName);
+	}
+
+	void Txtr::clearLoaded()
+	{
+		txtrIdPool.clear();
 	}
 
 	

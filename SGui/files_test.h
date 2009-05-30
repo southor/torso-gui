@@ -66,7 +66,7 @@ namespace SGui
 
 		// --------- testing Text ----------
 
-		Font font("F:/Programering/C++/SGui/Test/graphics/fonts/arial");
+		Font font("../Test/graphics/fonts/arial");
 
 		Text text(&font, "hello world");
 		assert(text.getNChars() == 10);

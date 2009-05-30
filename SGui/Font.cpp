@@ -8,6 +8,9 @@
 #include "Txtr.h"
 //#include "function_templates.h"
 
+#include <iostream>
+
+
 // solving LNK error
 #include "function_templates.inl"
 
@@ -125,8 +128,21 @@ namespace SGui
 		imageBUI.copyTo(&combinedFont, fontImagePos[B|U|I].x * fontImageSize.x,
 									   fontImagePos[B|U|I].y * fontImageSize.y);
 
+		//// temp debug test
+		//combinedFont.setPixel(4, 4, Txtr::Pixel4(0, 0, 150, 255));
+		//combinedFont.setPixel(4, 5, Txtr::Pixel4(0, 0, 150, 255));
+		//combinedFont.setPixel(5, 4, Txtr::Pixel4(0, 0, 150, 255));
+		//combinedFont.setPixel(5, 5, Txtr::Pixel4(0, 0, 150, 255));
+
+		//std::cout << "font width: " << combinedFont.getWidth() << std::endl;
+		//std::cout << "font height: " << combinedFont.getHeight() << std::endl;
+
+
 		// Load font to the grafics card.
 		this->combinedFontTxtrId = combinedFont.add(fontDirectory);
+
+		//// temp debug test
+		//this->combinedFontTxtrId = Txtr::loadAdd((baseFileName + ".bmp").c_str());
 
 
 		// Load character widths

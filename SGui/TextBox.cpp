@@ -128,8 +128,10 @@ namespace SGui
 			//glColorPointer(Font::N_FLOATS_PER_COLOR, GL_FLOAT, 0, colorArr);
 			//glVertexPointer(Font::N_FLOATS_PER_VTX, GL_FLOAT, 0, vtxArr);
 
-			glEnable(GL_TEXTURE_2D);	
-			glBindTexture(GL_TEXTURE_2D, font->getTxtrId());
+			glEnable(GL_TEXTURE_2D);
+			GLuint txtrId = font->getTxtrId();
+			//std::cout << "txtrId = " << txtrId << std::endl;
+			glBindTexture(GL_TEXTURE_2D, txtrId);
 			glEnable(GL_TEXTURE_COORD_ARRAY);
 			glTexCoordPointer(2, GL_FLOAT, 0, txtrCoordArr);
 			glEnable(GL_COLOR_ARRAY);
