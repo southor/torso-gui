@@ -21,9 +21,9 @@ namespace SGui
 		// ------ vtx array stuff --------
 		int nVtx;
 
-		GLfloat *vtxArr;
-		GLfloat *colorArr;
-		GLfloat *txtrCoordArr;
+		gl_float *vtxArr;
+		gl_float *colorArr;
+		gl_float *txtrCoordArr;
 
 		int xAlign;
 		int yAlign;

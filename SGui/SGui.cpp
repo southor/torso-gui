@@ -3,6 +3,8 @@
 
 #include "SGui.h"
 
+#include "gl_includes.h"
+
 namespace SGui
 {
 	void initNamespace()

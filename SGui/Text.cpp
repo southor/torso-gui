@@ -53,7 +53,7 @@ namespace SGui
 		return newWord;
 	}
 
-	int Text::Word::writeToVtxArr(GLfloat*& vtxArr, GLfloat*& colorArr, GLfloat*& txtrCoordArr, Pos pos, float size) const
+	int Text::Word::writeToVtxArr(gl_float*& vtxArr, gl_float*& colorArr, gl_float*& txtrCoordArr, Pos pos, float size) const
 	{
 		for(int i=0; i<getNChars(); ++i)
 		{					
@@ -106,18 +106,18 @@ namespace SGui
 		return returnVal;
 	}
 
-	void Text::moveVtxsX(GLfloat *vtxArr, int nFloats, int offset)
+	void Text::moveVtxsX(gl_float *vtxArr, int nFloats, int offset)
 	{
-		GLfloat offsetF = static_cast<GLfloat>(offset);
+		gl_float offsetF = static_cast<gl_float>(offset);
 		for(int i=0; i<nFloats; i += Font::N_FLOATS_PER_VTX)
 		{
 			vtxArr[i] += offsetF;			
 		}
 	}
 
-	void Text::moveVtxsY(GLfloat *vtxArr, int nFloats, int offset)
+	void Text::moveVtxsY(gl_float *vtxArr, int nFloats, int offset)
 	{
-		GLfloat offsetF = static_cast<GLfloat>(offset);
+		gl_float offsetF = static_cast<gl_float>(offset);
 		for(int i=1; i<nFloats; i += Font::N_FLOATS_PER_VTX)
 		{
 			vtxArr[i] += offsetF;
@@ -239,7 +239,7 @@ namespace SGui
 		nChars = countNChars();
 	}
 
-	void Text::writeFieldToVtxArr(GLfloat *vtxArr, GLfloat *colorArr, GLfloat *txtrCoordArr, Pos pos, Vec fieldSize, int xAlign, int yAlign, float size)
+	void Text::writeFieldToVtxArr(gl_float *vtxArr, gl_float *colorArr, gl_float *txtrCoordArr, Pos pos, Vec fieldSize, int xAlign, int yAlign, float size)
 	{
 		//assert(checkFlags(xAlign, ALLOWED_X_ALIGNS));
 		//assert(checkFlags(yAlign, ALLOWED_Y_ALIGNS));
@@ -251,12 +251,12 @@ namespace SGui
 		int charHeight = font->getCharHeight();		
 		
 		// local vertex array pointers, points within the hole array
-		GLfloat *currVtxArr = vtxArr;
-		GLfloat *currColorArr = colorArr;
-		GLfloat *currTxtrCoordArr = txtrCoordArr;
+		gl_float *currVtxArr = vtxArr;
+		gl_float *currColorArr = colorArr;
+		gl_float *currTxtrCoordArr = txtrCoordArr;
 
 		//pointer to the adress where the current row starts
-		GLfloat *rowStartVtxArr = vtxArr;
+		gl_float *rowStartVtxArr = vtxArr;
 
 		Pos lPos(0, fieldSize.y - charHeight); // local position within field
 		if (lPos.y < 0) return;

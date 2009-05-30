@@ -3,6 +3,8 @@
 
 #include "TextBox.h"
 
+#include "gl_includes.h"
+
 namespace SGui
 {
 	TextBox::TextBox() : RenderObj(), font(NULL), xAlign(ALIGN_LEFT), yAlign(ALIGN_TOP), textString(), autoUpdate(false), updateNeeded(true),

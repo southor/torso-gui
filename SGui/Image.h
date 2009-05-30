@@ -4,6 +4,7 @@
 #include "basic.h"
 #include "Txtr.h"
 #include "RenderObj.h"
+#include "gl_declares.h"
 
 #include "macros.h"
 
@@ -29,7 +30,7 @@ namespace SGui
 	public:
 		
 
-		GLuint txtrId;
+		gl_uint txtrId;
 
 		enum Operation
 		{
@@ -49,8 +50,8 @@ namespace SGui
 		 * @param op2 Any operations on the texture coordinates. Will apply Mirrors followed by Rotations.
 		 */
 		
-		Image(GLuint txtrId, Pos pos, Vec size, TxtrCoord posWithinTxtr, TxtrCoord sizeWithinTxtr, int operations1 = 0, int operations2 = 0);		
-		Image(GLuint txtrId, Pos pos, Vec size, int operations1 = 0, int operation2 = 0);
+		Image(gl_uint txtrId, Pos pos, Vec size, TxtrCoord posWithinTxtr, TxtrCoord sizeWithinTxtr, int operations1 = 0, int operations2 = 0);		
+		Image(gl_uint txtrId, Pos pos, Vec size, int operations1 = 0, int operation2 = 0);
 
 		Image(const char *fileName, Pos pos, Vec size, TxtrCoord posWithinTxtr, TxtrCoord sizeWithinTxtr, int operations1 = 0, int operations2 = 0);
 		Image(const char *fileName, Pos pos, Vec size, int operations1 = 0, int operations2 = 0);

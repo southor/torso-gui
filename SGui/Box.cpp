@@ -6,6 +6,8 @@
 //#include "gl_includes.h"
 #include "basic_includes.h"
 
+#include "gl_includes.h"
+
 namespace SGui
 {
 

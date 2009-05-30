@@ -6,6 +6,8 @@
 
 #include <algorithm>
 
+#include "gl_includes.h"
+
 namespace SGui
 {
 

@@ -167,7 +167,7 @@ namespace SGui
 
 	}
 	
-	int Font::writeCharToVtxArr(char c, int mods, Color3f color, GLfloat *vtxArr, GLfloat *colorArr, GLfloat *txtrCoordArr, Pos pos, float size) const
+	int Font::writeCharToVtxArr(char c, int mods, Color3f color, gl_float *vtxArr, gl_float *colorArr, gl_float *txtrCoordArr, Pos pos, float size) const
 	{		
 		assert((mods >= 0) && checkFlags(mods, ALLOWED_MODS));
 

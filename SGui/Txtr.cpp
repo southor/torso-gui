@@ -9,6 +9,8 @@
 //solving LNK error
 #include "function_templates.inl"
 
+#include "gl_includes.h"
+
 namespace SGui
 {
 	std::map<std::string, GLuint> Txtr::txtrIdPool = std::map<std::string, GLuint>();

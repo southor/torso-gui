@@ -49,7 +49,7 @@ namespace SGui
 
 			inline void addReturn()						{ ++(this->nReturns); }
 
-			virtual int writeToVtxArr(GLfloat*& vtxArr, GLfloat*& colorArr, GLfloat*& txtrCoordArr, Pos pos, float size = 1.0f) const
+			virtual int writeToVtxArr(gl_float*& vtxArr, gl_float*& colorArr, gl_float*& txtrCoordArr, Pos pos, float size = 1.0f) const
 			{
 				return 0;
 			}
@@ -101,7 +101,7 @@ namespace SGui
 				}
 			}
 
-			int writeToVtxArr(GLfloat*& vtxArr, GLfloat*& colorArr, GLfloat*& txtrCoordArr, Pos pos, float size = 1.0f) const
+			int writeToVtxArr(gl_float*& vtxArr, gl_float*& colorArr, gl_float*& txtrCoordArr, Pos pos, float size = 1.0f) const
 			{
 				return getWidth();
 			}
@@ -133,7 +133,7 @@ namespace SGui
 
 			inline int getWidth(const Font *font)				{ return font->getCharWidth(c, mods); }
 
-			inline int writeToVtxArr(const Font *font, GLfloat*& vtxArr, GLfloat*& colorArr, GLfloat*& txtrCoordArr, Pos pos, float size = 1.0f) const
+			inline int writeToVtxArr(const Font *font, gl_float*& vtxArr, gl_float*& colorArr, gl_float*& txtrCoordArr, Pos pos, float size = 1.0f) const
 			{
 				int returnVal =  font->writeCharToVtxArr(c, mods, Color3f(static_cast<float>(color.r) / 255.0f,
 																		  static_cast<float>(color.g) / 255.0f,
@@ -183,7 +183,7 @@ namespace SGui
 			// overrided
 			Unit* split(int maxWidth);
 						
-			int writeToVtxArr(GLfloat*& vtxArr, GLfloat*& colorArr, GLfloat*& txtrCoordArr, Pos pos, float size = 1.0f) const;
+			int writeToVtxArr(gl_float*& vtxArr, gl_float*& colorArr, gl_float*& txtrCoordArr, Pos pos, float size = 1.0f) const;
 			
 
 			bool isConsistent() const;
@@ -205,9 +205,9 @@ namespace SGui
 
 		int countNChars();
 
-		void moveVtxsX(GLfloat *vtxArr, int nFloats, int offset);
+		void moveVtxsX(gl_float *vtxArr, int nFloats, int offset);
 
-		void moveVtxsY(GLfloat *vtxArr, int nFloats, int offset);
+		void moveVtxsY(gl_float *vtxArr, int nFloats, int offset);
 
 	public:
 
@@ -257,7 +257,7 @@ namespace SGui
 		inline int getVtxArrNVtx()						{ return Font::N_VTX_PER_CHAR * getNChars(); }
 
 
-		void writeFieldToVtxArr(GLfloat *vtxArr, GLfloat *colorArr, GLfloat *txtrCoordArr, Pos pos, Vec fieldSize, int xAlign = ALIGN_LEFT, int yAlgin = ALIGN_TOP, float size = 1.0f);
+		void writeFieldToVtxArr(gl_float *vtxArr, gl_float *colorArr, gl_float *txtrCoordArr, Pos pos, Vec fieldSize, int xAlign = ALIGN_LEFT, int yAlgin = ALIGN_TOP, float size = 1.0f);
 
 
 	};

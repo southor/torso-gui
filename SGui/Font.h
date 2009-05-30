@@ -76,7 +76,7 @@ namespace SGui
 		Pos fontImagePos[N_MOD_COMBINATIONS];
 
 		// The combined font image loaded to the grafics card.
-		GLuint combinedFontTxtrId;
+		gl_uint combinedFontTxtrId;
 
 
 
@@ -102,14 +102,15 @@ namespace SGui
 		 */
 		Font(const char *fontDirectory, Vec fontImageNCharacters = Vec(16, 16));
 
-		inline GLuint getTxtrId() const						{ return combinedFontTxtrId; }
+		inline gl_uint getTxtrId() const						{ return combinedFontTxtrId; }
 		
 		inline int getCharWidth(char c, int mods) const		{ assert(checkFlags(mods, ALLOWED_MODS));
 															  return charWidths[mods][c]; }
 
 		inline int getCharHeight()							{ return charHeight; }
 
-		int writeCharToVtxArr(char c, int mods, Color3f color, GLfloat *vtxArr, GLfloat *colorArr, GLfloat *txtrCoordArr, Pos pos, float size = 1.0f) const;
+		int writeCharToVtxArr(char c, int mods, Color3f color, gl_float *vtxArr, gl_float *colorArr, gl_float *txtrCoordArr, Pos pos, float size = 1.0f) const;
+
 
 	public:
 

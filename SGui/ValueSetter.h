@@ -4,7 +4,8 @@
 #include "EventReciever.h"
 #include "ActionList.h"
 
-#include "gl_includes.h"
+//#include "gl_includes.h"
+#include "gl_declares.h"
 
 namespace SGui
 {
@@ -51,7 +52,7 @@ namespace SGui
 		}
 	};
 
-	typedef ValueSetter<GLuint> TxtrIdSetter;
+	typedef ValueSetter<gl_uint> TxtrIdSetter;
 	typedef ValueSetter<Color3f> Color3Setter;
 	typedef ValueSetter<Color4f> Color4Setter;
 };

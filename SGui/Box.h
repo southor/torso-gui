@@ -4,8 +4,9 @@
 #include "RenderObj.h"
 
 
-#include "gl_includes.h"
+//#include "gl_includes.h"
 //#include <GL/gl.h>
+#include "gl_declares.h"
 
 namespace SGui
 {
@@ -20,7 +21,7 @@ namespace SGui
 	{
 	private:
 		
-		GLuint displayList;
+		gl_uint displayList;
 		bool changed; // was a change made?
 		
 
@@ -32,7 +33,7 @@ namespace SGui
 		// will run all render code
 		void renderTo();
 
-		void setDisplayList(GLenum mode);
+		void setDisplayList(gl_enum mode);
 
 
 	public:

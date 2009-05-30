@@ -2,6 +2,8 @@
 #define _STATE_GUI_IMAGE_CPP
 
 #include "Image.h"
+
+#include "gl_includes.h"
  
 namespace SGui
 {
