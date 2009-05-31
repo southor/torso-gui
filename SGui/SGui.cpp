@@ -21,6 +21,7 @@ namespace SGui
 
 	void cleanupNamespace()
 	{
+		SGui::Txtr::clearLoaded();
 	}
 };
 

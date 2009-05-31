@@ -231,7 +231,7 @@ namespace SGui
 		if (it == txtrIdPool.end())
 		{
 			if (hasImage())
-			{
+			{				
 				glGenTextures(1, &txtrId);
  				glBindTexture(GL_TEXTURE_2D, txtrId);
 				glTexImage2D(GL_TEXTURE_2D, 0, 4, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (const GLvoid*)pixels);		
@@ -593,6 +593,16 @@ namespace SGui
 
 	void Txtr::clearLoaded()
 	{
+		std::map<std::string, GLuint>::iterator it = txtrIdPool.begin();
+		std::map<std::string, GLuint>::iterator end = txtrIdPool.end();
+
+		GLuint txtrId;
+		for(;it != end; ++it)
+		{
+			txtrId = it->second;
+			glDeleteTextures(1, &txtrId);
+		}
+
 		txtrIdPool.clear();
 	}
 
