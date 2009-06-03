@@ -3,25 +3,25 @@
 
 #include "SGui.h"
 
-#include "gl_includes.h"
+//#include "gl_includes.h"
 
 namespace SGui
 {
-	void initNamespace()
+	void initNamespace(RenderContext *renderContext)
 	{
-		SGui::Txtr::clearLoaded();
-		SGui::Txtr::createDefaultTxtr();
+		SGui::Txtr::clearLoaded(renderContext);
+		SGui::Txtr::createDefaultTxtr(renderContext);
 	}
 	
-	void setClipping(const Pos &pos, const Rect &clipRect)
-	{
-		glScissor(pos.x + clipRect.getX(), pos.y + clipRect.getY(),
-				  clipRect.getWidth(), clipRect.getHeight());
-	}
+	//void setClipping(const Pos &pos, const Rect &clipRect)
+	//{
+	//	glScissor(pos.x + clipRect.getX(), pos.y + clipRect.getY(),
+	//			  clipRect.getWidth(), clipRect.getHeight());
+	//}
 
-	void cleanupNamespace()
+	void cleanupNamespace(RenderContext *renderContext)
 	{
-		SGui::Txtr::clearLoaded();
+		SGui::Txtr::clearLoaded(renderContext);
 	}
 };
 

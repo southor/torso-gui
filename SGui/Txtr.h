@@ -13,6 +13,8 @@
 namespace SGui
 {
 
+	class RenderContext;
+
 	// tmp note: Fixa loadFile, snygga till kod. mer konsekvent.
 	// använd GLubyte istället för char
 
@@ -94,8 +96,8 @@ namespace SGui
 		inline uint getPixelIndex(uint x, uint y) const		{ return y*(width) + x; }
 
 		inline const Pixel4 &getPixel(uint i) const			{ dAssert(hasImage());
-															  if (!(i < width*height))
-																dAssert(i < width*height);
+															  //if (!(i < width*height))
+															  dAssert(i < width*height);
 															  return pixels[i]; }
 
 		Pixel4 getInterpoolatedPixel(float x, float y) const;
@@ -134,7 +136,7 @@ namespace SGui
 		
 		
 		
-		gl_uint add(const char *name);
+		gl_uint add(RenderContext *renderContext, const char *name);
 		
 		void setAlpha(gl_ubyte alpha);
 		void setAlpha(gl_ubyte alpha, Pixel3 transparentColor, uint antiAliasing = 0);
@@ -144,26 +146,26 @@ namespace SGui
 		// Draws the hole texture context of txtr to this texture at pixel x, y
 		void copyTo(Txtr *txtr, int x, int y);
 		
-		static /*GLuint*/gl_uint loadAddN(const char *name, const char *colorsFileName, gl_ubyte alpha = 255);		
+		static /*GLuint*/gl_uint loadAddN(RenderContext *renderContext, const char *name, const char *colorsFileName, gl_ubyte alpha = 255);		
 		
 		// @param transparentAA transparent anti aliasing value
-		static /*GLuint*/gl_uint loadAddN(const char *name, const char *colorsFileName, gl_ubyte alpha, Pixel3 transparentColor, uint antiAliasing = 1);
-		static /*GLuint*/gl_uint loadAddN(const char *name, const char *colorsFileName, const char *alphaFileName);
-		static /*GLuint*/gl_uint loadAddN(const char *name, Pixel3 color, const char *alphaFileName);
+		static /*GLuint*/gl_uint loadAddN(RenderContext *renderContext, const char *name, const char *colorsFileName, gl_ubyte alpha, Pixel3 transparentColor, uint antiAliasing = 1);
+		static /*GLuint*/gl_uint loadAddN(RenderContext *renderContext, const char *name, const char *colorsFileName, const char *alphaFileName);
+		static /*GLuint*/gl_uint loadAddN(RenderContext *renderContext, const char *name, Pixel3 color, const char *alphaFileName);
 
 
-		static /*GLuint*/gl_uint loadAdd(const char *colorsFileName, gl_ubyte alpha = 255);
+		static /*GLuint*/gl_uint loadAdd(RenderContext *renderContext, const char *colorsFileName, gl_ubyte alpha = 255);
 		// @param transparentAA transparent anti aliasing value
-		static /*GLuint*/gl_uint loadAdd(const char *colorsFileName, gl_ubyte alpha, Pixel3 transparentColor, uint antiAliasing = 1);
-		static /*GLuint*/gl_uint loadAdd(const char *colorsFileName, const char *alphaFileName);
-		static /*GLuint*/gl_uint loadAdd(Pixel3 color, const char *alphaFileName);
+		static /*GLuint*/gl_uint loadAdd(RenderContext *renderContext, const char *colorsFileName, gl_ubyte alpha, Pixel3 transparentColor, uint antiAliasing = 1);
+		static /*GLuint*/gl_uint loadAdd(RenderContext *renderContext, const char *colorsFileName, const char *alphaFileName);
+		static /*GLuint*/gl_uint loadAdd(RenderContext *renderContext, Pixel3 color, const char *alphaFileName);
 		
 		// Clears the texture ids pool.
-		static void clearLoaded();
+		static void clearLoaded(RenderContext *renderContext);
 
 
 		// Should be called one time before
-		static /*GLuint*/gl_uint createDefaultTxtr();
+		static /*GLuint*/gl_uint createDefaultTxtr(RenderContext *renderContext);
 
 		static /*GLuint*/gl_uint getDefaultTxtrId();
 

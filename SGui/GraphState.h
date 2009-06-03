@@ -23,7 +23,7 @@ namespace SGui
 
 		
 
-		void renderState(const Rect &clipRect);
+		void renderState(RenderContext *renderContext, const Rect &clipRect);
 	};
 };
 

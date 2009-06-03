@@ -11,7 +11,7 @@ namespace SGui
 	//GraphState::GraphState(int id) : State(id), renderObjs()
 	//{}
 
-	void GraphState::renderState(const Rect &clipRect)
+	void GraphState::renderState(RenderContext *renderContext, const Rect &clipRect)
 	{
 		RenderObj *renderObj;
 		RenderObjs::iterator iter = renderObjs.begin();
@@ -22,7 +22,7 @@ namespace SGui
 			renderObj = *iter;
 			if (clipRect.covering(renderObj->getRect()))
 			{
-				renderObj->render();
+				renderObj->render(renderContext);
 			}
 		}
 	}

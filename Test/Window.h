@@ -1,11 +1,13 @@
 #ifndef _STATE_GUI_TEST_WINDOW_H_
 #define _STATE_GUI_TEST_WINDOW_H_
 
-#include "files.h"
+#include "SGui\files.h"
 
-#include "StateHndlr.h"
+#include "SGui\StateHndlr.h"
 
-#include "gl_includes.h"
+#include "External\GLRenderContext.h"
+
+//#include "External\gl_includes.h"
 #include "SDL.h"
 
 class Window
@@ -21,7 +23,7 @@ class Window
 		//SGui::Font *font;
 
 
-
+		SGui::GLRenderContext renderContext;
 		
 		void init();
 		
@@ -35,6 +37,7 @@ class Window
 		SGui::StateHndlr stateHndlr;
 
 
+		SGui::GLRenderContext* getRenderContext()		{ return &renderContext; }
 		
 		Window();
 

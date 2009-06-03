@@ -6,11 +6,11 @@
 
 namespace SGui
 {
-	void initNamespace();
+	void initNamespace(RenderContext *renderContext);
 	
-	void setClipping(const Pos &pos, const Rect &clipRect);
+	//void setClipping(const Pos &pos, const Rect &clipRect);
 
-	void cleanupNamespace();
+	void cleanupNamespace(RenderContext *renderContext);
 };
 
 #endif

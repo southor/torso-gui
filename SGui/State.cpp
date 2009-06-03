@@ -6,7 +6,8 @@
 
 #include <algorithm>
 
-#include "gl_includes.h"
+//#include "gl_includes.h"
+#include "RenderContext.h"
 
 namespace SGui
 {
@@ -258,6 +259,7 @@ namespace SGui
 					 //Slot(0, 0, INT_MAX, INT_MAX),
 					 name(name), parent(NULL), children(), childrenRL(),
 					 active(false), childActivity(0), activeChild(NULL),
+					 renderContext(renderContext),
 					 id(0), clipping(false), paralell(false),
 					 callEnterExit(true), actionSurfaces()
 	{
@@ -383,25 +385,27 @@ namespace SGui
 		return count;
 	}
 
-	void State::renderTree(const Pos &parentGlobalPos, const Rect &parentUsedClipRect)
+	void State::renderTree(RenderContext *renderContext, const Pos &parentGlobalPos, const Rect &parentUsedClipRect)
 	{
 		if (active)
 		{	
-			glPushMatrix();
-				glTranslatef(static_cast<float>(this->rect.pos.x), static_cast<float>(this->rect.pos.y), 0);
+			//glPushMatrix();
+			renderContext->pushMatrix();
+				//glTranslatef(static_cast<float>(this->rect.pos.x), static_cast<float>(this->rect.pos.y), 0.0f);
+				renderContext->translate(this->rect.pos.x, this->rect.pos.y);
 
 				Rect usedClipRect(parentUsedClipRect);
 				if (clipping)
 				{
 					usedClipRect.intersectWith(this->getRect());
-					setClipping(parentGlobalPos, usedClipRect);
+					renderContext->setClipping(parentGlobalPos, usedClipRect);
 				}
 				usedClipRect.setPos(usedClipRect.getPos() - this->rect.pos); // convert from parent coordinates to local coordinates
 				Pos globalPos(parentGlobalPos + this->rect.pos); // This states position in global coordinates
 
 				if (!usedClipRect.empty())
 				{
-					renderState(usedClipRect);
+					renderState(renderContext, usedClipRect);
 
 					if (paralell)
 					{
@@ -409,21 +413,22 @@ namespace SGui
 						ChildrenRLIter end = childrenRL.end();
 						for(; iter != end; ++iter)
 						{
-							(*iter)->renderTree(globalPos, usedClipRect);
+							(*iter)->renderTree(renderContext, globalPos, usedClipRect);
 						}
 					}
 					else if (activeChild)
 					{
-						activeChild->renderTree(globalPos, usedClipRect);
+						activeChild->renderTree(renderContext, globalPos, usedClipRect);
 					}
 				}
 
 				if (clipping)
 				{
-					setClipping(parentGlobalPos, parentUsedClipRect);
+					renderContext->setClipping(parentGlobalPos, parentUsedClipRect);
 				}
 
-			glPopMatrix();
+			//glPopMatrix();
+			renderContext->popMatrix();
 		}
 	}
 

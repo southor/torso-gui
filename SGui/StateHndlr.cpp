@@ -392,7 +392,7 @@ namespace SGui
 		}
 	}
 
-	void StateHndlr::render()
+	void StateHndlr::render(RenderContext *renderContext)
 	{
 		if (root)
 		{
@@ -401,8 +401,8 @@ namespace SGui
 			// Create a very large clipping rectangle
 			Rect clipRect(INT_MIN / 2, INT_MIN / 2, INT_MAX, INT_MAX); //TODO use numeric (must get rid of evil min() macro first)
 			
-			setClipping(globalStartPos, clipRect);
-			root->renderTree(globalStartPos, clipRect);
+			renderContext->setClipping(globalStartPos, clipRect);
+			root->renderTree(renderContext, globalStartPos, clipRect);
 		}
 	}
 

@@ -22,18 +22,31 @@ namespace SGui
 	private:
 		
 		gl_uint displayList;
-		bool changed; // was a change made?
+
+		//bool displayListGenerated; // have a display list been generated?
+
+		//bool changed; // was a change made?
+
+
+		enum // Render Work
+		{
+			UNCHANGED,
+			CHANGED,
+			UNITIALISED
+		};
+		int16 renderWork; // The work of next rendering (enum).
+		
 		
 
 		//bool filled;
 
-		uchar lineWidth; // if lineWidth == 1 then use filled render mode
+		int16 lineWidth; // if lineWidth == 1 then use filled render mode
 		Color4f color;
 		
-		// will run all render code
-		void renderTo();
+		//// will run all render code
+		//void renderTo();
 
-		void setDisplayList(gl_enum mode);
+		//void setDisplayList(gl_enum mode);
 
 
 	public:
@@ -53,15 +66,11 @@ namespace SGui
 		void setSize(Vec size);
 
 		inline void setColor(const Color4f &color)		{ this->color = color;
-														  changed = true; }
-
-		//inline void setFilled(bool filled)			{ this->filled = filled;
-		//												  changed = true; }
-
+														  if (renderWork == UNCHANGED) renderWork = CHANGED; }
 
 		// The Box will be solid filled with the color.
 		inline void setFilledMode()						{ this->lineWidth = 0;
-														  changed = true; }
+														  if (renderWork == UNCHANGED) renderWork = CHANGED; }
 
 		/**
 		 * Will only draw borderlines and will not be filled.
@@ -72,7 +81,7 @@ namespace SGui
 
 
 
-		void render();
+		void render(RenderContext *renderContext);
 
 	};
 };

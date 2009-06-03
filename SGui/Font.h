@@ -101,7 +101,7 @@ namespace SGui
 		/**
 		 * @param fontDirectory The directory to the font files on the hard drive.
 		 */
-		Font(const char *fontDirectory, Vec fontImageNCharacters = Vec(16, 16));
+		Font(RenderContext *renderContext, const char *fontDirectory, Vec fontImageNCharacters = Vec(16, 16));
 
 		inline gl_uint getTxtrId() const						{ return combinedFontTxtrId; }
 		

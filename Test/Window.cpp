@@ -2,8 +2,8 @@
 #define _STATE_GUI_TEST_WINDOW_CPP_
 
 #include "Window.h"
-#include "Txtr.h"
-#include "macros.h"
+#include "SGui\Txtr.h"
+#include "SGui\macros.h"
 
 
 Window::Window() : screen(NULL), stateHndlr()//, font(NULL)
@@ -31,8 +31,9 @@ void Window::run()
 
 void Window::render()
 {
-	glClear(GL_COLOR_BUFFER_BIT);
-	stateHndlr.render();
+	//glClear(GL_COLOR_BUFFER_BIT);
+	renderContext.startNewRendering();
+	stateHndlr.render(&renderContext);
 
 	
 	
@@ -180,38 +181,38 @@ void Window::init()
 	}
 	
 
-	glViewport(0, 0, w, h);
+	renderContext.initGL(w, h);
+
+	//glViewport(0, 0, w, h);
 
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(0.0, static_cast<double>(w), 0.0, static_cast<double>(h), 0.5, 10.0);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glTranslatef(0.0f, 0.0f, -2.0f);
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadIdentity();
+	//glOrtho(0.0, static_cast<double>(w), 0.0, static_cast<double>(h), 0.5, 10.0);
+	//glMatrixMode(GL_MODELVIEW);
+	//glLoadIdentity();
+	//glTranslatef(0.0f, 0.0f, -2.0f);
 
 
 
-	glShadeModel(GL_SMOOTH);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//glShadeModel(GL_SMOOTH);
+	//glEnable(GL_BLEND);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	glEnable(GL_VERTEX_ARRAY);	
+	//glEnable(GL_VERTEX_ARRAY);	
 
-	//glEnable(GL_TEXTURE_COORD_ARRAY);
-	//glTexCoordPointer(2, GL_FLOAT, 0, txtrCoordArr);
-	//glDrawElements(PRIMITIVE_TYPE_GL_DRAW_MODES[primitiveType], nInd, GL_UNSIGNED_INT, indArr);
-	//glDisable(GL_TEXTURE_COORD_ARRAY);
+	////glEnable(GL_TEXTURE_COORD_ARRAY);
+	////glTexCoordPointer(2, GL_FLOAT, 0, txtrCoordArr);
+	////glDrawElements(PRIMITIVE_TYPE_GL_DRAW_MODES[primitiveType], nInd, GL_UNSIGNED_INT, indArr);
+	////glDisable(GL_TEXTURE_COORD_ARRAY);
 
 
-	//glEnable(GL_COLOR_ARRAY);
-	//glColorPointer(4, GL_FLOAT, 0, colorArr);				
-	//glDrawArrays(PRIMITIVE_TYPE_GL_DRAW_MODES[primitiveType], 0, nVtx);
-	//glDisable(GL_COLOR_ARRAY);
-	
-	glEnable(GL_SCISSOR_TEST);
-
-	//SGui::Txtr::clearLoaded();
+	////glEnable(GL_COLOR_ARRAY);
+	////glColorPointer(4, GL_FLOAT, 0, colorArr);				
+	////glDrawArrays(PRIMITIVE_TYPE_GL_DRAW_MODES[primitiveType], 0, nVtx);
+	////glDisable(GL_COLOR_ARRAY);
+	//
+	//glEnable(GL_SCISSOR_TEST);
 
 }
 

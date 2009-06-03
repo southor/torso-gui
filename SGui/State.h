@@ -5,7 +5,9 @@
 #include "Slot.h"
 #include "ActionSurface.h"
 #include "SGui.h"
+#include "RenderContext.h"
 #include "macros.h"
+
 
 #include <vector>
 #include <list>
@@ -17,6 +19,7 @@ namespace SGui
 {
 
 	class StateHndlr;
+	//class RenderContext;
 
 	/**
 	 * Different type of coordinates.
@@ -64,6 +67,10 @@ namespace SGui
 		 * Used if this state is not paralell.
 		 */
 		State *activeChild;
+
+
+		// Fast acccess to the render context for this state tree.
+		RenderContext *renderContext;
 
 
 		
@@ -185,6 +192,7 @@ namespace SGui
 		 * Becomes a root object, but will be converted
 		 * if added as a child to another state. The id of this state
 		 * will always be zero as long as it stays as the root of the tree.
+		 * // @param renderContext The render context. Must be the same for all states in the same StateTree.
 		 * @param name The name of the state. If used, it is another id for the state.
 		 *			   If the empty string is passed, the state will have no name.
 		 */
@@ -297,7 +305,7 @@ namespace SGui
 		 * @param parentGlobalPos The position of the parent in global coordinates.
 		 * @param parentUsedClipRect The clip rectangle of the parent used in this case in parent coordinates.
 		 */
-		void renderTree(const Pos &parentGlobalPos, const Rect &parentUsedClipRect);
+		void renderTree(RenderContext *renderContext, const Pos &parentGlobalPos, const Rect &parentUsedClipRect);
 
 
 
@@ -307,7 +315,7 @@ namespace SGui
 		 * Renders only this state.
 		 * @param clipRect The clipping rectangle of the caller.
 		 */
-		virtual void renderState(const Rect &clipRect)						{}
+		virtual void renderState(RenderContext *renderContext, const Rect &clipRect)						{}
 		
 		/**	
 		 * @param parentGlobalPos The position of the parent in global coordinates.

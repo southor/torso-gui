@@ -53,8 +53,8 @@ namespace SGui
 		Image(gl_uint txtrId, Pos pos, Vec size, TxtrCoord posWithinTxtr, TxtrCoord sizeWithinTxtr, int operations1 = 0, int operations2 = 0);		
 		Image(gl_uint txtrId, Pos pos, Vec size, int operations1 = 0, int operation2 = 0);
 
-		Image(const char *fileName, Pos pos, Vec size, TxtrCoord posWithinTxtr, TxtrCoord sizeWithinTxtr, int operations1 = 0, int operations2 = 0);
-		Image(const char *fileName, Pos pos, Vec size, int operations1 = 0, int operations2 = 0);
+		Image(RenderContext *renderContext, const char *fileName, Pos pos, Vec size, TxtrCoord posWithinTxtr, TxtrCoord sizeWithinTxtr, int operations1 = 0, int operations2 = 0);
+		Image(RenderContext *renderContext, const char *fileName, Pos pos, Vec size, int operations1 = 0, int operations2 = 0);
 
 
 		
@@ -63,7 +63,7 @@ namespace SGui
 		void initTxtrCoords();
 
 		
-		void render();
+		void render(RenderContext *renderContext);
 
 		
 		//// set position of image with the Texture apperaing static on the screen.

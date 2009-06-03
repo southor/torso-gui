@@ -3,7 +3,7 @@
 
 #include "Image.h"
 
-#include "gl_includes.h"
+//#include "gl_includes.h"
  
 namespace SGui
 {
@@ -13,7 +13,7 @@ namespace SGui
 		initTxtrCoords();
 	}
 
-	Image::Image(GLuint txtrId, Pos pos, Vec size, TxtrCoord posWithinTxtr, TxtrCoord sizeWithinTxtr, int operations1, int operations2)
+	Image::Image(gl_uint txtrId, Pos pos, Vec size, TxtrCoord posWithinTxtr, TxtrCoord sizeWithinTxtr, int operations1, int operations2)
 		: RenderObj(pos, size), txtrId(txtrId), useFixedTxtr(false)
 	{
 		initTxtrCoords(posWithinTxtr, sizeWithinTxtr);
@@ -21,7 +21,7 @@ namespace SGui
 		applyOperations(operations2);
 	}
 
-	Image::Image(GLuint txtrId, Pos pos, Vec size, int operations1, int operations2)
+	Image::Image(gl_uint txtrId, Pos pos, Vec size, int operations1, int operations2)
 		: RenderObj(pos, size), txtrId(txtrId)
 	{
 		initTxtrCoords();
@@ -29,19 +29,19 @@ namespace SGui
 		applyOperations(operations2);
 	}
 
-	Image::Image(const char *fileName, Pos pos, Vec size, TxtrCoord posWithinTxtr, TxtrCoord sizeWithinTxtr, int operations1, int operations2)
+	Image::Image(RenderContext *renderContext, const char *fileName, Pos pos, Vec size, TxtrCoord posWithinTxtr, TxtrCoord sizeWithinTxtr, int operations1, int operations2)
 		: RenderObj(pos, size), txtrId(txtrId)
 	{
-		txtrId = Txtr::loadAdd(fileName);
+		txtrId = Txtr::loadAdd(renderContext, fileName);
 		initTxtrCoords(posWithinTxtr, sizeWithinTxtr);
 		applyOperations(operations1);
 		applyOperations(operations2);
 	}
 
-	Image::Image(const char *fileName, Pos pos, Vec size, int operations1, int operations2)
+	Image::Image(RenderContext *renderContext, const char *fileName, Pos pos, Vec size, int operations1, int operations2)
 		: RenderObj(pos, size), txtrId(0)
 	{
-		txtrId = Txtr::loadAdd(fileName);
+		txtrId = Txtr::loadAdd(renderContext, fileName);
 		initTxtrCoords();
 		applyOperations(operations1);
 		applyOperations(operations2);
@@ -67,17 +67,22 @@ namespace SGui
 
 
 
-	void Image::render()
+	void Image::render(RenderContext *renderContext)
 	{
-		glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-		glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, txtrId);
-		glBegin(GL_QUADS);
-			glTexCoord2f(txtrCoords[0].s, txtrCoords[0].t);	glVertex2i((this->rect.pos.x + this->rect.size.x), this->rect.pos.y);
-			glTexCoord2f(txtrCoords[1].s, txtrCoords[1].t);	glVertex2i((this->rect.pos.x + this->rect.size.x), (this->rect.pos.y + this->rect.size.y));
-			glTexCoord2f(txtrCoords[2].s, txtrCoords[2].t);	glVertex2i(this->rect.pos.x, (this->rect.pos.y + this->rect.size.y));
-			glTexCoord2f(txtrCoords[3].s, txtrCoords[3].t);	glVertex2i(this->rect.pos.x, this->rect.pos.y);
-		glEnd();
+		//glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+		//glEnable(GL_TEXTURE_2D);
+		//glBindTexture(GL_TEXTURE_2D, txtrId);
+		//glBegin(GL_QUADS);
+		//	glTexCoord2f(txtrCoords[0].s, txtrCoords[0].t);	glVertex2i((this->rect.pos.x + this->rect.size.x), this->rect.pos.y);
+		//	glTexCoord2f(txtrCoords[1].s, txtrCoords[1].t);	glVertex2i((this->rect.pos.x + this->rect.size.x), (this->rect.pos.y + this->rect.size.y));
+		//	glTexCoord2f(txtrCoords[2].s, txtrCoords[2].t);	glVertex2i(this->rect.pos.x, (this->rect.pos.y + this->rect.size.y));
+		//	glTexCoord2f(txtrCoords[3].s, txtrCoords[3].t);	glVertex2i(this->rect.pos.x, this->rect.pos.y);
+		//glEnd();
+
+		//RenderContext *renderContext = getRenderContext();
+		dAssert(renderContext);
+
+		renderContext->renderTxtr(txtrId, this, txtrCoords);
 	}
 
 	void Image::setPos(const Pos &pos)

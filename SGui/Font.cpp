@@ -54,7 +54,7 @@ namespace SGui
 	const char Font::MOD_SYMBOLS[] = "bui";
 
 	
-	Font::Font(const char *fontDirectory, Vec fontImageNCharacters)
+	Font::Font(RenderContext *renderContext, const char *fontDirectory, Vec fontImageNCharacters)
 		: fontImageNCharacters(fontImageNCharacters)
 	{
 		dAssert(std::strlen(MOD_SYMBOLS) == N_MODS);
@@ -139,7 +139,7 @@ namespace SGui
 
 
 		// Load font to the grafics card.
-		this->combinedFontTxtrId = combinedFont.add(fontDirectory);
+		this->combinedFontTxtrId = combinedFont.add(renderContext, fontDirectory);
 
 		//// temp debug test
 		//this->combinedFontTxtrId = Txtr::loadAdd((baseFileName + ".bmp").c_str());

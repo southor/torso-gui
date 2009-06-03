@@ -5,7 +5,7 @@
 
 namespace SGui
 {
-	void testFiles(const char *fontsPath)
+	void testFiles(RenderContext *renderContext, const char *fontsPath)
 	{
 		// ----------- testing State ------------
 		
@@ -46,7 +46,7 @@ namespace SGui
 
 
 		state2->setRenderOrder(1);
-		state1->renderTree(Pos(0, 0), Rect(-10000, -10000, 20000, 20000));
+		state1->renderTree(renderContext, Pos(0, 0), Rect(-10000, -10000, 20000, 20000));
 
 
 		// --------- testing StateHndlr ----------
@@ -76,7 +76,7 @@ namespace SGui
 		else
 			fontArialPathStr = "arial";
 		
-		Font font(fontArialPathStr.c_str());
+		Font font(renderContext, fontArialPathStr.c_str());
 
 		Text text(&font, "hello world");
 		dAssert(text.getNChars() == 10);

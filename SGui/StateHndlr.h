@@ -121,7 +121,7 @@ namespace SGui
 		void restartState(int stateId);
 
 		// Render
-		void render();
+		void render(RenderContext *renderContext);
 
 		
 

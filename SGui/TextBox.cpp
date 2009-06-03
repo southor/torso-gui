@@ -3,7 +3,7 @@
 
 #include "TextBox.h"
 
-#include "gl_includes.h"
+//#include "gl_includes.h"
 
 namespace SGui
 {
@@ -53,9 +53,9 @@ namespace SGui
 			nVtx = text.getVtxArrNVtx();
 			if (nVtx > 0)
 			{
-				vtxArr = new GLfloat[text.getVtxArrNFloats()];
-				colorArr = new GLfloat[text.getColorArrNFloats()];
-				txtrCoordArr = new GLfloat[text.getTxtrCoordArrNFloats()];
+				vtxArr = new gl_float[text.getVtxArrNFloats()];
+				colorArr = new gl_float[text.getColorArrNFloats()];
+				txtrCoordArr = new gl_float[text.getTxtrCoordArrNFloats()];
 				text.writeFieldToVtxArr(vtxArr, colorArr, txtrCoordArr, getPos(), getSize(), xAlign, yAlign);
 			}
 		}
@@ -116,36 +116,33 @@ namespace SGui
 		}
 	}	
 
-	void TextBox::render()
+	void TextBox::render(RenderContext *renderContext)
 	{ 
 		dAssert(!updateNeeded);
+
+		//if (nVtx > 0)
+		//{
+		//	glEnable(GL_TEXTURE_2D);
+		//	GLuint txtrId = font->getTxtrId();
+		//	//std::cout << "txtrId = " << txtrId << std::endl;
+		//	glBindTexture(GL_TEXTURE_2D, txtrId);
+		//	glEnable(GL_TEXTURE_COORD_ARRAY);
+		//	glTexCoordPointer(2, GL_FLOAT, 0, txtrCoordArr);
+		//	glEnable(GL_COLOR_ARRAY);
+		//	glColorPointer(3, GL_FLOAT, 0, colorArr);
+		//	glVertexPointer(3, GL_FLOAT, 0, vtxArr);
+
+		//	glDrawArrays(GL_QUADS, 0, nVtx);
+
+		//	glDisable(GL_TEXTURE_COORD_ARRAY);
+		//	glDisable(GL_COLOR_ARRAY);
+		//	glColor3f(1.0f, 1.0f, 1.0f);
+		//}
+
+		dAssert(renderContext);
+
+		renderContext->renderText(font->getTxtrId(), nVtx, vtxArr, colorArr, txtrCoordArr);	
 		
-		if (nVtx > 0)
-		{			
-			//glEnable(GL_TEXTURE_2D);	
-			//glBindTexture(GL_TEXTURE_2D, font->getTxtrId());
-			//glEnable(GL_TEXTURE_COORD_ARRAY);
-			//glTexCoordPointer(Font::N_TXTR_COORD_PER_VTX, GL_FLOAT, 0, txtrCoordArr);
-			//glEnable(GL_COLOR_ARRAY);
-			//glColorPointer(Font::N_FLOATS_PER_COLOR, GL_FLOAT, 0, colorArr);
-			//glVertexPointer(Font::N_FLOATS_PER_VTX, GL_FLOAT, 0, vtxArr);
-
-			glEnable(GL_TEXTURE_2D);
-			GLuint txtrId = font->getTxtrId();
-			//std::cout << "txtrId = " << txtrId << std::endl;
-			glBindTexture(GL_TEXTURE_2D, txtrId);
-			glEnable(GL_TEXTURE_COORD_ARRAY);
-			glTexCoordPointer(2, GL_FLOAT, 0, txtrCoordArr);
-			glEnable(GL_COLOR_ARRAY);
-			glColorPointer(3, GL_FLOAT, 0, colorArr);
-			glVertexPointer(3, GL_FLOAT, 0, vtxArr);
-
-			glDrawArrays(GL_QUADS, 0, nVtx);
-
-			glDisable(GL_TEXTURE_COORD_ARRAY);
-			glDisable(GL_COLOR_ARRAY);
-			glColor3f(1.0f, 1.0f, 1.0f);
-		}
 	}
 
 	bool TextBox::isConsistent()

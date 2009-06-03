@@ -3,17 +3,20 @@
 
 #include "Txtr.h"
 #include "function_templates.h"
+#include "RenderContext.h"
 
 #include <fstream>
 
 //solving LNK error
 #include "function_templates.inl"
 
-#include "gl_includes.h"
+//#include "gl_includes.h"
+#include "gl_declares.h"
 
 namespace SGui
 {
-	std::map<std::string, GLuint> Txtr::txtrIdPool = std::map<std::string, GLuint>();
+	
+	std::map<std::string, gl_uint> Txtr::txtrIdPool = std::map<std::string, gl_uint>();
 
 
 	// **************************************************************************************************************
@@ -41,17 +44,17 @@ namespace SGui
 		}
 	}
 
-	Txtr::Txtr(GLuint w, GLuint h) : pixels(NULL), width(0), height(0)
+	Txtr::Txtr(gl_uint w, gl_uint h) : pixels(NULL), width(0), height(0)
 	{
 		createImage(w, h);
 	}
 
-	Txtr::Txtr(const char *colorsFileName, GLubyte alpha) : pixels(NULL), width(0), height(0)
+	Txtr::Txtr(const char *colorsFileName, gl_ubyte alpha) : pixels(NULL), width(0), height(0)
 	{
 		load(colorsFileName, alpha);
 	}
 
-	Txtr::Txtr(const char *colorsFileName, GLubyte alpha, Pixel3 transparentColor, uint antiAliasing) : pixels(NULL), width(0), height(0)
+	Txtr::Txtr(const char *colorsFileName, gl_ubyte alpha, Pixel3 transparentColor, uint antiAliasing) : pixels(NULL), width(0), height(0)
 	{
 		load(colorsFileName, alpha, transparentColor, antiAliasing);
 	}
@@ -106,8 +109,8 @@ namespace SGui
 	Txtr::Pixel4 Txtr::getInterpoolatedPixel(float x, float y) const
 	{
 		dAssert(between(x, 0.0f, static_cast<float>(width)-1.0f));
-		if (!between(y, 0.0f, static_cast<float>(height)-1.0f))
-			dAssert(between(y, 0.0f, static_cast<float>(height)-1.0f));
+		//if (!between(y, 0.0f, static_cast<float>(height)-1.0f))
+		dAssert(between(y, 0.0f, static_cast<float>(height)-1.0f));
 
 		uint leftX = static_cast<uint>(x);
 		uint lowY = static_cast<uint>(y);
@@ -127,25 +130,25 @@ namespace SGui
 		const Pixel4 &topLeftPixel = getPixel(leftX, lowY+1);
 		const Pixel4 &topRightPixel = getPixel(leftX+1, lowY+1);
 		
-		pixel.r = static_cast<GLubyte>(
+		pixel.r = static_cast<gl_ubyte>(
 				  static_cast<float>(lowLeftPixel.r) * lowLeftWeight
 				+ static_cast<float>(lowRightPixel.r) * lowRightWeight
 				+ static_cast<float>(topLeftPixel.r) * topLeftWeight
 				+ static_cast<float>(topRightPixel.r) * topRightWeight);
 
-		pixel.g = static_cast<GLubyte>(
+		pixel.g = static_cast<gl_ubyte>(
 				  static_cast<float>(lowLeftPixel.g) * lowLeftWeight
 				+ static_cast<float>(lowRightPixel.g) * lowRightWeight
 				+ static_cast<float>(topLeftPixel.g) * topLeftWeight
 				+ static_cast<float>(topRightPixel.g) * topRightWeight);
 
-		pixel.b = static_cast<GLubyte>(
+		pixel.b = static_cast<gl_ubyte>(
 				  static_cast<float>(lowLeftPixel.b) * lowLeftWeight
 				+ static_cast<float>(lowRightPixel.b) * lowRightWeight
 				+ static_cast<float>(topLeftPixel.b) * topLeftWeight
 				+ static_cast<float>(topRightPixel.b) * topRightWeight);
 
-		pixel.a = static_cast<GLubyte>(
+		pixel.a = static_cast<gl_ubyte>(
 				  static_cast<float>(lowLeftPixel.a) * lowLeftWeight
 				+ static_cast<float>(lowRightPixel.a) * lowRightWeight
 				+ static_cast<float>(topLeftPixel.a) * topLeftWeight
@@ -154,7 +157,7 @@ namespace SGui
 		return pixel;
 	}
 
-	bool Txtr::createImage(GLuint w, GLuint h)
+	bool Txtr::createImage(gl_uint w, gl_uint h)
 	{		
 		bool hadImage = hasImage();
 		if (hadImage) removeImage();
@@ -188,14 +191,14 @@ namespace SGui
 		return false;
 	}
 
-	void Txtr::load(const char *colorsFileName, GLubyte alpha)
+	void Txtr::load(const char *colorsFileName, gl_ubyte alpha)
 	{
 		removeImage();
 		if (colorsFileName) loadColors(colorsFileName);
 		setAlpha(alpha);
 	}
 
-	void Txtr::load(const char *colorsFileName, GLubyte alpha, Pixel3 transparentColor, uint transparentAA)
+	void Txtr::load(const char *colorsFileName, gl_ubyte alpha, Pixel3 transparentColor, uint transparentAA)
 	{		
 		load(colorsFileName, alpha);
 		setTransparent(transparentColor, transparentAA);
@@ -220,27 +223,29 @@ namespace SGui
 
 
 
-	GLuint Txtr::add(const char *name)
+	gl_uint Txtr::add(RenderContext *renderContext, const char *name)
 	{
 		dAssert(isConsistent());
 
 		std::string nameStr(name);
-		GLuint txtrId; // result variable
+		gl_uint txtrId; // result variable
 
-		std::map<std::string, GLuint>::iterator it = txtrIdPool.find(nameStr);
+		std::map<std::string, gl_uint>::iterator it = txtrIdPool.find(nameStr);
 		if (it == txtrIdPool.end())
 		{
 			if (hasImage())
 			{				
-				glGenTextures(1, &txtrId);
- 				glBindTexture(GL_TEXTURE_2D, txtrId);
-				glTexImage2D(GL_TEXTURE_2D, 0, 4, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (const GLvoid*)pixels);		
-				
-				// Perform these here?
-				glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-				glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-				glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-				glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+				//glGenTextures(1, &txtrId);
+ 				//glBindTexture(GL_TEXTURE_2D, txtrId);
+				//glTexImage2D(GL_TEXTURE_2D, 0, 4, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (const GLvoid*)pixels);		
+				//
+				//// Perform these here?
+				//glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+				//glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+				//glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+				//glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+				txtrId = renderContext->loadTxtr(pixels, width, height);
 			}
 			else
 			{
@@ -293,7 +298,7 @@ namespace SGui
 		return txtrId;
 	}
 
-	void Txtr::setAlpha(GLubyte alpha)
+	void Txtr::setAlpha(gl_ubyte alpha)
 	{
 		for(uint i=0; i<width*height; ++i)
 		{
@@ -301,7 +306,7 @@ namespace SGui
 		}
 	}
 
-	void Txtr::setAlpha(GLubyte alpha, Pixel3 transparentColor, uint antiAliasing)
+	void Txtr::setAlpha(gl_ubyte alpha, Pixel3 transparentColor, uint antiAliasing)
 	{
 		setAlpha(alpha);
 		setTransparent(transparentColor, antiAliasing);
@@ -318,7 +323,7 @@ namespace SGui
 			dist += abs((pixels+i)->g - transparentColor.g);
 			dist += abs((pixels+i)->b - transparentColor.b);
 	
-			GLubyte alpha;
+			gl_ubyte alpha;
 			if (dist >= antiAliasing) alpha = 255;
 			else if (dist == 0) alpha = 0;
 			else alpha = 255 * dist / antiAliasing;
@@ -342,15 +347,15 @@ namespace SGui
 	// *------------------------------------------------------------------------------------------------------------*
 	// **************************************************************************************************************
 
-	GLuint Txtr::defaultTxtr = 0;
+	gl_uint Txtr::defaultTxtr = 0;
 
 	void Txtr::loadColors(const char *fileName, bool initialize)
 	{
 		dAssert(isConsistent());
 		dAssert(!hasImage() || !initialize);
 
-		GLuint w;
-		GLuint h;
+		gl_uint w;
+		gl_uint h;
 		Pixel3 *colorPixels = loadFile(fileName, &w, &h);
 		//Pixel3 *colorPixels = loadFile(fileName, &height, &width);
 		if (colorPixels)
@@ -378,13 +383,13 @@ namespace SGui
 		}
 	}
 
-	void Txtr::loadAlpha(const char *fileName, GLubyte defaultAlpha, bool initialize)
+	void Txtr::loadAlpha(const char *fileName, gl_ubyte defaultAlpha, bool initialize)
 	{	
 		dAssert(isConsistent());
 		dAssert(!hasImage() || !initialize);
 		
-		GLuint w;
-		GLuint h;	
+		gl_uint w;
+		gl_uint h;	
 		Pixel3 *colorPixels = loadFile(fileName, &w, &h);
 		if (colorPixels)
 		{
@@ -452,7 +457,7 @@ namespace SGui
 	// *------------------------------------------------------------------------------------------------------------*
 	// **************************************************************************************************************
 
-	Txtr::Pixel3* Txtr::loadFile(const char *fileName, GLuint *w, GLuint *h)
+	Txtr::Pixel3* Txtr::loadFile(const char *fileName, gl_uint *w, gl_uint *h)
 	{
 		long in;
 		uint i;
@@ -489,8 +494,8 @@ namespace SGui
 			
 			pixels = new Pixel3[size];
 				
-			GLuint x;
-			for(GLuint y=0;y<*h;y++)
+			gl_uint x;
+			for(gl_uint y=0;y<*h;y++)
 			{
 				for(x=0;x<*w;x++)
 				{
@@ -526,81 +531,86 @@ namespace SGui
 		return pixels;
 	}
 
-	GLuint Txtr::createDefaultTxtr()
+	gl_uint Txtr::createDefaultTxtr(RenderContext *renderContext)
 	{
 		//dAssert(defaultTxtr == NULL);
 		
-		Pixel4 pixel(127, 127, 127, 255);
+		//Pixel4 pixel(127, 127, 127, 255);
 
-		glGenTextures(1, &defaultTxtr);
-		glBindTexture(GL_TEXTURE_2D, defaultTxtr);
-		glTexImage2D(GL_TEXTURE_2D, 0, 4, 1, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, (const GLvoid*)&pixel);
+		//glGenTextures(1, &defaultTxtr);
+		//glBindTexture(GL_TEXTURE_2D, defaultTxtr);
+		//glTexImage2D(GL_TEXTURE_2D, 0, 4, 1, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, (const GLvoid*)&pixel);
+		defaultTxtr = renderContext->createDefaultTxtr();
+		
 		txtrIdPool[std::string("DefaultTxtr")] = defaultTxtr;
+
 		return defaultTxtr;
 	}
 
-	GLuint Txtr::getDefaultTxtrId()
+	gl_uint Txtr::getDefaultTxtrId()
 	{
 		return defaultTxtr;
 	}
 
-	GLuint Txtr::loadAddN(const char *name, const char *colorsFileName, GLubyte alpha)
+	gl_uint Txtr::loadAddN(RenderContext *renderContext, const char *name, const char *colorsFileName, gl_ubyte alpha)
 	{
 		Txtr t(colorsFileName, alpha);
-		return t.add(name);
+		return t.add(renderContext, name);
 	}
 
-	GLuint Txtr::loadAddN(const char *name, const char *colorsFileName, GLubyte alpha, Pixel3 transparentColor, uint antiAliasing)
+	gl_uint Txtr::loadAddN(RenderContext *renderContext, const char *name, const char *colorsFileName, gl_ubyte alpha, Pixel3 transparentColor, uint antiAliasing)
 	{
 		Txtr t(colorsFileName, alpha, transparentColor, antiAliasing);
-		return t.add(name);
+		return t.add(renderContext, name);
 	}
 
-	GLuint Txtr::loadAddN(const char *name, const char *colorsFileName, const char *alphaFileName)
+	gl_uint Txtr::loadAddN(RenderContext *renderContext, const char *name, const char *colorsFileName, const char *alphaFileName)
 	{
 		Txtr t(colorsFileName, alphaFileName);
-		return t.add(name);
+		return t.add(renderContext, name);
 	}
 
-	GLuint Txtr::loadAddN(const char *name, Pixel3 color, const char *alphaFileName)
+	gl_uint Txtr::loadAddN(RenderContext *renderContext, const char *name, Pixel3 color, const char *alphaFileName)
 	{
 		Txtr t(color, alphaFileName);
-		return t.add(name);
+		return t.add(renderContext, name);
 	}
 
 
 
 	
-	GLuint Txtr::loadAdd(const char *colorsFileName, GLubyte alpha)
+	gl_uint Txtr::loadAdd(RenderContext *renderContext, const char *colorsFileName, gl_ubyte alpha)
 	{
-		return loadAddN(colorsFileName, colorsFileName, alpha);
+		return loadAddN(renderContext, colorsFileName, colorsFileName, alpha);
 	}
 
-	GLuint Txtr::loadAdd(const char *colorsFileName, GLubyte alpha, Pixel3 transparentColor, uint antiAliasing)
+	gl_uint Txtr::loadAdd(RenderContext *renderContext, const char *colorsFileName, gl_ubyte alpha, Pixel3 transparentColor, uint antiAliasing)
 	{
-		return loadAddN(colorsFileName, colorsFileName, alpha, transparentColor, antiAliasing);
+		return loadAddN(renderContext, colorsFileName, colorsFileName, alpha, transparentColor, antiAliasing);
 	}
 
-	GLuint Txtr::loadAdd(const char *colorsFileName, const char *alphaFileName)
+	gl_uint Txtr::loadAdd(RenderContext *renderContext, const char *colorsFileName, const char *alphaFileName)
 	{
-		return loadAddN(colorsFileName, colorsFileName, alphaFileName);
+		return loadAddN(renderContext, colorsFileName, colorsFileName, alphaFileName);
 	}
 
-	GLuint Txtr::loadAdd(Pixel3 color, const char *alphaFileName)
+	gl_uint Txtr::loadAdd(RenderContext *renderContext, Pixel3 color, const char *alphaFileName)
 	{
-		return loadAddN(alphaFileName, color, alphaFileName);
+		return loadAddN(renderContext, alphaFileName, color, alphaFileName);
 	}
 
-	void Txtr::clearLoaded()
+	void Txtr::clearLoaded(RenderContext *renderContext)
 	{
-		std::map<std::string, GLuint>::iterator it = txtrIdPool.begin();
-		std::map<std::string, GLuint>::iterator end = txtrIdPool.end();
+		std::map<std::string, gl_uint>::iterator it = txtrIdPool.begin();
+		std::map<std::string, gl_uint>::iterator end = txtrIdPool.end();
+		
+		gl_uint txtrId;
 
-		GLuint txtrId;
 		for(;it != end; ++it)
 		{
 			txtrId = it->second;
-			glDeleteTextures(1, &txtrId);
+			//glDeleteTextures(1, &txtrId);
+			renderContext->unloadTxtr(txtrId);
 		}
 
 		txtrIdPool.clear();

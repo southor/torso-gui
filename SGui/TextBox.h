@@ -50,7 +50,7 @@ namespace SGui
 
 		inline void clearTextString()					{ setTextString(std::string()); }
 
-		void render();
+		void render(RenderContext *renderContext);
 
 		bool isConsistent();
 		
