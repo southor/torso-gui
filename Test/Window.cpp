@@ -201,17 +201,6 @@ void Window::init()
 
 	//glEnable(GL_VERTEX_ARRAY);	
 
-	////glEnable(GL_TEXTURE_COORD_ARRAY);
-	////glTexCoordPointer(2, GL_FLOAT, 0, txtrCoordArr);
-	////glDrawElements(PRIMITIVE_TYPE_GL_DRAW_MODES[primitiveType], nInd, GL_UNSIGNED_INT, indArr);
-	////glDisable(GL_TEXTURE_COORD_ARRAY);
-
-
-	////glEnable(GL_COLOR_ARRAY);
-	////glColorPointer(4, GL_FLOAT, 0, colorArr);				
-	////glDrawArrays(PRIMITIVE_TYPE_GL_DRAW_MODES[primitiveType], 0, nVtx);
-	////glDisable(GL_COLOR_ARRAY);
-	//
 	//glEnable(GL_SCISSOR_TEST);
 
 }
