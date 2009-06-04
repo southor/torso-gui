@@ -2,9 +2,9 @@
 #include "External\GLRenderContext.h"
 #include "External\gl_includes.h"
 
+
 namespace SGui
 {
-
 
 	void GLRenderContext::pushMatrix()
 	{
