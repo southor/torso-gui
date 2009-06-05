@@ -16,16 +16,30 @@
 namespace SGui
 {
 
+	//typedef signed char int8;
+	//typedef unsigned char uint8;
+
+	//typedef short int16;
+	//typedef unsigned short uint16;
+
+	//typedef int int32;
+	//typedef unsigned int uint32;
+
+	typedef signed __int8 int8;
+	typedef unsigned __int8 uint8;
+
+	typedef signed __int16 int16;
+	typedef unsigned __int16 uint16;
+
+	typedef signed __int32 int32;
+	typedef unsigned __int32 uint32;
+
+	typedef signed __int64 int64;
+	typedef unsigned __int64 uint64;
+
+	//typedef signed __int128 int128;
+	//typedef unsigned __int128 uint128;
 	
-
-	typedef signed char int8;
-	typedef unsigned char uint8;
-
-	typedef short int16;
-	typedef unsigned short uint16;
-
-	typedef int int32;
-	typedef unsigned int uint32;
 
 	
 	
