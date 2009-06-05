@@ -56,6 +56,11 @@ namespace SGui
 		glEnable(GL_SCISSOR_TEST);
 	}
 
+	void GLRenderContext::uninitGL()
+	{
+		// TODO: anything?
+	}
+
 	void GLRenderContext::startNewRendering()
 	{
 		glClear(GL_COLOR_BUFFER_BIT);

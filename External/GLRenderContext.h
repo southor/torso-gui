@@ -16,6 +16,7 @@ namespace SGui
 
 
 		void initGL(uint w, uint h);
+		void uninitGL();
 
 		void startNewRendering();
 
