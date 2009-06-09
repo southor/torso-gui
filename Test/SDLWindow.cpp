@@ -1,24 +1,28 @@
-#ifndef _STATE_GUI_TEST_WINDOW_CPP_
-#define _STATE_GUI_TEST_WINDOW_CPP_
+#ifndef _STATE_GUI_TEST_SDL_WINDOW_CPP_
+#define _STATE_GUI_TEST_SDL_WINDOW_CPP_
 
-#include "Window.h"
+#ifndef _X64
+
+#include "SDLWindow.h"
 #include "SGui\Txtr.h"
 #include "SGui\macros.h"
 
 
-Window::Window() : screen(NULL), stateHndlr()//, font(NULL)
+
+
+SDLWindow::SDLWindow() : screen(NULL), stateHndlr()//, font(NULL)
 {
 	init();
 
 	//font = new SGui::Font("../Test/graphics/fonts/arial");
 }
 
-Window::~Window()
+SDLWindow::~SDLWindow()
 {
 	//delete font;
 }
 
-void Window::run()
+void SDLWindow::run()
 {
 	while(true)
 	{
@@ -29,7 +33,7 @@ void Window::run()
 	}
 }	
 
-void Window::render()
+void SDLWindow::render()
 {
 	//glClear(GL_COLOR_BUFFER_BIT);
 	renderContext.startNewRendering();
@@ -81,7 +85,7 @@ void Window::render()
 // **************************************************************************************************************
 
 
-bool Window::pollEvents()
+bool SDLWindow::pollEvents()
 {
 	SDL_Event event;
 	bool quit = false;
@@ -154,7 +158,7 @@ bool Window::pollEvents()
 	return quit;
 }
 
-void Window::init()
+void SDLWindow::init()
 {
 	if ( SDL_Init( SDL_INIT_VIDEO ) < 0 )
 	{
@@ -205,5 +209,6 @@ void Window::init()
 
 }
 
+#endif
 
 #endif

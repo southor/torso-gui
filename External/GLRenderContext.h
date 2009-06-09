@@ -14,6 +14,7 @@ namespace SGui
 
 	public:
 
+		virtual void flush();
 
 		void initGL(uint w, uint h);
 		void uninitGL();

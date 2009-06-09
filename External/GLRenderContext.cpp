@@ -6,6 +6,11 @@
 namespace SGui
 {
 
+	void GLRenderContext::flush()
+	{
+		glFlush();
+	}
+
 	void GLRenderContext::pushMatrix()
 	{
 		glPushMatrix();

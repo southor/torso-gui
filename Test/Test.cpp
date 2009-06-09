@@ -5,22 +5,36 @@
 
 #include "SGui\files.h"
 #include "SGui\files_test.h"
-#include "Window.h"
+
+#ifdef _X64
+	#include "WinWindow.h"
+	typedef WinWindow Window;
+#else
+	#include "SDLWindow.h"
+	typedef SDLWindow Window;
+#endif
+
+
 #include "SGui\SGui.h"
 
 #include <iostream>
+
+
+
+
 
 int _tmain(int argc, _TCHAR* argv[])
 {
 	
 
 
-
+	std::cout << "sizeof void* = " << sizeof(void*) << std::endl;
 	
 
 	
 
 	Window window; // opengl init, must be performed before init namespace because loaded opengl textures will be cleared/wasted by opengl, in newer versions.
+	if (window.getError() != 0) return 0; // TODO now uninit is called though innit failed
 	SGui::RenderContext *renderContext = window.getRenderContext();
 
 	std::cout << "Test State Gui" << std::endl;

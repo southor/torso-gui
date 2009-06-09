@@ -1,5 +1,5 @@
-#ifndef _STATE_GUI_TEST_WINDOW_H_
-#define _STATE_GUI_TEST_WINDOW_H_
+#ifndef _STATE_GUI_TEST_SDL_WINDOW_H_
+#define _STATE_GUI_TEST_SDL_WINDOW_H_
 
 #include "SGui\files.h"
 
@@ -10,7 +10,7 @@
 //#include "External\gl_includes.h"
 #include "SDL.h"
 
-class Window
+class SDLWindow
 {
 
 	private:
@@ -34,14 +34,16 @@ class Window
 
 	public:
 
+		int getError()		{ return 0; }
+
 		SGui::StateHndlr stateHndlr;
 
 
 		SGui::GLRenderContext* getRenderContext()		{ return &renderContext; }
 		
-		Window();
+		SDLWindow();
 
-		~Window();
+		~SDLWindow();
 
 		SGui::uint getWidth()			{ return windowWidth; }
 

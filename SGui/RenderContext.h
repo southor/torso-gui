@@ -19,6 +19,8 @@ namespace SGui
 
 	public:
 
+		virtual void flush() = 0;
+
 		virtual void pushMatrix() = 0;
 		virtual void popMatrix() = 0;
 
