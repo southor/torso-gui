@@ -6,12 +6,10 @@
 #include "SGui\files.h"
 #include "SGui\files_test.h"
 
-#ifdef _X64
+#ifdef _M_X64
 	#include "WinWindow.h"
-	typedef WinWindow Window;
 #else
 	#include "SDLWindow.h"
-	typedef SDLWindow Window;
 #endif
 
 
@@ -28,13 +26,34 @@ int _tmain(int argc, _TCHAR* argv[])
 	
 
 
-	std::cout << "sizeof void* = " << sizeof(void*) << std::endl;
+	std::cout << "sizeof(void*) = " << sizeof(void*) << std::endl;
 	
-
+	std::cout << "sizeof(char) = " << sizeof(char) << std::endl;
+	std::cout << "sizeof(short) = " << sizeof(short) << std::endl;
+	std::cout << "sizeof(int) = " << sizeof(int) << std::endl;
+	std::cout << "sizeof(long) = " << sizeof(long) << std::endl;
+	std::cout << "sizeof(loing long) = " << sizeof(long long) << std::endl;
 	
+	std::cout << "sizeof(float) = " << sizeof(float) << std::endl;
+	std::cout << "sizeof(double) = " << sizeof(double) << std::endl;
+	
+	std::cout << "sizeof(__int8) = " << sizeof(__int8) << std::endl;
+	std::cout << "sizeof(__int16) = " << sizeof(__int16) << std::endl;
+	std::cout << "sizeof(__int32) = " << sizeof(__int32) << std::endl;
+	std::cout << "sizeof(__int64) = " << sizeof(__int64) << std::endl;
+	std::cout << std::endl;
 
-	Window window; // opengl init, must be performed before init namespace because loaded opengl textures will be cleared/wasted by opengl, in newer versions.
-	if (window.getError() != 0) return 0; // TODO now uninit is called though innit failed
+
+	// opengl init, must be performed before init namespace because loaded opengl textures will be cleared/wasted by opengl, in newer versions.
+#ifdef _M_X64
+	WinWindow window;
+#else
+	SDLWindow window;
+#endif
+	
+	
+	
+	if (window.getWasError()) return 0; // TODO now uninit is called though innit failed
 	SGui::RenderContext *renderContext = window.getRenderContext();
 
 	std::cout << "Test State Gui" << std::endl;

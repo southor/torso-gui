@@ -1,11 +1,14 @@
 #ifndef _STATE_GUI_TEST_WIN_WINDOW_CPP_
 #define _STATE_GUI_TEST_WIN_WINDOW_CPP_
 
+#ifdef _M_X64
+
 #include "WinWindow.h"
 #include "SGui\Txtr.h"
 #include "SGui\macros.h"
 
-#include "win_includes.h"
+#include "External\win_includes.h"
+
 
 //the window procedure
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -56,26 +59,19 @@ void DisableOpenGL(HWND hwnd, HDC hDC, HGLRC hRC)
 	ReleaseDC(hwnd, hDC);
 }
 
-WinWindow::WinWindow() : stateHndlr()//, font(NULL)
-{
-	
-	
-	error = init();
 
-	//font = new SGui::Font("../Test/graphics/fonts/arial");
+WinWindow::WinWindow() : Window() //, font(NULL)
+{		
+	wasError = !init();
 }
 
 WinWindow::~WinWindow()
 {
-	//delete font;
-
 	uninit();
-
 }
 
 void WinWindow::run()
 {
-
 	MSG Msg;
 
 	//meassage loop
@@ -85,103 +81,17 @@ void WinWindow::run()
 		DispatchMessage(&Msg);
 		
 		render();
+		renderContext.flush();
 		
 		SwapBuffers((HDC)(hDC));
 	}
-
-}	
-
-void WinWindow::render()
-{
-	renderContext.startNewRendering();
-	stateHndlr.render(&renderContext);
-	renderContext.flush();
 }
 
-// **************************************************************************************************************
-// *------------------------------------------------------------------------------------------------------------*
-// *--------------------------------------------- PRIVATE ------------------------------------------------------*
-// *------------------------------------------------------------------------------------------------------------*
-// **************************************************************************************************************
 
-
-//bool WinWindow::pollEvents()
-//{
-//	SDL_Event event;
-//	bool quit = false;
-//	
-//
-//	while(SDL_PollEvent(&event))
-//	{
-//	  switch(event.type)
-//	  {
-//		case SDL_KEYDOWN:
-//		{
-//		  switch(event.key.keysym.sym)
-//		  {
-//			case SDLK_LEFT:
-//				//mapRendererController.scrollLeft = true;
-//			  break;
-//			case SDLK_RIGHT:
-//				//mapRendererController.scrollRight = true;				  
-//			  break;
-//			case SDLK_UP:
-//				//mapRendererController.scrollUp = true;				  
-//			  break;
-//			case SDLK_DOWN:
-//				//mapRendererController.scrollDown = true;				  
-//			  break;
-//		  
-//			case SDLK_ESCAPE:
-//			  quit = true;
-//			  break;
-//              
-//			case SDLK_f:					
-//			  if (event.key.keysym.mod & KMOD_CTRL)
-//				SDL_WM_ToggleFullScreen(screen);
-//			  break;
-//              
-//			default:
-//			  break;
-//		  } // end switch
-//          
-//		  break;
-//		}
-//		case SDL_KEYUP:
-//		{
-//			switch(event.key.keysym.sym)
-//			{
-//				case SDLK_LEFT:
-//					//mapRendererController.scrollLeft = false;
-//				  break;
-//				case SDLK_RIGHT:
-//					//mapRendererController.scrollRight = false;
-//				  break;
-//				case SDLK_UP:
-//					//mapRendererController.scrollUp = false;
-//				  break;
-//				case SDLK_DOWN:
-//					//mapRendererController.scrollDown = false;
-//				  break;
-//			}
-//		}
-//		break;
-//		case SDL_QUIT:
-//		  quit = true;
-//          
-//		default:
-//		  break;
-//          
-//	  } // end switch
-//	} // end while
-//
-//	return quit;
-//}
-
-WinWindow::error_t WinWindow::init()
+bool WinWindow::init()
 {
 
-	HINSTANCE hInstance = NULL;
+	HINSTANCE hInstance = GetModuleHandle(NULL);
 
 	wchar_t g_szClassName[] = L"myWindowClass\0";
 	
@@ -206,7 +116,7 @@ WinWindow::error_t WinWindow::init()
 	if(!RegisterClassEx(&wc))
 	{
 		MessageBox(NULL, L"window register failed", L"Error", MB_ICONEXCLAMATION | MB_OK);
-		return WINDOW_REGISTER_FAILED;
+		return false;
 	}
 
 	windowWidth = 640;
@@ -219,7 +129,7 @@ WinWindow::error_t WinWindow::init()
 	if(hwnd == NULL)
 	{
 		MessageBox(NULL, L"window creation failed", L"Error", MB_ICONEXCLAMATION | MB_OK);
-		return WINDOW_CREATION_FAILED;
+		return false;
 	}
 
 	
@@ -230,7 +140,7 @@ WinWindow::error_t WinWindow::init()
 
 	renderContext.initGL(windowWidth, windowHeight);
 
-	return NESTLA_TEST_NO_ERROR;
+	return true;
 
 }
 
@@ -240,5 +150,7 @@ void WinWindow::uninit()
 	DisableOpenGL((HWND)hwnd, (HDC)hDC, (HGLRC)hRC);
 
 }
+
+#endif
 
 #endif

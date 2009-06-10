@@ -7,6 +7,9 @@ namespace SGui
 {
 	void testFiles(RenderContext *renderContext, const char *fontsPath)
 	{
+
+		std::cout << "sizeof(void*) = " << sizeof(void*) << std::endl;
+
 		// ----------- testing State ------------
 		
 		State *state1 = new State();

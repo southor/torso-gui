@@ -6,7 +6,7 @@
 
 inline void sGuiDebugBreak()
 {
-#ifndef _X64 // TODO deal with case X64 later, (write a binary function manually).
+#ifndef _M_X64 // TODO deal with case X64 later, (write a binary function manually).
 		__asm int 3
 #endif
 }

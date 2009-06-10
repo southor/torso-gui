@@ -1,7 +1,7 @@
 #ifndef _STATE_GUI_TEST_SDL_WINDOW_CPP_
 #define _STATE_GUI_TEST_SDL_WINDOW_CPP_
 
-#ifndef _X64
+#ifndef _M_X64
 
 #include "SDLWindow.h"
 #include "SGui\Txtr.h"
@@ -9,17 +9,13 @@
 
 
 
-
-SDLWindow::SDLWindow() : screen(NULL), stateHndlr()//, font(NULL)
+SDLWindow::SDLWindow() : screen(NULL), Window() //, font(NULL)
 {
-	init();
-
-	//font = new SGui::Font("../Test/graphics/fonts/arial");
+	wasError = !init();
 }
 
 SDLWindow::~SDLWindow()
 {
-	//delete font;
 }
 
 void SDLWindow::run()
@@ -29,61 +25,10 @@ void SDLWindow::run()
 		if (pollEvents()) break;
 		
 		render();
+
 		SDL_GL_SwapBuffers();
 	}
 }	
-
-void SDLWindow::render()
-{
-	//glClear(GL_COLOR_BUFFER_BIT);
-	renderContext.startNewRendering();
-	stateHndlr.render(&renderContext);
-
-	
-	
-	// test render some characters
-
-
-	//SGui::Text text(font, "ett tva tre fyra fem sex/nsju/natta ~~nio ~uon.tio elva ~c00a0ff.tolv tretton ~uoff.fjorton femton sexton sjutton artan nitton tjugo");
-
-	//float *vtxArr = new GLfloat[text.getVtxArrNFloats()];
-	//float *colorArr = new GLfloat[text.getColorArrNFloats()];
-	//float *txtrCoordArr = new GLfloat[text.getTxtrCoordArrNFloats()];
-	//
-	//glEnable(GL_TEXTURE_2D);	
-	//glBindTexture(GL_TEXTURE_2D, font->getTxtrId());
-	//glEnable(GL_TEXTURE_COORD_ARRAY);
-	//glTexCoordPointer(2, GL_FLOAT, 0, txtrCoordArr);
-	//glEnable(GL_COLOR_ARRAY);
-	//glColorPointer(3, GL_FLOAT, 0, colorArr);
-	//glVertexPointer(3, GL_FLOAT, 0, vtxArr);
-	//
-
-
-
-	//text.writeFieldToVtxArr(vtxArr, colorArr, txtrCoordArr, SGui::Pos(340, 160), SGui::Vec(150, 90));
-	//glDrawArrays(GL_QUADS, 0, text.getVtxArrNVtx());
-
-
-
-
-	//delete[] vtxArr;
-	//delete[] colorArr;
-	//delete[] txtrCoordArr; 
-
-	//
-	//
-	//glDisable(GL_TEXTURE_COORD_ARRAY);
-	//glDisable(GL_COLOR_ARRAY);
-	//glColor3f(1.0f, 1.0f, 1.0f);
-}
-
-// **************************************************************************************************************
-// *------------------------------------------------------------------------------------------------------------*
-// *--------------------------------------------- PRIVATE ------------------------------------------------------*
-// *------------------------------------------------------------------------------------------------------------*
-// **************************************************************************************************************
-
 
 bool SDLWindow::pollEvents()
 {
@@ -158,7 +103,8 @@ bool SDLWindow::pollEvents()
 	return quit;
 }
 
-void SDLWindow::init()
+
+bool SDLWindow::init()
 {
 	if ( SDL_Init( SDL_INIT_VIDEO ) < 0 )
 	{
@@ -182,31 +128,14 @@ void SDLWindow::init()
 	{
 		rAssert(false);
 		//throw EXCEPTION("Failed to set video mode");
+
+		return false;
 	}
 	
 
 	renderContext.initGL(w, h);
 
-	//glViewport(0, 0, w, h);
-
-
-	//glMatrixMode(GL_PROJECTION);
-	//glLoadIdentity();
-	//glOrtho(0.0, static_cast<double>(w), 0.0, static_cast<double>(h), 0.5, 10.0);
-	//glMatrixMode(GL_MODELVIEW);
-	//glLoadIdentity();
-	//glTranslatef(0.0f, 0.0f, -2.0f);
-
-
-
-	//glShadeModel(GL_SMOOTH);
-	//glEnable(GL_BLEND);
-	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	//glEnable(GL_VERTEX_ARRAY);	
-
-	//glEnable(GL_SCISSOR_TEST);
-
+	return true;
 }
 
 #endif
