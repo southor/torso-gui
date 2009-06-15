@@ -294,7 +294,8 @@ namespace SGui
 			{				
 				for(; it != end; ++it) // find free id
 				{
-					if (currId > greatestId) greatestId = currId;
+					int currId2 = (*it)->id;
+					if (currId2 > greatestId) greatestId = currId2;
 				}
 
 				// solve id overlap
@@ -392,7 +393,7 @@ namespace SGui
 			//glPushMatrix();
 			renderContext->pushMatrix();
 				//glTranslatef(static_cast<float>(this->rect.pos.x), static_cast<float>(this->rect.pos.y), 0.0f);
-				renderContext->translate(this->rect.pos.x, this->rect.pos.y);
+				renderContext->translate(this->rect.pos);
 
 				Rect usedClipRect(parentUsedClipRect);
 				if (clipping)

@@ -24,7 +24,9 @@ namespace SGui
 		virtual void pushMatrix() = 0;
 		virtual void popMatrix() = 0;
 
-		virtual void translate(int x, int y) = 0;
+		virtual void translate(const Vec &v) = 0;
+
+		virtual void scale(const Vecf &v) = 0;
 
 		virtual void setClipping(const Pos &pos, const Rect &clipRect) = 0;
 
@@ -40,7 +42,7 @@ namespace SGui
 
 		virtual void renderTxtr(gl_uint txtrId, const RectIfc *rect, const TxtrCoord *txtrCoords) = 0;
 
-		virtual void renderText(gl_uint fontTxtrId, int nVtx, float *vtxArr, float *colorArr, float *txtrCoordArr) = 0;
+		virtual void renderText(gl_uint fontTxtrId, int nVtx, const float *vtxArr, const float *colorArr, const float *txtrCoordArr) = 0;
 		
 		
 	};

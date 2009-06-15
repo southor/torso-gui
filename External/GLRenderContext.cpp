@@ -21,9 +21,14 @@ namespace SGui
 		glPopMatrix();
 	}
 
-	void GLRenderContext::translate(int x, int y)
+	void GLRenderContext::translate(const Vec &v)
 	{
-		glTranslatef(static_cast<float>(x), static_cast<float>(y), 0.0f);
+		glTranslatef(static_cast<float>(v.x), static_cast<float>(v.y), 0.0f);
+	}
+
+	void GLRenderContext::scale(const Vecf &v)
+	{
+		glScalef(v.x, v.y, 1.0f);
 	}
 
 	void GLRenderContext::initGL(uint w, uint h)
@@ -275,7 +280,7 @@ namespace SGui
 		glCallList(displayList);
 	}
 
-	void GLRenderContext::renderText(gl_uint fontTxtrId, int nVtx, float *vtxArr, float *colorArr, float *txtrCoordArr)
+	void GLRenderContext::renderText(gl_uint fontTxtrId, int nVtx, const float *vtxArr, const float *colorArr, const float *txtrCoordArr)
 	{ 		
 		if (nVtx > 0)
 		{
@@ -291,7 +296,7 @@ namespace SGui
 
 			glDisable(GL_TEXTURE_COORD_ARRAY);
 			glDisable(GL_COLOR_ARRAY);
-			glColor3f(1.0f, 1.0f, 1.0f);
+			glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 		}
 	}
 

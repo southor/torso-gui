@@ -19,12 +19,14 @@ namespace SGui
 		void initGL(uint w, uint h);
 		void uninitGL();
 
-		void startNewRendering();
+		virtual void startNewRendering();
 
 		virtual void pushMatrix();
 		virtual void popMatrix();
 
-		virtual void translate(int x, int y);
+		virtual void translate(const Vec &v);
+
+		virtual void scale(const Vecf &v);
 
 		virtual void setClipping(const Pos &pos, const Rect &clipRect);
 
@@ -40,7 +42,7 @@ namespace SGui
 
 		virtual void renderTxtr(gl_uint txtrId, const RectIfc *rect, const TxtrCoord *txtrCoords);
 
-		virtual void renderText(gl_uint fontTxtrId, int nVtx, float *vtxArr, float *colorArr, float *txtrCoordArr);
+		virtual void renderText(gl_uint fontTxtrId, int nVtx, const float *vtxArr, const float *colorArr, const float *txtrCoordArr);
 		
 		
 	};
