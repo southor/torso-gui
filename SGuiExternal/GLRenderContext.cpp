@@ -1,6 +1,6 @@
 
-#include "External\GLRenderContext.h"
-#include "External\gl_includes.h"
+#include "SGuiExternal\GLRenderContext.h"
+#include "SGuiExternal\gl_includes.h"
 
 
 namespace SGui

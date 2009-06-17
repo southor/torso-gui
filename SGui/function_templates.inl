@@ -2,7 +2,7 @@
 #define _STATE_GUI_FUNCTION_TEMPLATES_CPP_
 
 #include "function_templates.h"
-#include "Font.h" // test include
+//#include "Font.h" // test include
 
 namespace SGui
 {
