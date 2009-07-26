@@ -19,7 +19,7 @@ namespace SGui
 		void initGL(uint w, uint h);
 		void uninitGL();
 
-		virtual void startNewRendering();
+		virtual void startNewRendering(const SGui::Color3f &color);
 
 		virtual void pushMatrix();
 		virtual void popMatrix();

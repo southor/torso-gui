@@ -28,7 +28,9 @@ namespace SGui
 
 	void GLRenderContext::scale(const Vecf &v)
 	{
+#ifndef SGUI_DEBUG_GL_LINES
 		glScalef(v.x, v.y, 1.0f);
+#endif
 	}
 
 	void GLRenderContext::initGL(uint w, uint h)
@@ -71,9 +73,20 @@ namespace SGui
 		// TODO: anything?
 	}
 
-	void GLRenderContext::startNewRendering()
+	void GLRenderContext::startNewRendering(const SGui::Color3f &color)
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		glColor4f(color.r, color.g, color.b, 1.0f);
+
+		glBegin(GL_QUADS);
+			glVertex3i(0, 0, 0);
+			glVertex3i(500, 0, 0);
+			glVertex3i(500, 500, 0);
+			glVertex3i(0, 500, 0);
+		glEnd();
+
+		glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 	}
 
 	gl_uint GLRenderContext::createDefaultTxtr()
