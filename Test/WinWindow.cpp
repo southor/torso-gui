@@ -7,7 +7,7 @@
 #include "SGui\Txtr.h"
 #include "SGui\macros.h"
 
-#include "External\win_includes.h"
+#include "SGuiExternal\win_includes.h"
 
 
 //the window procedure

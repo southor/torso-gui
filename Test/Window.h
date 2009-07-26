@@ -4,7 +4,7 @@
 #include "SGui\files.h"
 #include "SGui\StateHndlr.h"
 
-#include "External\GLRenderContext.h"
+#include "SGuiExternal\GLRenderContext.h"
 
 //#ifdef WIN32
 //#pragma comment(lib, "SDL.lib")

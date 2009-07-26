@@ -105,7 +105,7 @@ namespace SGui
 	 * @param arrTo The array to copy to.
 	 * @param nElements number of elements to copy.
 	 */
-	template<typename T> void copyFun(T *fromArr, T *toArr, uint nElements);
+	template<typename T> void copyFun(const T *fromArr, T *toArr, uint nElements);
 
 	/**
 	 * Copys nElements elements from arrFrom to arrTo, uses operator= .
@@ -113,7 +113,7 @@ namespace SGui
 	 * @param arrTo The array to copy to.
 	 * @param nElements number of elements to copy.
 	 */
-	template<typename T> void copyFun(T *fromArr, uint fromElementStride, T *toArr, uint toElementStride, uint nElements);
+	template<typename T> void copyFun(const T *fromArr, uint fromElementStride, T *toArr, uint toElementStride, uint nElements);
 
 	/**
 	 * assigns every element in the array to zero.
@@ -147,6 +147,29 @@ namespace SGui
 	{
 		return (alternative < nAlternatives) && (alternative >= 0);
 	}
+
+	template<typename T, typename S>
+	T myLShift(T x, S n)
+	{
+		if (n > 0) return x << n;
+		else return x >> -n;
+	}
+
+	template<typename T, typename S>
+	T myRShift(T x, S n)
+	{
+		if (n > 0) return x >> n;
+		else return x << -n;
+	}
+	
+	template<typename T>
+	T twoToThePowerOf(int n)
+	{
+		T x(1);
+		return myLShift<T>(x, n);
+	}
+
+	
 
 	
 

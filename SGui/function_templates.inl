@@ -92,7 +92,7 @@ namespace SGui
 		b = tmp;
 	}
 
-	template<typename T> void copyFun(T *fromArr, T *toArr, uint nElements)
+	template<typename T> void copyFun(const T *fromArr, T *toArr, uint nElements)
 	{
 		for(uint i=0; i<nElements; ++i)
 		{
@@ -100,7 +100,7 @@ namespace SGui
 		}
 	}
 
-	template<typename T> void copyFun(T *fromArr, uint fromElementStride, T *toArr, uint toElementStride, uint nElements)
+	template<typename T> void copyFun(const T *fromArr, uint fromElementStride, T *toArr, uint toElementStride, uint nElements)
 	{
 		uint fromElementInterval = fromElementStride + 1;
 		uint toElementInterval = toElementStride + 1;
