@@ -16,7 +16,8 @@ Window::~Window()
 void Window::render()
 {
 	//glClear(GL_COLOR_BUFFER_BIT);
-	renderContext.startNewRendering();
+	SGui::Color3f bgColor(0.3f, 0.3f, 0.5f);
+	renderContext.startNewRendering(bgColor);
 	stateHndlr.render(&renderContext);
 }
 

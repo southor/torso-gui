@@ -117,7 +117,7 @@ namespace SGui
 	//	{
 	//		stateHndlr->addActiveStateLeaf(this);
 	//	}
-	//	else if (paralell)
+	//	else if (parallel)
 	//	{
 	//		ChildrenIter iter = childrenBegin();
 	//		ChildrenIter end = childrenEnd();
@@ -163,7 +163,7 @@ namespace SGui
 	//			 * Must be this case becuase otherwise the child would also
 	//			 * been active and then this call should not have happen.
 	//			 */
-	//			dAssert(!paralell);
+	//			dAssert(!parallel);
 
 	//			activeChild->enterTo(stateHndlr);
 	//		}
@@ -176,7 +176,7 @@ namespace SGui
 	//	{
 	//		if (parent)
 	//		{
-	//			// If the parent is a parlell state than this assignment has no menaing
+	//			// If the parent is a parallel state than this assignment has no menaing
 	//			parent->activeChild = this;
 
 	//			parent->enterFrom(stateHndlr);
@@ -184,7 +184,7 @@ namespace SGui
 	//		else
 	//		{
 	//			// This is the root state
-	//			dAssert((childActivity == 0) || !paralell);
+	//			dAssert((childActivity == 0) || !parallel);
 
 	//			enterTo(stateHndlr);
 	//		}
@@ -204,7 +204,7 @@ namespace SGui
 	//	{
 	//		stateHndlr->addActiveStateLeaf(this);
 	//	}
-	//	else if (paralell)
+	//	else if (parallel)
 	//	{
 	//		ChildrenIter iter = childrenBegin();
 	//		ChildrenIter end = childrenEnd();
@@ -260,7 +260,7 @@ namespace SGui
 					 name(name), parent(NULL), children(), childrenRL(),
 					 active(false), childActivity(0), activeChild(NULL),
 					 renderContext(renderContext),
-					 id(0), clipping(false), paralell(false),
+					 id(0), clipping(false), parallel(false),
 					 callEnterExit(true), actionSurfaces()
 	{
 		//setSize(INT_MAX, INT_MAX);
@@ -272,7 +272,7 @@ namespace SGui
 
 	//State::State(int id) : parent(NULL), children(), childrenRL(), active(false), childActivity(0),
 	//				 activeChild(NULL), Rect(0, 0, INT_MAX, INT_MAX), id(id), clipping(false),
-	//				 paralell(false), actionSurfaces()
+	//				 parallel(false), actionSurfaces()
 	//{}
 
 	void State::addChild(State *state, int id)
@@ -408,7 +408,7 @@ namespace SGui
 				{
 					renderState(renderContext, usedClipRect);
 
-					if (paralell)
+					if (parallel)
 					{
 						ChildrenRLIter iter = childrenRL.begin();
 						ChildrenRLIter end = childrenRL.end();
@@ -447,7 +447,7 @@ namespace SGui
 	//	Pos globalPos(parentGlobalPos + pos); // This states position in global coordinates
 	//	
 	//	// Check children
-	//	if (paralell)
+	//	if (parallel)
 	//	{
 	//		ChildrenRL::reverse_iterator iter = childrenRL.rbegin();
 	//		ChildrenRL::reverse_iterator end = childrenRL.rend();		
@@ -500,7 +500,7 @@ namespace SGui
 			mousePos -= this->rect.pos; // To local coordinates
 
 			// children
-			if (paralell)
+			if (parallel)
 			{
 				ChildrenRL::reverse_iterator iter = childrenRL.rbegin();
 				ChildrenRL::reverse_iterator end = childrenRL.rend();		
@@ -524,7 +524,7 @@ namespace SGui
 	void State::handleMouseButtonEvent(int mouseButtonEvent)
 	{
 		// children
-		if (paralell)
+		if (parallel)
 		{
 			ChildrenRL::reverse_iterator iter = childrenRL.rbegin();
 			ChildrenRL::reverse_iterator end = childrenRL.rend();
@@ -564,7 +564,7 @@ namespace SGui
 		if (parent)
 		{
 			if (active && !parent->active) return false;
-			if (!paralell && childActivity > 1) return false;
+			if (!parallel && childActivity > 1) return false;
 			if (childActivity > getNChildren()) return false;			
 		}
 		else

@@ -121,7 +121,7 @@ namespace SGui
 		{
 			addActiveStateLeaf(state);
 		}
-		else if (state->paralell)
+		else if (state->parallel)
 		{
 			State::ChildrenIter iter = state->childrenBegin();
 			State::ChildrenIter end = state->childrenEnd();
@@ -164,7 +164,7 @@ namespace SGui
 				 * Must be this case becuase otherwise the child would also
 				 * been active and then this call should not have happen.
 				 */
-				dAssert(!state->paralell);
+				dAssert(!state->parallel);
 
 				stateEnterTo(state->activeChild);				
 			}
@@ -179,7 +179,7 @@ namespace SGui
 		{
 			if (state->parent)
 			{
-				// If the parent is a parlell state than this assignment has no meaning
+				// If the parent is a parallel state than this assignment has no meaning
 				state->parent->activeChild = state;
 
 				return stateEnterFrom(state->parent);
@@ -187,7 +187,7 @@ namespace SGui
 			else
 			{
 				// This is the root state
-				dAssert((state->childActivity == 0) || !state->paralell);
+				dAssert((state->childActivity == 0) || !state->parallel);
 
 				stateEnterTo(state);
 
@@ -209,7 +209,7 @@ namespace SGui
 		{
 			addActiveStateLeaf(state);
 		}
-		else if (state->paralell)
+		else if (state->parallel)
 		{
 			State::ChildrenIter iter = state->childrenBegin();
 			State::ChildrenIter end = state->childrenEnd();
@@ -315,7 +315,7 @@ namespace SGui
 					activeStateLeaves.pop_back();
 					State *commonState = getCommonFather(state, currentLeaf);
 					dAssert(commonState);
-					if (commonState->paralell) activeStateLeaves.push_front(currentLeaf);
+					if (commonState->parallel) activeStateLeaves.push_front(currentLeaf);
 					//else currentLeaf->exitTo(this, commonState);
 					else stateExitTo(currentLeaf, commonState);
 									

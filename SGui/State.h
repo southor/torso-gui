@@ -58,13 +58,13 @@ namespace SGui
 		bool active;
 
 		/**
-		 * Used if this state is paralell. Used when exiting this state.
+		 * Used if this state is parallel. Used when exiting this state.
 		 * Tells how many of the children that are still active.
 		 */
 		int childActivity;
 
 		/**
-		 * Used if this state is not paralell.
+		 * Used if this state is not parallel.
 		 */
 		State *activeChild;
 
@@ -134,7 +134,7 @@ namespace SGui
 		 * Paralell state means activating this state
 		 * activates all children too instead of only one.
 		 */
-		bool paralell;
+		bool parallel;
 
 		/**
 		 * Tells if the members "enter" and "exit" should be
