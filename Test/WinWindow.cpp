@@ -93,7 +93,7 @@ bool WinWindow::init()
 
 	HINSTANCE hInstance = GetModuleHandle(NULL);
 
-	wchar_t g_szClassName[] = L"myWindowClass\0";
+	wchar_t_t g_szClassName[] = L"myWindowClass\0";
 	
 	WNDCLASSEX wc;
 	//HWND hwnd;

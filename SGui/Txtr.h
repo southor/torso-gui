@@ -73,11 +73,11 @@ namespace SGui
 		Txtr();
 		Txtr(const Txtr &txtr);
 		Txtr(gl_uint w, gl_uint h);
-		Txtr(const char *colorsFileName, gl_ubyte alpha = 255);
+		Txtr(const wchar_t *colorsFileName, gl_ubyte alpha = 255);
 		// @param transparentAA transparent anti aliasing value
-		Txtr(const char *colorsFileName, gl_ubyte alpha, Pixel3 transparentColor, uint transparentAA = 1);
-		Txtr(const char *colorsFileName, const char *alphaFileName);
-		Txtr(Pixel3 color, const char *alphaFileName);
+		Txtr(const wchar_t *colorsFileName, gl_ubyte alpha, Pixel3 transparentColor, uint transparentAA = 1);
+		Txtr(const wchar_t *colorsFileName, const wchar_t *alphaFileName);
+		Txtr(Pixel3 color, const wchar_t *alphaFileName);
 		
 		Txtr &operator=(const Txtr &txtr);
 
@@ -128,15 +128,15 @@ namespace SGui
 		inline bool hasImage() const		{ return (pixels != NULL); }
 
 		
-		void load(const char *colorsFileName, gl_ubyte alpha = 255);
+		void load(const wchar_t *colorsFileName, gl_ubyte alpha = 255);
 		// @param transparentAA transparent anti aliasing value
-		void load(const char *colorsFileName, gl_ubyte alpha, Pixel3 transparentColor, uint transparentAA = 1);
-		void load(const char *colorsFileName, const char *alphaFileName);
-		void load(Pixel3 color, const char *alphaFileName);
+		void load(const wchar_t *colorsFileName, gl_ubyte alpha, Pixel3 transparentColor, uint transparentAA = 1);
+		void load(const wchar_t *colorsFileName, const wchar_t *alphaFileName);
+		void load(Pixel3 color, const wchar_t *alphaFileName);
 		
 		
 		
-		gl_uint add(RenderContext *renderContext, const char *name);
+		gl_uint add(RenderContext *renderContext, const wchar_t *name);
 		
 		void setAlpha(gl_ubyte alpha);
 		void setAlpha(gl_ubyte alpha, Pixel3 transparentColor, uint antiAliasing = 0);
@@ -146,19 +146,19 @@ namespace SGui
 		// Draws the hole texture context of txtr to this texture at pixel x, y
 		void copyTo(Txtr *txtr, int x, int y);
 		
-		static /*GLuint*/gl_uint loadAddN(RenderContext *renderContext, const char *name, const char *colorsFileName, gl_ubyte alpha = 255);		
+		static /*GLuint*/gl_uint loadAddN(RenderContext *renderContext, const wchar_t *name, const wchar_t *colorsFileName, gl_ubyte alpha = 255);		
 		
 		// @param transparentAA transparent anti aliasing value
-		static /*GLuint*/gl_uint loadAddN(RenderContext *renderContext, const char *name, const char *colorsFileName, gl_ubyte alpha, Pixel3 transparentColor, uint antiAliasing = 1);
-		static /*GLuint*/gl_uint loadAddN(RenderContext *renderContext, const char *name, const char *colorsFileName, const char *alphaFileName);
-		static /*GLuint*/gl_uint loadAddN(RenderContext *renderContext, const char *name, Pixel3 color, const char *alphaFileName);
+		static /*GLuint*/gl_uint loadAddN(RenderContext *renderContext, const wchar_t *name, const wchar_t *colorsFileName, gl_ubyte alpha, Pixel3 transparentColor, uint antiAliasing = 1);
+		static /*GLuint*/gl_uint loadAddN(RenderContext *renderContext, const wchar_t *name, const wchar_t *colorsFileName, const wchar_t *alphaFileName);
+		static /*GLuint*/gl_uint loadAddN(RenderContext *renderContext, const wchar_t *name, Pixel3 color, const wchar_t *alphaFileName);
 
 
-		static /*GLuint*/gl_uint loadAdd(RenderContext *renderContext, const char *colorsFileName, gl_ubyte alpha = 255);
+		static /*GLuint*/gl_uint loadAdd(RenderContext *renderContext, const wchar_t *colorsFileName, gl_ubyte alpha = 255);
 		// @param transparentAA transparent anti aliasing value
-		static /*GLuint*/gl_uint loadAdd(RenderContext *renderContext, const char *colorsFileName, gl_ubyte alpha, Pixel3 transparentColor, uint antiAliasing = 1);
-		static /*GLuint*/gl_uint loadAdd(RenderContext *renderContext, const char *colorsFileName, const char *alphaFileName);
-		static /*GLuint*/gl_uint loadAdd(RenderContext *renderContext, Pixel3 color, const char *alphaFileName);
+		static /*GLuint*/gl_uint loadAdd(RenderContext *renderContext, const wchar_t *colorsFileName, gl_ubyte alpha, Pixel3 transparentColor, uint antiAliasing = 1);
+		static /*GLuint*/gl_uint loadAdd(RenderContext *renderContext, const wchar_t *colorsFileName, const wchar_t *alphaFileName);
+		static /*GLuint*/gl_uint loadAdd(RenderContext *renderContext, Pixel3 color, const wchar_t *alphaFileName);
 		
 		// Clears the texture ids pool.
 		static void clearLoaded(RenderContext *renderContext);
@@ -175,19 +175,19 @@ namespace SGui
 	private:
 
 		// Must have no Image to call this.
-		void loadColors(const char *fileName, bool initialize = true);
+		void loadColors(const wchar_t *fileName, bool initialize = true);
 
 		/**
 		 * Must have an image to call this.
 		 * Will add alphavalues if images has same proportions
 		 */
-		void loadAlpha(const char *fileName, gl_ubyte defaultAlpha, bool initialize = false);
+		void loadAlpha(const wchar_t *fileName, gl_ubyte defaultAlpha, bool initialize = false);
 
-		static Pixel3* loadFile(const char *fileName, gl_uint *w, gl_uint *h);
+		static Pixel3* loadFile(const wchar_t *fileName, gl_uint *w, gl_uint *h);
 
-		typedef std::pair<std::string, gl_uint> TxtrPair;
+		typedef std::pair<std::wstring, gl_uint> TxtrPair;
 
-		static std::map<std::string, gl_uint> txtrIdPool;
+		static std::map<std::wstring, gl_uint> txtrIdPool;
 
 		// createDefaultTxtr() should be called before accessing the rest of this namespace!
 		static /*GLuint*/gl_uint defaultTxtr;

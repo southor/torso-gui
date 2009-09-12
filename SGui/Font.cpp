@@ -24,7 +24,7 @@ namespace SGui
 	// *------------------------------------------------------------------------------------------------------------*
 	// **************************************************************************************************************
 
-	void Font::loadCharWidths(const char *filename, uchar maxWidth, uchar *charWidths)
+	void Font::loadCharWidths(const wchar_t *filename, uchar maxWidth, uchar *charWidths)
 	{
 		std::ifstream file(filename);
 		dAssert(file.good());
@@ -54,7 +54,7 @@ namespace SGui
 	const char Font::MOD_SYMBOLS[] = "bui";
 
 	
-	Font::Font(RenderContext *renderContext, const char *fontDirectory, Vec fontImageNCharacters)
+	Font::Font(RenderContext *renderContext, const wchar_t *fontDirectory, Vec fontImageNCharacters)
 		: fontImageNCharacters(fontImageNCharacters)
 	{
 		dAssert(std::strlen(MOD_SYMBOLS) == N_MODS);
@@ -85,17 +85,17 @@ namespace SGui
 		}
 
 		// Load all fonts which will make up the combined font
-		std::string baseFileName = fontDirectory;
-		baseFileName += "/image_";		
+		std::wstring baseFileName = fontDirectory;
+		baseFileName += L"/image_";		
 		const Txtr::Pixel3 WHITE = Txtr::Pixel3(255, 255, 255);
-		Txtr image(WHITE, (baseFileName + ".bmp").c_str());
-		Txtr imageB(WHITE, (baseFileName + "b.bmp").c_str());
-		Txtr imageU(WHITE, (baseFileName + "u.bmp").c_str());
-		Txtr imageBU(WHITE, (baseFileName + "bu.bmp").c_str());
-		Txtr imageI(WHITE, (baseFileName + "i.bmp").c_str());
-		Txtr imageBI(WHITE, (baseFileName + "bi.bmp").c_str());
-		Txtr imageUI(WHITE, (baseFileName + "ui.bmp").c_str());
-		Txtr imageBUI(WHITE, (baseFileName + "bui.bmp").c_str());
+		Txtr image(WHITE, (baseFileName + L".bmp").c_str());
+		Txtr imageB(WHITE, (baseFileName + L"b.bmp").c_str());
+		Txtr imageU(WHITE, (baseFileName + L"u.bmp").c_str());
+		Txtr imageBU(WHITE, (baseFileName + L"bu.bmp").c_str());
+		Txtr imageI(WHITE, (baseFileName + L"i.bmp").c_str());
+		Txtr imageBI(WHITE, (baseFileName + L"bi.bmp").c_str());
+		Txtr imageUI(WHITE, (baseFileName + L"ui.bmp").c_str());
+		Txtr imageBUI(WHITE, (baseFileName + L"bui.bmp").c_str());
 
 		// Set the font image size
 		this->fontImageSize = Vec(image.getWidth(), image.getHeight());
@@ -146,7 +146,7 @@ namespace SGui
 
 
 		// Load character widths
-		std::string charWidthsFilename;				
+		std::wstring charWidthsFilename;				
 		for(int b=0; b<2; ++b)
 		{			
 			for(int u=0; u<2; ++u)
@@ -154,11 +154,11 @@ namespace SGui
 				for(int i=0; i<2; ++i)
 				{					
 					charWidthsFilename = fontDirectory;
-					charWidthsFilename += "/char_widths_";
-					if (b) charWidthsFilename += 'b';					
-					if (u) charWidthsFilename += 'u';
-					if (i) charWidthsFilename += 'i';
-					charWidthsFilename += ".dat";
+					charWidthsFilename += L"\\char_widths_";
+					if (b) charWidthsFilename += L'b';					
+					if (u) charWidthsFilename += L'u';
+					if (i) charWidthsFilename += L'i';
+					charWidthsFilename += L".dat";
 					
 					loadCharWidths(charWidthsFilename.c_str(), charBaseWidth, &(this->charWidths[b*B | u*U | i*I][0]));			
 				}

@@ -16,7 +16,7 @@
 namespace SGui
 {
 	
-	std::map<std::string, gl_uint> Txtr::txtrIdPool = std::map<std::string, gl_uint>();
+	std::map<std::wstring, gl_uint> Txtr::txtrIdPool = std::map<std::wstring, gl_uint>();
 
 
 	// **************************************************************************************************************
@@ -49,22 +49,22 @@ namespace SGui
 		createImage(w, h);
 	}
 
-	Txtr::Txtr(const char *colorsFileName, gl_ubyte alpha) : pixels(NULL), width(0), height(0)
+	Txtr::Txtr(const wchar_t *colorsFileName, gl_ubyte alpha) : pixels(NULL), width(0), height(0)
 	{
 		load(colorsFileName, alpha);
 	}
 
-	Txtr::Txtr(const char *colorsFileName, gl_ubyte alpha, Pixel3 transparentColor, uint antiAliasing) : pixels(NULL), width(0), height(0)
+	Txtr::Txtr(const wchar_t *colorsFileName, gl_ubyte alpha, Pixel3 transparentColor, uint antiAliasing) : pixels(NULL), width(0), height(0)
 	{
 		load(colorsFileName, alpha, transparentColor, antiAliasing);
 	}
 
-	Txtr::Txtr(const char *colorsFileName, const char *alphaFileName) : pixels(NULL), width(0), height(0)
+	Txtr::Txtr(const wchar_t *colorsFileName, const wchar_t *alphaFileName) : pixels(NULL), width(0), height(0)
 	{
 		load(colorsFileName, alphaFileName);
 	}
 
-	Txtr::Txtr(Pixel3 color, const char *alphaFileName) : pixels(NULL), width(0), height(0)
+	Txtr::Txtr(Pixel3 color, const wchar_t *alphaFileName) : pixels(NULL), width(0), height(0)
 	{
 		load(color, alphaFileName);
 	}
@@ -191,20 +191,20 @@ namespace SGui
 		return false;
 	}
 
-	void Txtr::load(const char *colorsFileName, gl_ubyte alpha)
+	void Txtr::load(const wchar_t *colorsFileName, gl_ubyte alpha)
 	{
 		removeImage();
 		if (colorsFileName) loadColors(colorsFileName);
 		setAlpha(alpha);
 	}
 
-	void Txtr::load(const char *colorsFileName, gl_ubyte alpha, Pixel3 transparentColor, uint transparentAA)
+	void Txtr::load(const wchar_t *colorsFileName, gl_ubyte alpha, Pixel3 transparentColor, uint transparentAA)
 	{		
 		load(colorsFileName, alpha);
 		setTransparent(transparentColor, transparentAA);
 	}
 
-	void Txtr::load(const char *colorsFileName, const char *alphaFileName)
+	void Txtr::load(const wchar_t *colorsFileName, const wchar_t *alphaFileName)
 	{
 		removeImage();
 		if (colorsFileName) loadColors(colorsFileName);
@@ -212,7 +212,7 @@ namespace SGui
 		else setAlpha(255);
 	}
 
-	void Txtr::load(Pixel3 color, const char *alphaFileName)
+	void Txtr::load(Pixel3 color, const wchar_t *alphaFileName)
 	{
 		removeImage();
 		loadAlpha(alphaFileName, 255, true);
@@ -223,14 +223,14 @@ namespace SGui
 
 
 
-	gl_uint Txtr::add(RenderContext *renderContext, const char *name)
+	gl_uint Txtr::add(RenderContext *renderContext, const wchar_t *name)
 	{
 		dAssert(isConsistent());
 
-		std::string nameStr(name);
+		std::wstring nameStr(name);
 		gl_uint txtrId; // result variable
 
-		std::map<std::string, gl_uint>::iterator it = txtrIdPool.find(nameStr);
+		std::map<std::wstring, gl_uint>::iterator it = txtrIdPool.find(nameStr);
 		if (it == txtrIdPool.end())
 		{
 			if (hasImage())
@@ -264,7 +264,7 @@ namespace SGui
 
 		//if (hasImage())
 		//{
-		//	std::map<std::string, GLuint>::iterator it = txtrIdPool.find(std::string(name));
+		//	std::map<std::wstring, GLuint>::iterator it = txtrIdPool.find(std::wstring(name));
 		//	if (it == txtrIdPool.end())
 		//	{
 
@@ -279,7 +279,7 @@ namespace SGui
 		//		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
 		//		// add to pool
-		//		txtrIdPool[std::string(name)] = txtrId;
+		//		txtrIdPool[std::wstring(name)] = txtrId;
 		//	}
 		//	else
 		//	{
@@ -292,7 +292,7 @@ namespace SGui
 		//	txtrId = defaultTxtr;
 
 		//	// add to pool
-		//	txtrIdPool[std::string(name)] = txtrId;
+		//	txtrIdPool[std::wstring(name)] = txtrId;
 		//}
 		
 		return txtrId;
@@ -349,7 +349,7 @@ namespace SGui
 
 	gl_uint Txtr::defaultTxtr = 0;
 
-	void Txtr::loadColors(const char *fileName, bool initialize)
+	void Txtr::loadColors(const wchar_t *fileName, bool initialize)
 	{
 		dAssert(isConsistent());
 		dAssert(!hasImage() || !initialize);
@@ -383,7 +383,7 @@ namespace SGui
 		}
 	}
 
-	void Txtr::loadAlpha(const char *fileName, gl_ubyte defaultAlpha, bool initialize)
+	void Txtr::loadAlpha(const wchar_t *fileName, gl_ubyte defaultAlpha, bool initialize)
 	{	
 		dAssert(isConsistent());
 		dAssert(!hasImage() || !initialize);
@@ -457,7 +457,7 @@ namespace SGui
 	// *------------------------------------------------------------------------------------------------------------*
 	// **************************************************************************************************************
 
-	Txtr::Pixel3* Txtr::loadFile(const char *fileName, gl_uint *w, gl_uint *h)
+	Txtr::Pixel3* Txtr::loadFile(const wchar_t *fileName, gl_uint *w, gl_uint *h)
 	{
 		long in;
 		uint i;
@@ -465,8 +465,8 @@ namespace SGui
 		Pixel3 *pixels = NULL;
 
 		std::ifstream imageFile;
-		//if(filename != NULL) imageFile.open((const char*)fileName, ios::nocreate | ios::binary);
-		if(fileName != NULL) imageFile.open((const char*)fileName, std::ios::binary);
+		//if(filename != NULL) imageFile.open(fileName, ios::nocreate | ios::binary);
+		if(fileName != NULL) imageFile.open(fileName, std::ios::binary);
 
 		if((!(imageFile.good())) || fileName == NULL)
 		{
@@ -542,7 +542,7 @@ namespace SGui
 		//glTexImage2D(GL_TEXTURE_2D, 0, 4, 1, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, (const GLvoid*)&pixel);
 		defaultTxtr = renderContext->createDefaultTxtr();
 		
-		txtrIdPool[std::string("DefaultTxtr")] = defaultTxtr;
+		txtrIdPool[std::wstring(L"DefaultTxtr")] = defaultTxtr;
 
 		return defaultTxtr;
 	}
@@ -552,25 +552,25 @@ namespace SGui
 		return defaultTxtr;
 	}
 
-	gl_uint Txtr::loadAddN(RenderContext *renderContext, const char *name, const char *colorsFileName, gl_ubyte alpha)
+	gl_uint Txtr::loadAddN(RenderContext *renderContext, const wchar_t *name, const wchar_t *colorsFileName, gl_ubyte alpha)
 	{
 		Txtr t(colorsFileName, alpha);
 		return t.add(renderContext, name);
 	}
 
-	gl_uint Txtr::loadAddN(RenderContext *renderContext, const char *name, const char *colorsFileName, gl_ubyte alpha, Pixel3 transparentColor, uint antiAliasing)
+	gl_uint Txtr::loadAddN(RenderContext *renderContext, const wchar_t *name, const wchar_t *colorsFileName, gl_ubyte alpha, Pixel3 transparentColor, uint antiAliasing)
 	{
 		Txtr t(colorsFileName, alpha, transparentColor, antiAliasing);
 		return t.add(renderContext, name);
 	}
 
-	gl_uint Txtr::loadAddN(RenderContext *renderContext, const char *name, const char *colorsFileName, const char *alphaFileName)
+	gl_uint Txtr::loadAddN(RenderContext *renderContext, const wchar_t *name, const wchar_t *colorsFileName, const wchar_t *alphaFileName)
 	{
 		Txtr t(colorsFileName, alphaFileName);
 		return t.add(renderContext, name);
 	}
 
-	gl_uint Txtr::loadAddN(RenderContext *renderContext, const char *name, Pixel3 color, const char *alphaFileName)
+	gl_uint Txtr::loadAddN(RenderContext *renderContext, const wchar_t *name, Pixel3 color, const wchar_t *alphaFileName)
 	{
 		Txtr t(color, alphaFileName);
 		return t.add(renderContext, name);
@@ -579,30 +579,30 @@ namespace SGui
 
 
 	
-	gl_uint Txtr::loadAdd(RenderContext *renderContext, const char *colorsFileName, gl_ubyte alpha)
+	gl_uint Txtr::loadAdd(RenderContext *renderContext, const wchar_t *colorsFileName, gl_ubyte alpha)
 	{
 		return loadAddN(renderContext, colorsFileName, colorsFileName, alpha);
 	}
 
-	gl_uint Txtr::loadAdd(RenderContext *renderContext, const char *colorsFileName, gl_ubyte alpha, Pixel3 transparentColor, uint antiAliasing)
+	gl_uint Txtr::loadAdd(RenderContext *renderContext, const wchar_t *colorsFileName, gl_ubyte alpha, Pixel3 transparentColor, uint antiAliasing)
 	{
 		return loadAddN(renderContext, colorsFileName, colorsFileName, alpha, transparentColor, antiAliasing);
 	}
 
-	gl_uint Txtr::loadAdd(RenderContext *renderContext, const char *colorsFileName, const char *alphaFileName)
+	gl_uint Txtr::loadAdd(RenderContext *renderContext, const wchar_t *colorsFileName, const wchar_t *alphaFileName)
 	{
 		return loadAddN(renderContext, colorsFileName, colorsFileName, alphaFileName);
 	}
 
-	gl_uint Txtr::loadAdd(RenderContext *renderContext, Pixel3 color, const char *alphaFileName)
+	gl_uint Txtr::loadAdd(RenderContext *renderContext, Pixel3 color, const wchar_t *alphaFileName)
 	{
 		return loadAddN(renderContext, alphaFileName, color, alphaFileName);
 	}
 
 	void Txtr::clearLoaded(RenderContext *renderContext)
 	{
-		std::map<std::string, gl_uint>::iterator it = txtrIdPool.begin();
-		std::map<std::string, gl_uint>::iterator end = txtrIdPool.end();
+		std::map<std::wstring, gl_uint>::iterator it = txtrIdPool.begin();
+		std::map<std::wstring, gl_uint>::iterator end = txtrIdPool.end();
 		
 		gl_uint txtrId;
 

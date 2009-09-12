@@ -98,7 +98,7 @@ namespace SGui
 		glGenTextures(1, &txtrId);
 		glBindTexture(GL_TEXTURE_2D, txtrId);
 		glTexImage2D(GL_TEXTURE_2D, 0, 4, 1, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, (const GLvoid*)&pixel);
-		//txtrIdPool[std::string("DefaultTxtr")] = txtrId;
+		//txtrIdPool[std::wstring("DefaultTxtr")] = txtrId;
 
 		return txtrId;
 	}

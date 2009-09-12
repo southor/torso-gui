@@ -5,7 +5,7 @@
 
 namespace SGui
 {
-	void testFiles(RenderContext *renderContext, const char *fontsPath)
+	void testFiles(RenderContext *renderContext, const wchar_t *fontsPath)
 	{
 
 		std::cout << "sizeof(void*) = " << sizeof(void*) << std::endl;
@@ -71,13 +71,18 @@ namespace SGui
 
 		//Font font("../Test/graphics/fonts/arial");
 
-		std::string fontsPathStr(fontsPath);
-		std::string fontArialPathStr;
+		std::wstring fontsPathStr(fontsPath);
+		std::wstring fontArialPathStr;
 
 		if (fontsPathStr.length() > 0)
-			fontArialPathStr = fontsPathStr + ((fontsPathStr[fontsPathStr.length()-1] == '/') ? "arial" : "/arial");
+		{
+			bool slash = (fontsPathStr[fontsPathStr.length()-1] == L'/') || (fontsPathStr[fontsPathStr.length()-1] == L'\\');
+			fontArialPathStr = fontsPathStr + (slash ? L"arial" : L"/arial");
+		}
 		else
-			fontArialPathStr = "arial";
+		{
+			fontArialPathStr = L"arial";
+		}
 		
 		Font font(renderContext, fontArialPathStr.c_str());
 

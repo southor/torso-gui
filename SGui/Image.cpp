@@ -29,7 +29,7 @@ namespace SGui
 		applyOperations(operations2);
 	}
 
-	Image::Image(RenderContext *renderContext, const char *fileName, Pos pos, Vec size, TxtrCoord posWithinTxtr, TxtrCoord sizeWithinTxtr, int operations1, int operations2)
+	Image::Image(RenderContext *renderContext, const wchar_t *fileName, Pos pos, Vec size, TxtrCoord posWithinTxtr, TxtrCoord sizeWithinTxtr, int operations1, int operations2)
 		: RenderObj(pos, size), txtrId(txtrId)
 	{
 		txtrId = Txtr::loadAdd(renderContext, fileName);
@@ -38,7 +38,7 @@ namespace SGui
 		applyOperations(operations2);
 	}
 
-	Image::Image(RenderContext *renderContext, const char *fileName, Pos pos, Vec size, int operations1, int operations2)
+	Image::Image(RenderContext *renderContext, const wchar_t *fileName, Pos pos, Vec size, int operations1, int operations2)
 		: RenderObj(pos, size), txtrId(0)
 	{
 		txtrId = Txtr::loadAdd(renderContext, fileName);

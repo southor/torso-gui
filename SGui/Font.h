@@ -90,7 +90,7 @@ namespace SGui
 		 * @param filename The file to load from.
 		 * @param charWidths The array to store the character widths to.
 		 */
-		static void loadCharWidths(const char *filename, uchar maxWidth, uchar *charWidths);
+		static void loadCharWidths(const wchar_t *filename, uchar maxWidth, uchar *charWidths);
 
 
 	public:
@@ -101,7 +101,7 @@ namespace SGui
 		/**
 		 * @param fontDirectory The directory to the font files on the hard drive.
 		 */
-		Font(RenderContext *renderContext, const char *fontDirectory, Vec fontImageNCharacters = Vec(16, 16));
+		Font(RenderContext *renderContext, const wchar_t *fontDirectory, Vec fontImageNCharacters = Vec(16, 16));
 
 		inline gl_uint getTxtrId() const						{ return combinedFontTxtrId; }
 		

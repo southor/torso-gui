@@ -57,12 +57,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	SGui::RenderContext *renderContext = window.getRenderContext();
 
 	std::cout << "Test State Gui" << std::endl;
-	SGui::testFiles(renderContext, "../Test/graphics/fonts"); // TODO, maybe initing opengl should be done before testFiles, otherwise problems with texture ids might appear.
+	SGui::testFiles(renderContext, L"../Test/graphics/fonts"); // TODO, maybe initing opengl should be done before testFiles, otherwise problems with texture ids might appear.
 
 	SGui::initNamespace(window.getRenderContext());
 
 
-	SGui::Font font(renderContext, "../Test/graphics/fonts/arial");
+	SGui::Font font(renderContext, L"../Test/graphics/fonts/arial");
 
 	SGui::GraphState root;
 	SGui::GraphState state1;
@@ -74,13 +74,13 @@ int _tmain(int argc, _TCHAR* argv[])
 	std::cout << "sizeof(root) = " << sizeof(SGui::State) << std::endl;
 
 
-	SGui::Image imageBG(renderContext, "../Test/graphics/bg.bmp", SGui::Pos(0, 0), SGui::Vec(window.getWidth(), window.getHeight()));
+	SGui::Image imageBG(renderContext, L"../Test/graphics/bg.bmp", SGui::Pos(0, 0), SGui::Vec(window.getWidth(), window.getHeight()));
 	//SGui::Image imageBG(font.getTxtrId(), SGui::Pos(0, 0), SGui::Vec(window.getWidth(), window.getHeight()));
 	//SGui::Image imageBG("../Test/graphics/fonts/arial/image_.bmp", SGui::Pos(0, 0), SGui::Vec(window.getWidth(), window.getHeight()));
 	root.renderObjs.push_back(&imageBG);
 
-	SGui::Txtr arrowTxtr(SGui::Txtr::Pixel3(127, 64, 255), "../Test/graphics/arrow-alpha.bmp");
-	SGui::gl_uint arrowTxtrId = arrowTxtr.add(renderContext, "../Test/graphics/arrow.bmp");
+	SGui::Txtr arrowTxtr(SGui::Txtr::Pixel3(127, 64, 255), L"../Test/graphics/arrow-alpha.bmp");
+	SGui::gl_uint arrowTxtrId = arrowTxtr.add(renderContext, L"../Test/graphics/arrow.bmp");
 	//arrowTxtr.add("../Test/graphics/arrow.bmp");
 	SGui::Image arrowDownImage(arrowTxtrId, SGui::Pos(100, 200), SGui::Vec(arrowTxtr.getWidth(), arrowTxtr.getHeight()));	
 	SGui::Box scrollAreaBox(arrowDownImage.getTopLeft(), SGui::Vec(arrowDownImage.getWidth(), 100), SGui::Color4f(0.5f, 0.25f, 1.0f, 1.0f), 1);
@@ -97,8 +97,8 @@ int _tmain(int argc, _TCHAR* argv[])
 
 
 
-	SGui::Txtr windowTxtr("../Test/graphics/window.bmp", "../Test/graphics/window-alpha.bmp");
-	SGui::Image imageWindow(windowTxtr.add(renderContext, "window.bmp"), SGui::Pos(0, 0), SGui::Vec(windowTxtr.getWidth(), windowTxtr.getHeight()));
+	SGui::Txtr windowTxtr(L"../Test/graphics/window.bmp", L"../Test/graphics/window-alpha.bmp");
+	SGui::Image imageWindow(windowTxtr.add(renderContext, L"window.bmp"), SGui::Pos(0, 0), SGui::Vec(windowTxtr.getWidth(), windowTxtr.getHeight()));
 	state1.renderObjs.push_back(&imageWindow);
 	state1.WRectIfc::setPos(300, 100);
 	//state1.setPos(300, 100);
@@ -107,8 +107,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	state1.renderObjs.push_back(&lineBox);
 	state1.renderObjs.push_back(&textBox);
 
-	SGui::Txtr gronTxtr("../Test/graphics/gron.bmp");
-	SGui::Image imageGron(gronTxtr.add(renderContext, "gron.bmp"), SGui::Pos(100, 150), SGui::Vec(gronTxtr.getWidth(), gronTxtr.getHeight()));
+	SGui::Txtr gronTxtr(L"../Test/graphics/gron.bmp");
+	SGui::Image imageGron(gronTxtr.add(renderContext, L"gron.bmp"), SGui::Pos(100, 150), SGui::Vec(gronTxtr.getWidth(), gronTxtr.getHeight()));
 	state2.renderObjs.push_back(&imageGron);
 
 
