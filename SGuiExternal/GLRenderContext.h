@@ -10,14 +10,22 @@ namespace SGui
 	{
 	protected:
 
+		//bool textureNonPowerOfTwoExtensionAvailible;
+
 		void renderBox(const RectIfc *rect, const Color4f &color, int lineWidth);
+
+		bool glExtensionAvailible(const char *extensionName);
 
 	public:
 
-		virtual void flush();
-
 		void initGL(uint w, uint h);
 		void uninitGL();
+
+		//virtual bool isTextureNonPowerOfTwoExtensionAvailible();
+
+		//virtual bool modifyTxtrSizeIfNecessary(gl_uint sizeValue);
+
+		virtual void flush();
 
 		virtual void startNewRendering(const SGui::Color3f &color);
 
@@ -35,7 +43,7 @@ namespace SGui
 		virtual void renderBoxToDisplayList(gl_uint displayList, bool execute, const RectIfc *rect, const Color4f &color, int lineWidth);
 		virtual void renderDisplayList(gl_uint displayList);
 
-		virtual gl_uint loadTxtr(Txtr::Pixel4 *pixels, gl_uint width, gl_uint height);
+		virtual gl_uint loadTxtr(const Txtr::Pixel4 *pixels, gl_uint width, gl_uint height);
 		virtual void unloadTxtr(gl_uint txtrId);
 		
 		virtual gl_uint createDefaultTxtr();

@@ -51,6 +51,14 @@ namespace SGui
 
 	void Image::initTxtrCoords(TxtrCoord posWithinTxtr, TxtrCoord sizeWithinTxtr)
 	{
+		Vecd rescaleVec;
+
+		if (Txtr::getTxtrCoordRescale(txtrId, rescaleVec))
+		{
+			posWithinTxtr.rescale(rescaleVec);
+			sizeWithinTxtr.rescale(rescaleVec);
+		}
+
 		txtrCoords[0] = TxtrCoord(posWithinTxtr.s + sizeWithinTxtr.s, posWithinTxtr.t);
 		txtrCoords[1] = TxtrCoord(posWithinTxtr.s + sizeWithinTxtr.s, posWithinTxtr.t + sizeWithinTxtr.t);
 		txtrCoords[2] = TxtrCoord(posWithinTxtr.s, posWithinTxtr.t + sizeWithinTxtr.t);

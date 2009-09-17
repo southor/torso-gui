@@ -66,7 +66,7 @@ namespace SGui
 		gl_uint width;
 		gl_uint height;
 
-		Pixel4 *pixels;
+		Pixel4 *pixels;		
 
 	public:
 		
@@ -145,6 +145,19 @@ namespace SGui
 
 		// Draws the hole texture context of txtr to this texture at pixel x, y
 		void copyTo(Txtr *txtr, int x, int y);
+
+		static bool getTxtrCoordRescale(uint txtrId, Vecd &rescaleVec);
+
+		//static Vecf getTxtrCoordRescale(uint txtrId)
+		//{
+		//	Vecd rescaleVec;
+		//	if ( ! getTxtrCoordRescale(txtrId, rescaleVec))
+		//	{
+		//		rescaleVec.x = 1.0;
+		//		rescaleVec.y = 1.0;
+		//	}
+		//	return rescaleVec;
+		//}
 		
 		static /*GLuint*/gl_uint loadAddN(RenderContext *renderContext, const wchar_t *name, const wchar_t *colorsFileName, gl_ubyte alpha = 255);		
 		
@@ -185,9 +198,14 @@ namespace SGui
 
 		static Pixel3* loadFile(const wchar_t *fileName, gl_uint *w, gl_uint *h);
 
+		// @return true if sizeValue was modified
+		static bool conformSizeValue(gl_uint &sizeValue);		
+
 		typedef std::pair<std::wstring, gl_uint> TxtrPair;
 
 		static std::map<std::wstring, gl_uint> txtrIdPool;
+
+		static std::map<gl_uint, Vecd> txtrRescaleMap;
 
 		// createDefaultTxtr() should be called before accessing the rest of this namespace!
 		static /*GLuint*/gl_uint defaultTxtr;

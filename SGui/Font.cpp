@@ -55,7 +55,7 @@ namespace SGui
 
 	
 	Font::Font(RenderContext *renderContext, const wchar_t *fontDirectory, Vec fontImageNCharacters)
-		: fontImageNCharacters(fontImageNCharacters)
+		: fontImageNCharacters(fontImageNCharacters), txtrCoordRescaleVec(1.0, 1.0)
 	{
 		dAssert(std::strlen(MOD_SYMBOLS) == N_MODS);
 
@@ -66,21 +66,41 @@ namespace SGui
 		switch(N_MODS)
 		{
 		case 3:
+			
+			//// Set number of font images
+			//if (renderContext->hasFeature(RenderContext::FEATURE_TEXTURE_NON_POWER_OF_TWO))
+			//	this->nFontImagesCombined = Pos(3, 3);
+			//else
+			//	this->nFontImagesCombined = Pos(4, 4);
+
+			//// font image positions
+			//this->fontImagePos[0] = Pos(0, 0);
+			//this->fontImagePos[B] = Pos(1, 0);
+			//this->fontImagePos[U] = Pos(2, 0);
+			//this->fontImagePos[B|U] = Pos(0, 1);
+			//this->fontImagePos[I] = Pos(1, 1);
+			//this->fontImagePos[B|I] = Pos(2, 1);
+			//this->fontImagePos[U|I] = Pos(0, 2);
+			//this->fontImagePos[B|U|I] = Pos(1, 2);	
+
 			// Set number of font images
-			this->nFontImagesCombined = Pos(3, 3);
+			this->nFontImagesCombined = Pos(4, 2);
 			
 			// font image positions
 			this->fontImagePos[0] = Pos(0, 0);
 			this->fontImagePos[B] = Pos(1, 0);
 			this->fontImagePos[U] = Pos(2, 0);
-			this->fontImagePos[B|U] = Pos(0, 1);
-			this->fontImagePos[I] = Pos(1, 1);
-			this->fontImagePos[B|I] = Pos(2, 1);
-			this->fontImagePos[U|I] = Pos(0, 2);
-			this->fontImagePos[B|U|I] = Pos(1, 2);			
+			this->fontImagePos[B|U] = Pos(3, 0);
+			this->fontImagePos[I] = Pos(0, 1);
+			this->fontImagePos[B|I] = Pos(1, 1);
+			this->fontImagePos[U|I] = Pos(2, 1);
+			this->fontImagePos[B|U|I] = Pos(3, 1);
+
+					
 		break;
 		default:
-			dAssert(false);
+			rAssert(false);
+			// TODO generate user error?
 		break;
 		}
 
@@ -142,8 +162,10 @@ namespace SGui
 		this->combinedFontTxtrId = combinedFont.add(renderContext, fontDirectory);
 
 		//// temp debug test
-		//this->combinedFontTxtrId = Txtr::loadAdd((baseFileName + ".bmp").c_str());
+		//this->combinedFontTxtrId = Txtr::loadAdd((baseFileName + ".bmp").c_str());		
 
+		// Check for texture coord rescale
+		usingTxtrCoordRescale = Txtr::getTxtrCoordRescale(this->combinedFontTxtrId, this->txtrCoordRescaleVec);		
 
 		// Load character widths
 		std::wstring charWidthsFilename;				
@@ -246,7 +268,17 @@ namespace SGui
 		//coordCharHeight = 0.33f;
 
 		double s = static_cast<double>(coord.x) / combinedWidthD;
-		double t = static_cast<double>(coord.y) / combinedHeightD;		
+		double t = static_cast<double>(coord.y) / combinedHeightD;
+
+		// Rescale texture coords if rescaling is necessary
+		if (usingTxtrCoordRescale)
+		{
+			TxtrCoord::rescale(s, txtrCoordRescaleVec.x);
+			TxtrCoord::rescale(t, txtrCoordRescaleVec.y);
+
+			TxtrCoord::rescale(coordCharWidth, txtrCoordRescaleVec.x);
+			TxtrCoord::rescale(coordCharHeight, txtrCoordRescaleVec.y);
+		}
 		
 		// Write to texture coordinate array
 		txtrCoordArr[0] = static_cast<float>(s);

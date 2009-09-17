@@ -40,7 +40,7 @@ namespace SGui
 
 		//bool filled;
 
-		int16 lineWidth; // if lineWidth == 1 then use filled render mode
+		int16 lineWidth; // if lineWidth == 0 then use filled render mode
 		Color4f color;
 		
 		//// will run all render code

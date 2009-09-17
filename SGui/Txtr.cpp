@@ -18,6 +18,8 @@ namespace SGui
 	
 	std::map<std::wstring, gl_uint> Txtr::txtrIdPool = std::map<std::wstring, gl_uint>();
 
+	std::map<gl_uint, Vecd> Txtr::txtrRescaleMap = std::map<gl_uint, Vecd>();
+
 
 	// **************************************************************************************************************
 	// *------------------------------------------------------------------------------------------------------------*
@@ -234,18 +236,33 @@ namespace SGui
 		if (it == txtrIdPool.end())
 		{
 			if (hasImage())
-			{				
-				//glGenTextures(1, &txtrId);
- 				//glBindTexture(GL_TEXTURE_2D, txtrId);
-				//glTexImage2D(GL_TEXTURE_2D, 0, 4, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (const GLvoid*)pixels);		
-				//
-				//// Perform these here?
-				//glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-				//glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-				//glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-				//glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			{
+				// Create an enlarged texture if necessary
 
-				txtrId = renderContext->loadTxtr(pixels, width, height);
+				gl_uint width2 = width;
+				gl_uint height2 = height;
+
+				Txtr *enlargedTxtr = NULL;
+
+				if ( ! renderContext->hasFeature(RenderContext::FEATURE_TEXTURE_NON_POWER_OF_TWO_AVAILIBLE))
+				{
+					bool wRes = conformSizeValue(width2);
+					bool hRes = conformSizeValue(height2);
+					if (wRes || hRes)
+					{
+						enlargedTxtr = new Txtr(width2, height2);
+						copyTo(enlargedTxtr, 0, 0);
+						Vecd txtrCoordRescale(static_cast<double>(width) / static_cast<double>(width2),
+												static_cast<double>(height) / static_cast<double>(height2));
+						txtrRescaleMap[txtrId] = txtrCoordRescale;
+					}
+				}
+
+				Txtr *txtrToLoad = enlargedTxtr ? enlargedTxtr : this;
+				
+				txtrId = renderContext->loadTxtr(txtrToLoad->getPixels(), width2, height2);
+
+				delete enlargedTxtr;
 			}
 			else
 			{
@@ -345,7 +362,7 @@ namespace SGui
 	// *------------------------------------------------------------------------------------------------------------*
 	// *--------------------------------------------- PRIVATE ------------------------------------------------------*
 	// *------------------------------------------------------------------------------------------------------------*
-	// **************************************************************************************************************
+	// **************************************************************************************************************	
 
 	gl_uint Txtr::defaultTxtr = 0;
 
@@ -531,6 +548,65 @@ namespace SGui
 		return pixels;
 	}
 
+	bool Txtr::conformSizeValue(gl_uint &sizeValue)
+	{
+		// TODO Is there any x86 instructions that can do this faster?
+
+		gl_uint x1 = sizeValue;
+		gl_uint x2 = 1;
+
+		if (x1 == 0) return false;		
+		while(x1 > 1)
+		{
+			x1 = x1 >> 1;
+			x2 = x2 << 1;
+		}
+
+		if (x2 == sizeValue)
+		{
+			return false;
+		}
+		else
+		{
+			dAssert(x2 < sizeValue);
+			dAssert((x2 << 1) > sizeValue);
+			sizeValue = x2 << 1;	
+			return true;
+		}		
+	}
+
+	//Vecf Txtr::getTxtrCoordRescale(uint txtrId)
+	//{
+	//	std::map<gl_uint, Vecd>::iterator it = txtrRescaleMap.find(txtrId);
+
+	//	if (it == txtrRescaleMap.end())
+	//	{
+	//		return Vecd(1.0, 1.0); // Not in the rescale map which means no rescale for this texture.
+	//	}
+	//	else
+	//	{
+	//		return it->second;
+	//	}
+	//}
+
+	bool Txtr::getTxtrCoordRescale(uint txtrId, Vecd &rescaleVec)
+	{
+		std::map<gl_uint, Vecd>::iterator it = txtrRescaleMap.find(txtrId);
+
+		if (it == txtrRescaleMap.end())
+		{			
+			rescaleVec.x = 1.0;
+			rescaleVec.y = 1.0;
+			return false;
+		}
+		else
+		{
+			//return it->second;
+			rescaleVec = it->second;
+			return true;
+		}
+	}
+
 	gl_uint Txtr::createDefaultTxtr(RenderContext *renderContext)
 	{
 		//dAssert(defaultTxtr == NULL);
@@ -614,6 +690,8 @@ namespace SGui
 		}
 
 		txtrIdPool.clear();
+
+		txtrRescaleMap.clear();
 	}
 
 	

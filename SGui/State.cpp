@@ -243,7 +243,8 @@ namespace SGui
 		for(int actionSurfaceId = static_cast<int>(actionSurfaces.size()-1);
 			(actionSurfaceId >= 0); --actionSurfaceId)
 		{
-			hitOccured = hitOccured || actionSurfaces[actionSurfaceId].handleMouseMoveEvent(this, actionSurfaceId, mousePos, hitOccured || indirect);
+			hitOccured = actionSurfaces[actionSurfaceId].handleMouseMoveEvent(this, actionSurfaceId, mousePos, hitOccured || indirect)
+							|| hitOccured;
 		}
 		return hitOccured;
 	}
@@ -506,16 +507,19 @@ namespace SGui
 				ChildrenRL::reverse_iterator end = childrenRL.rend();		
 				for(; (iter != end); ++iter)
 				{
-					hitOccured = hitOccured || (*iter)->handleMouseMoveEvent(usedClipRect, mousePos, hitOccured || indirect);
+					hitOccured = (*iter)->handleMouseMoveEvent(usedClipRect, mousePos, hitOccured || indirect)
+									|| hitOccured;
 				}
 			}
 			else if (!isLeaf())
 			{
 				dAssert(activeChild);
-				hitOccured = hitOccured || activeChild->handleMouseMoveEvent(usedClipRect, mousePos, hitOccured || indirect);
+				hitOccured = activeChild->handleMouseMoveEvent(usedClipRect, mousePos, hitOccured || indirect) 
+								|| hitOccured;
 			}
 
-			hitOccured = hitOccured || handleMouseMoveEventState(mousePos, hitOccured || indirect);
+			hitOccured = handleMouseMoveEventState(mousePos, hitOccured || indirect)
+							|| hitOccured;
 		}
 
 		return hitOccured;

@@ -42,6 +42,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	std::cout << "sizeof(__int32) = " << sizeof(__int32) << std::endl;
 	std::cout << "sizeof(__int64) = " << sizeof(__int64) << std::endl;
 	std::cout << std::endl;
+	std::cout << "sizeof(SGui::Font) = " << sizeof(SGui::Font) << std::endl;
 
 
 	// opengl init, must be performed before init namespace because loaded opengl textures will be cleared/wasted by opengl, in newer versions.

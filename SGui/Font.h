@@ -47,16 +47,7 @@ namespace SGui
 		static const int B_BIT = BOLD;  // POW_TO_2[B_INDEX];
 		static const int U_BIT = UNDERLINE; // POW_TO_2[U_INDEX];
 		static const int I_BIT = ITALIC; // POW_TO_2[I_INDEX];
-		
-		
-		// The width of each character, (just affects rendering, not  storage)
-		uchar charWidths[N_MOD_COMBINATIONS][N_CHARS];
 
-		// The height of each character, always the same.
-		uchar charHeight;
-
-		// The basewidth of each character
-		uchar charBaseWidth;
 
 		// Number of characters in each font image, in x and y
 		Vec fontImageNCharacters;
@@ -66,7 +57,22 @@ namespace SGui
 
 		// Number of font images in x and y axis in the combined font image.
 		Vec nFontImagesCombined;
-		
+
+		// The combined font image loaded to the grafics card.
+		gl_uint combinedFontTxtrId;
+
+		// The height of each character, always the same.
+		uchar charHeight;
+
+		// The basewidth of each character
+		uchar charBaseWidth;
+
+		// Boolean telling if texture coordinates needs rescaling or not
+		bool usingTxtrCoordRescale;	
+
+		// Rescale values for texture coordinates, stored for fast access.
+		Vecd txtrCoordRescaleVec;
+
 		/**
 		 * Position of each fontimage in the combined fontimage.
 		 * The combined fontimage is an 2-dimensional array of fontimages.
@@ -74,10 +80,13 @@ namespace SGui
 		 * chanse to have the same width and height in pixels
 		 * (fontImageSize must be same in x and y)
 		 */
-		Pos fontImagePos[N_MOD_COMBINATIONS];
+		VecTempl<int8> fontImagePos[N_MOD_COMBINATIONS];
+		
 
-		// The combined font image loaded to the grafics card.
-		gl_uint combinedFontTxtrId;
+		// The width of each character, (just affects rendering, not  storage)
+		uchar charWidths[N_MOD_COMBINATIONS][N_CHARS];
+
+		
 
 
 
@@ -99,11 +108,13 @@ namespace SGui
 
 
 		/**
-		 * @param fontDirectory The directory to the font files on the hard drive.
+		 * @param fontDirectory The directory to the image font files on the hard drive.
+		 *                      These images must have a size of 2^n otherwise it might
+		 *                      not work depending on the implementation.
 		 */
 		Font(RenderContext *renderContext, const wchar_t *fontDirectory, Vec fontImageNCharacters = Vec(16, 16));
 
-		inline gl_uint getTxtrId() const						{ return combinedFontTxtrId; }
+		inline gl_uint getTxtrId() const					{ return combinedFontTxtrId; }
 		
 		inline int getCharWidth(char c, int mods) const		{ dAssert(checkFlags(mods, ALLOWED_MODS));
 															  return charWidths[mods][c]; }

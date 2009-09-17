@@ -51,6 +51,7 @@ namespace SGui
 
 	typedef VecTempl<int> Veci;
 	typedef VecTempl<float> Vecf;
+	typedef VecTempl<double> Vecd;
 	typedef Veci Vec;
 	typedef Vec Pos;
 
@@ -81,6 +82,35 @@ namespace SGui
 		//TxtrCoord(const Vecf &v) : s(v.x), t(v.y)		{}
 		//TxtrCoord(const Vec &v) : s(static_cast<float>(v.x)), t(static_cast<float>(v.y))	{}
 		//TxtrCoord& operator+=(const Vecf &v)			{ s += v.x; t += v.y; }
+		operator Vecf()									{ return Vecf(s, t); }
+		//const Vecf& operator Vecf()					{ *reinterpret_cast<const Vecf*>(this); }
+
+		void rescale(const Vecd &rescaleVec);
+
+		static inline void rescale(double &value, double rescale)
+		{
+			value *= rescale;
+		}
+
+		//Vecd tmpPos = static_cast<double>(posWithinTxtr) * txtrCoordRescale;
+		//Vecd tmpSize = static_cast<double>(sizeWithinTxtr) * txtrCoordRescale;
+	};
+
+	template <typename T>
+	struct Flags
+	{
+		T flags;
+
+		Flags()	: flags(0)									{}
+		Flags(T flags) : flags(flags)						{}
+		Flags(const Flags<T> &flags) : flags(flags.flags)	{}
+	
+		bool get(T flag)	{ return (flags & flag) != 0; }
+		void set(T flag, bool value)
+		{
+			if (value) flags |= flag;
+			else flags &= ~flag;
+		}
 	};
 
 };
