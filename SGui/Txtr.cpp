@@ -243,6 +243,7 @@ namespace SGui
 				gl_uint height2 = height;
 
 				Txtr *enlargedTxtr = NULL;
+				Vecd txtrCoordRescale;
 
 				if ( ! renderContext->hasFeature(RenderContext::FEATURE_TEXTURE_NON_POWER_OF_TWO_AVAILIBLE))
 				{
@@ -252,8 +253,9 @@ namespace SGui
 					{
 						enlargedTxtr = new Txtr(width2, height2);
 						copyTo(enlargedTxtr, 0, 0);
-						Vecd txtrCoordRescale(static_cast<double>(width) / static_cast<double>(width2),
-												static_cast<double>(height) / static_cast<double>(height2));
+						// TODO set untouched pixels in enlargedTxtr to appropriate colors.
+						txtrCoordRescale.x = static_cast<double>(width) / static_cast<double>(width2);
+						txtrCoordRescale.y = static_cast<double>(height) / static_cast<double>(height2);
 						txtrRescaleMap[txtrId] = txtrCoordRescale;
 					}
 				}
@@ -261,8 +263,12 @@ namespace SGui
 				Txtr *txtrToLoad = enlargedTxtr ? enlargedTxtr : this;
 				
 				txtrId = renderContext->loadTxtr(txtrToLoad->getPixels(), width2, height2);
-
-				delete enlargedTxtr;
+				
+				if (enlargedTxtr)
+				{
+					delete enlargedTxtr;
+					txtrRescaleMap[txtrId] = txtrCoordRescale;					
+				}
 			}
 			else
 			{

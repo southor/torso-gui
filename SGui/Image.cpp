@@ -67,9 +67,17 @@ namespace SGui
 
 	void Image::initTxtrCoords()
 	{
-		txtrCoords[0] = TxtrCoord(1.0f, 0.0f);
-		txtrCoords[1] = TxtrCoord(1.0f, 1.0f);
-		txtrCoords[2] = TxtrCoord(0.0f, 1.0f);
+		TxtrCoord rescaleCoords(1.0f, 1.0f);
+
+		Vecd rescaleVec;
+		if (Txtr::getTxtrCoordRescale(txtrId, rescaleVec))
+		{
+			rescaleCoords.rescale(rescaleVec);
+		}		
+
+		txtrCoords[0] = TxtrCoord(rescaleCoords.s, 0.0f);
+		txtrCoords[1] = TxtrCoord(rescaleCoords.s, rescaleCoords.t);
+		txtrCoords[2] = TxtrCoord(0.0f, rescaleCoords.t);
 		txtrCoords[3] = TxtrCoord(0.0f, 0.0f);
 	}
 
