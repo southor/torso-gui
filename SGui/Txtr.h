@@ -42,20 +42,14 @@ namespace SGui
 
 		struct Pixel4
 		{
-			//GLubyte r, g, b, a;
 			gl_ubyte r, g, b, a;
 			Pixel4() {}
-			//Pixel4(GLubyte r, GLubyte g, GLubyte b, GLubyte a) : r(r), g(g), b(b), a(a) {}
 			Pixel4(gl_ubyte r, gl_ubyte g, gl_ubyte b, gl_ubyte a) : r(r), g(g), b(b), a(a) {}
-			//inline GLubyte getBWColor() const	{ return static_cast<GLubyte>(((uint)r+(uint)g+(uint)b) / 3); }
 			inline gl_ubyte getBWColor() const	{ return static_cast<gl_ubyte>(((uint)r+(uint)g+(uint)b) / 3); }
-			bool operator == (const Pixel4 &pixel4) const
-			{
-				return (r == pixel4.r) && (g == pixel4.g) && (b == pixel4.b) && (a == pixel4.a);
-			}
-			//Pixel4 operator *(float v)
+			//bool operator == (const Pixel4 &pixel4) const
 			//{
-			//	return Pixel4((GLubyte)(((float)r)*v), (GLubyte)(((float)g)*v), (GLubyte)(((float)b)*v), (GLubyte)(((float)a)*v));
+			//	//return (r == pixel4.r) && (g == pixel4.g) && (b == pixel4.b) && (a == pixel4.a);
+			//	return *reinterpret_cast<int32>(this) == *reinterpret_cast<int32>(&pixel4);
 			//}
 		};
 	
@@ -66,7 +60,10 @@ namespace SGui
 		gl_uint width;
 		gl_uint height;
 
-		Pixel4 *pixels;		
+		/**
+		 * Pixels are stored by rows, the current implementation of fill functions depend on this property.
+		 */
+		Pixel4 *pixels;
 
 	public:
 		
@@ -90,12 +87,17 @@ namespace SGui
 		inline const Pixel4 *getPixels() const				{ dAssert(hasImage());
 															  return pixels; }
 
-		inline Pixel4 *getPixelsForChanging()				{ dAssert(hasImage());
+		inline Pixel4 *getPixels()							{ dAssert(hasImage());
 													          return pixels; }
 
 		inline uint getPixelIndex(uint x, uint y) const		{ return y*(width) + x; }
 
 		inline const Pixel4 &getPixel(uint i) const			{ dAssert(hasImage());
+															  //if (!(i < width*height))
+															  dAssert(i < width*height);
+															  return pixels[i]; }
+
+		inline Pixel4 &getPixel(uint i)						{ dAssert(hasImage());
 															  //if (!(i < width*height))
 															  dAssert(i < width*height);
 															  return pixels[i]; }
@@ -108,10 +110,15 @@ namespace SGui
 
 		inline const Pixel4 &getPixel(uint x, uint y) const			{ return getPixel(getPixelIndex(x, y)); }		
 
+		inline Pixel4 &getPixel(uint x, uint y)						{ return getPixel(getPixelIndex(x, y)); }
+
 		inline void setPixel(uint x, uint y, const Pixel4 &pixel)	{ setPixel(getPixelIndex(x, y), pixel); }
 
+		// Fills a rectangle are with a color
+		void fillArea(int x, int y, int width, int height, const Pixel4 &pixel);
+
 		// only sets color, not alpha value of pixels
-		void fillColor(const Pixel3 &color);
+		void fillColor3(const Pixel3 &color);
 
 		
 		/**
@@ -144,7 +151,7 @@ namespace SGui
 
 
 		// Draws the hole texture context of txtr to this texture at pixel x, y
-		void copyTo(Txtr *txtr, int x, int y);
+		void copyTo(Txtr *txtr, int x, int y, bool fillSurroundings = false);		
 
 		static bool getTxtrCoordRescale(uint txtrId, Vecd &rescaleVec);
 
@@ -199,7 +206,26 @@ namespace SGui
 		static Pixel3* loadFile(const wchar_t *fileName, gl_uint *w, gl_uint *h);
 
 		// @return true if sizeValue was modified
-		static bool conformSizeValue(gl_uint &sizeValue);		
+		static bool conformSizeValue(gl_uint &sizeValue);
+
+		//// Copies from pixels into a specified row
+		//void pasteRow(int y, int xStart, int length, const Pixel4 *copyPixels);
+
+		//// Fills a specified row with a pixel value
+		//void fillRow(int y, int xStart, int length, Pixel4 pixel);		
+
+		// Fills the surroungings of the specified area with colors chosen from the edges of the specified area.
+		void duplicateRectangleEdges(int x, int y, int width, int height);
+
+		// duplicates a row into multiple rows
+		void duplicateRow(int x, int y, int length, int duplicateStep, int nDuplicates);
+
+		// duplicates a column into multiple column
+		void duplicateColumn(int x, int y, int length, int duplicateStep, int nDuplicates);
+
+		//// Copy from a selected line of pixels and paste each pixel into a line in another direction.
+		//void selectAndDuplicate(int x, int y, int xCopyStep, int yCopyStep, int nToCopy, int xPasteStep, int yPasteStep, int nToPaste);
+
 
 		typedef std::pair<std::wstring, gl_uint> TxtrPair;
 

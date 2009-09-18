@@ -102,7 +102,7 @@ namespace SGui
 		T flags;
 
 		Flags()	: flags(0)									{}
-		Flags(T flags) : flags(flags)						{}
+		explicit Flags(T flags) : flags(flags)				{}
 		Flags(const Flags<T> &flags) : flags(flags.flags)	{}
 	
 		bool get(T flag)	{ return (flags & flag) != 0; }

@@ -127,6 +127,15 @@ namespace SGui
 		}
 	}
 
+	template<typename T> void assignAll(T *arr, uint stride, T value, uint nElements)
+	{
+		for(uint i=0; i<nElements; ++i)
+		{
+			size_t j = i*stride;
+			arr[j] = value;
+		}
+	}
+
 	template<typename T> T randFun(T min, T max)
 	{
 		return (static_cast<T>(rand())*(max-min))/static_cast<T>(32768) + min;

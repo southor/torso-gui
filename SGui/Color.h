@@ -21,6 +21,8 @@ namespace SGui
 		operator T* ();
 		operator const T* () const;
 
+		Color3<T>& operator=(const Color3<T>& rhs);
+
 		Color3<T>& operator+=(const Color3<T>& c);
 		Color3<T>& operator-=(const Color3<T>& c);
 		Color3<T>& operator*=(const T& s);
@@ -42,6 +44,8 @@ namespace SGui
 
 		operator T* ();
 		operator const T* () const;
+
+		Color4<T>& operator=(const Color4<T>& rhs);
 
 		Color4<T>& operator+=(const Color4<T>& c);
 		Color4<T>& operator-=(const Color4<T>& c);
@@ -96,6 +100,15 @@ namespace SGui
 	Color3<T>::operator const T* () const
 	{
 		return (const T *) &r; 
+	}
+
+	template <typename T> 
+	Color3<T>& Color3<T>::operator =(const Color3<T>& rhs)
+	{
+		r = rhs.r;
+		g = rhs.g;
+		b = rhs.b;
+		return *this;
 	}
 
 	template <typename T> 
@@ -186,6 +199,16 @@ namespace SGui
 	Color4<T>::operator const T* () const
 	{
 		return (const T *) &r; 
+	}
+
+	template <typename T> 
+	Color4<T>& Color4<T>::operator =(const Color4<T>& rhs)
+	{
+		r = rhs.r;
+		g = rhs.g;
+		b = rhs.b;
+		a = rhs.a;
+		return *this;
 	}
 
 	template <typename T> 

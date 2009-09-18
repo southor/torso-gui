@@ -98,7 +98,16 @@ namespace SGui
 		if (pixels != NULL) delete[] pixels;
 	}
 
-	void Txtr::fillColor(const Pixel3 &color)
+	void Txtr::fillArea(int x, int y, int width, int height, const Pixel4 &pixel)
+	{
+		int yStop = y + height;
+		for(int i=y; i<yStop; ++i)
+		{
+			assignAll(&getPixel(x, i), pixel, width);
+		}
+	}
+
+	void Txtr::fillColor3(const Pixel3 &color)
 	{
 		for(uint i=0; i<width*height; ++i)
 		{
@@ -218,7 +227,7 @@ namespace SGui
 	{
 		removeImage();
 		loadAlpha(alphaFileName, 255, true);
-		fillColor(color);
+		fillColor3(color);
 	}
 
 
@@ -252,11 +261,10 @@ namespace SGui
 					if (wRes || hRes)
 					{
 						enlargedTxtr = new Txtr(width2, height2);
-						copyTo(enlargedTxtr, 0, 0);
-						// TODO set untouched pixels in enlargedTxtr to appropriate colors.
+						copyTo(enlargedTxtr, 0, 0, true);
+						//enlargedTxtr->duplicateRectangleEdges(0, 0, width, height);
 						txtrCoordRescale.x = static_cast<double>(width) / static_cast<double>(width2);
 						txtrCoordRescale.y = static_cast<double>(height) / static_cast<double>(height2);
-						txtrRescaleMap[txtrId] = txtrCoordRescale;
 					}
 				}
 
@@ -358,8 +366,14 @@ namespace SGui
 
 	bool Txtr::isConsistent() const
 	{
-		return (((pixels == NULL) || (width == 0) || (height == 0))
-			? ((pixels == NULL) && (width == 0) && (height == 0)) : true);
+		if ((pixels == NULL) || (width == 0) || (height == 0))
+		{
+			return (pixels == NULL) && (width == 0) && (height == 0);
+		}
+		else
+		{
+			return (pixels != NULL) && (width > 0) && (height > 0);
+		}
 	}
 
 
@@ -442,7 +456,7 @@ namespace SGui
 		}
 	}
 
-	void Txtr::copyTo(Txtr *txtr, int x, int y)
+	void Txtr::copyTo(Txtr *txtr, int x, int y, bool fillSurroundings)
 	{
 		uint targetStartX = static_cast<uint>(maxFun(0, x));
 		uint targetStartY = static_cast<uint>(maxFun(0, y));
@@ -472,7 +486,135 @@ namespace SGui
 			}
 		}
 
+		// fill up the surrounding pixels with duplicated pixels?
+		if (fillSurroundings)
+			txtr->duplicateRectangleEdges(x, y, width, height);
+
 	}
+
+	void Txtr::duplicateRectangleEdges(int x, int y, int width, int height)
+	{
+		if ( ! hasImage()) return;
+
+		restrain<int>(x, 0, this->width-1);
+		restrain<int>(y, 0, this->height-1);
+
+		restrain<int>(width, 1, this->width-x);
+		restrain<int>(height, 1, this->height-y);
+
+		dAssert((x >= 0) && (y >= 0));
+			
+		int leftSpace = x;
+		int bottomSpace = y;
+		int rightSpace = this->width - (x+width);
+		int topSpace = this->height - (y+height);
+
+		// duplicate in four directions
+
+		duplicateColumn(x, y, height, -1, leftSpace); // left area
+		duplicateColumn(x+width-1, y, height, 1, rightSpace); // right area
+		duplicateRow(x, y, width, -1, bottomSpace); // bottom area
+		duplicateRow(x, y+height-1, width, 1, topSpace); // bottom area	
+
+		//selectAndDuplicate(x, y, 0, 1, height, -1, 0, leftSpace); // left area
+		//selectAndDuplicate(x, y, 1, 0, width, 0, -1, bottomSpace); // bottom area
+		//selectAndDuplicate(x+width, y+height, 0, -1, height, 1, 0, rightSpace); // right area
+		//selectAndDuplicate(x+width, y+height, -1, 0, width, 0, 1, topSpace); // top area
+
+		//// duplicate the duplicates into the corners
+
+		//selectAndDuplicate(x, y, 0, -1, bottomSpace, -1, -1, leftSpace); // left bottom down
+		//selectAndDuplicate(x, y, -1, 0, leftSpace, -1, -1, leftSpace); // left bottom left
+
+		//selectAndDuplicate(x, y+height, -1, 0, leftSpace, -1, 1, leftSpace); // left top left
+		//selectAndDuplicate(x, y+height, 0, 1, topSpace, -1, 1, leftSpace); // left top up		
+
+		//selectAndDuplicate(x+width, y+height, 0, 1, topSpace, 1, 1, rightSpace); // right top up
+		//selectAndDuplicate(x+width, y+height, 1, 0, rightSpace, 1, 1, rightSpace); // right top right
+
+		//selectAndDuplicate(x+width, y, 1, 0, rightSpace, 1, -1, rightSpace); // right bottom right
+		//selectAndDuplicate(x+width, y, 0, -1, bottomSpace, 1, -1, rightSpace); // right bottom down
+
+		// fill corners
+
+		fillArea(0, 0, leftSpace, bottomSpace, getPixel(x, y)); // left bottom
+		fillArea(0, y+height, leftSpace, topSpace, getPixel(x, y+height-1)); // top left
+		fillArea(x+width, y+height, rightSpace, topSpace, getPixel(x+width-1, y+height-1)); // top right
+		fillArea(x+width, 0, rightSpace, bottomSpace, getPixel(x+width-1, y)); // right bottom
+		
+	}
+
+	void Txtr::duplicateRow(int x, int y, int length, int duplicateStep, int nDuplicates)
+	{
+		if (nDuplicates <= 0 || length <= 0) return;
+		
+		//copyFun(getPixel(x+i, y), width, getPixel(x
+
+		//int startY;
+		//if (duplicateStep > 0)
+		//{
+		//	startY = y + duplicateStep;
+		//}
+		//else
+		//{
+		//	startY = y + duplicateStep*nDuplicates;
+		//	duplicateStep = -duplicateStep;
+		//}
+
+		//for(int i=0; i<length; ++i)
+		//{
+		//	assignAll(getPixel(x+i, startY), width*duplicateStep, getPixel(x+i, y), nDuplicates);
+		//}
+
+		const Pixel4 *pixels = &getPixel(x, y);
+		for(int i=1; i<=nDuplicates; ++i)
+		{
+			//pasteRow(y + i*duplicateStep, x, length, pixels);
+			//void pasteRow(int y, int xStart, int length, const Pixel4 *copyPixels);
+			copyFun(pixels, &getPixel(x, y + i*duplicateStep), length);
+		}
+	}
+
+	void Txtr::duplicateColumn(int x, int y, int length, int duplicateStep, int nDuplicates)
+	{
+		if (nDuplicates <= 0 || length <= 0) return;
+
+		int xStart;
+		if (duplicateStep > 0)
+		{
+			xStart = x + duplicateStep;
+		}
+		else
+		{
+			xStart = x + duplicateStep*nDuplicates;
+			duplicateStep = -duplicateStep;
+		}
+
+		dAssert(duplicateStep >= 0);
+		
+		for(int i=0; i<length; ++i)
+		{			
+			Pixel4 *toPixels =&getPixel(xStart, y+i);
+			Pixel4 pixel(getPixel(x, y+i));
+
+			if (duplicateStep == 1)
+			{
+				//fillRow(y+i, xStart, nDuplicates, pixel);
+				assignAll(toPixels, pixel, nDuplicates);
+			}
+			else
+			{
+				assignAll(toPixels, duplicateStep, pixel, nDuplicates);
+			}
+		}
+	}
+
+	//void Txtr::selectAndDuplicate(int x, int y, int xCopyStep, int yCopyStep, int nToCopy, int xPasteStep, int yPasteStep, int nToPaste)
+	//{
+	//	
+	//}
+
+	
 
 	// **************************************************************************************************************
 	// *------------------------------------------------------------------------------------------------------------*
@@ -580,6 +722,26 @@ namespace SGui
 			return true;
 		}		
 	}
+
+	//void Txtr::pasteRow(int y, int xStart, int length, const Pixel4 *copyPixels)
+	//{
+	//	copyFun(copyPixels, &getPixel(xStart, y), length);
+	//}
+
+	//void Txtr::fillRow(int y, int xStart, int length, Pixel4 pixel)
+	//{
+	//	// TODO can it be done faster with a special machine instruction?
+	//	
+	//	Pixel4 *p = &getPixel(xStart, y);
+	//	//Pixel4 *stop = p+length;
+
+	//	//for(; p<stop; ++p)
+	//	//{
+	//	//	*p = pixel;
+	//	//}
+
+	//	assignAll(p, pixel, length);
+	//}
 
 	//Vecf Txtr::getTxtrCoordRescale(uint txtrId)
 	//{

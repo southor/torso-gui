@@ -108,6 +108,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	state1.renderObjs.push_back(&lineBox);
 	state1.renderObjs.push_back(&textBox);
 
+	SGui::Txtr largeTestTxtr(64, 64);
+	SGui::Txtr colorsTxtr(L"../Test/graphics/colors.bmp");
+	colorsTxtr.copyTo(&largeTestTxtr, 19, 32, true);
+	SGui::Image imageTest(largeTestTxtr.add(renderContext, L"../Test/graphics/window.bmp"), SGui::Pos(20, 20), SGui::Vec(largeTestTxtr.getWidth(), largeTestTxtr.getHeight()));
+	root.renderObjs.push_back(&imageTest);
+
 	SGui::Txtr gronTxtr(L"../Test/graphics/gron.bmp");
 	SGui::Image imageGron(gronTxtr.add(renderContext, L"gron.bmp"), SGui::Pos(100, 150), SGui::Vec(gronTxtr.getWidth(), gronTxtr.getHeight()));
 	state2.renderObjs.push_back(&imageGron);

@@ -6,6 +6,8 @@
 namespace SGui
 {
 
+	// TODO instead of uint use size_t
+
 	/**
 	 * Loops the value so that it will be inside Min, Max
 	 * @param value The value to loop
@@ -129,6 +131,14 @@ namespace SGui
 	 * @param nElements Number of elements in the array.
 	 */
 	template<typename T> void assignAll(T *arr, T value, uint nElements);
+
+	/**
+	 * Assigns all elements in the array to value.
+	 * @param arr The array.
+	 * @param value The value that all elements should be assigned to.
+	 * @param nElements Number of elements in the array.
+	 */
+	template<typename T> void assignAll(T *arr, uint stride, T value, uint nElements);
 
 
 	template<typename T> T randFun(T min, T max);
