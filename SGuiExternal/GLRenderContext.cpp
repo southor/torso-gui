@@ -3,7 +3,9 @@
 #include "SGuiExternal\gl_includes.h"
 
 
-#define SGUI_DEBUG_GL_LINES
+//#define STATE_GUI_DEBUG_GL_LINES
+
+#define STATE_GUI_DISPLAY_GL_ERRORS
 
 namespace SGui
 {
@@ -49,10 +51,17 @@ namespace SGui
 
 	}
 
-	inline void condDisplayGLError(const char *str)
+	inline bool condDisplayGLError(const char *str)
 	{
+#ifdef STATE_GUI_DISPLAY_GL_ERRORS
 		GLenum error = glGetError();
-		if (error != GL_NO_ERROR) displayGLError(str, error);
+		if (error != GL_NO_ERROR)
+		{
+			displayGLError(str, error);
+			return true;
+		}
+#endif
+		return false;
 	}
 
 	bool GLRenderContext::glExtensionAvailible(const char *extensionName)
@@ -83,8 +92,9 @@ namespace SGui
 
 	void GLRenderContext::scale(const Vecf &v)
 	{
-#ifndef SGUI_DEBUG_GL_LINES
+#ifndef STATE_GUI_DEBUG_GL_LINES
 		glScalef(v.x, v.y, 1.0f);
+		condDisplayGLError("scale 2");
 #endif
 	}
 
@@ -93,31 +103,31 @@ namespace SGui
 
 		glViewport(0, 0, w, h);
 
-		condDisplayGLError("initGL 2");
+		//condDisplayGLError("initGL 2");
 
 
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		glOrtho(0.0, static_cast<double>(w), 0.0, static_cast<double>(h), 0.5, 10.0);
-		condDisplayGLError("initGL 5");
+		//condDisplayGLError("initGL 5");
 		glMatrixMode(GL_MODELVIEW);
-		condDisplayGLError("initGL 6");
+		//condDisplayGLError("initGL 6");
 		glLoadIdentity();
 		glTranslatef(0.0f, 0.0f, -2.0f);
 
-		condDisplayGLError("initGL 10");
+		//condDisplayGLError("initGL 10");
 
 		glShadeModel(GL_SMOOTH);
-		condDisplayGLError("initGL 12");
+		//condDisplayGLError("initGL 12");
 		glEnable(GL_BLEND);
-		condDisplayGLError("initGL 13");
+		//condDisplayGLError("initGL 13");
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		condDisplayGLError("initGL 15");
+		//condDisplayGLError("initGL 15");
 
 		////glEnable(GL_VERTEX_ARRAY);
 		glEnableClientState(GL_VERTEX_ARRAY);
 
-		condDisplayGLError("initGL 19");
+		//condDisplayGLError("initGL 19");
 
 		////glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 		////glTexCoordPointer(2, GL_FLOAT, 0, txtrCoordArr);
@@ -134,7 +144,7 @@ namespace SGui
 
 		glEnable(GL_LINE_SMOOTH);
 
-		condDisplayGLError("initGL 20");
+		//condDisplayGLError("initGL 20");
 
 		setFeature(FEATURE_TEXTURE_NON_POWER_OF_TWO_AVAILIBLE, glExtensionAvailible("GL_ARGB_texture_non_power_of_two"));
 
@@ -153,11 +163,11 @@ namespace SGui
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		condDisplayGLError("start New Rendering 2");
+		//condDisplayGLError("start New Rendering 2");
 
 		glColor4f(color.r, color.g, color.b, 1.0f);
 
-		condDisplayGLError("start New Rendering 3");
+		//condDisplayGLError("start New Rendering 3");
 
 		glBegin(GL_QUADS);
 			glVertex3i(0, 0, 0);
@@ -166,7 +176,7 @@ namespace SGui
 			glVertex3i(0, 500, 0);
 		glEnd();
 
-		condDisplayGLError("start New Rendering 4");
+		//condDisplayGLError("start New Rendering 4");
 
 		glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 
@@ -179,13 +189,12 @@ namespace SGui
 
 		static Txtr::Pixel4 pixel(127, 127, 127, 255);
 
-		condDisplayGLError("createDefaultTxtr 1");
+		//condDisplayGLError("createDefaultTxtr 1");
 
 		glGenTextures(1, &txtrId);
 		glBindTexture(GL_TEXTURE_2D, txtrId);
-		condDisplayGLError("createDefaultTxtr 3");
+		//condDisplayGLError("createDefaultTxtr 3");
 		glTexImage2D(GL_TEXTURE_2D, 0, 4, 1, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, (const GLvoid*)&pixel);
-		//txtrIdPool[std::wstring("DefaultTxtr")] = txtrId;
 
 		condDisplayGLError("createDefaultTxtr 4");
 
@@ -197,15 +206,15 @@ namespace SGui
 
 		GLuint txtrId;
 
-		condDisplayGLError("loadTxtr 0");
+		//condDisplayGLError("loadTxtr 0");
 		
 		glGenTextures(1, &txtrId);
-		condDisplayGLError("loadTxtr 1");
+		//condDisplayGLError("loadTxtr 1");
 		glBindTexture(GL_TEXTURE_2D, txtrId);
-		condDisplayGLError("loadTxtr 2");
+		//condDisplayGLError("loadTxtr 2");
 		glTexImage2D(GL_TEXTURE_2D, 0, 4, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (const GLvoid*)pixels);		
 		
-		condDisplayGLError("loadTxtr 3");
+		//condDisplayGLError("loadTxtr 3");
 
 		// Perform these here?
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -220,7 +229,7 @@ namespace SGui
 
 	void GLRenderContext::unloadTxtr(gl_uint txtrId)
 	{
-		condDisplayGLError("unloadTxtr 1");
+		//condDisplayGLError("unloadTxtr 1");
 		glDeleteTextures(1, &txtrId);
 		condDisplayGLError("unloadTxtr 2");
 	}
@@ -228,26 +237,16 @@ namespace SGui
 	void GLRenderContext::renderTxtr(uint txtrId, const RectIfc *rect, const TxtrCoord *txtrCoords)
 	{
 		glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-		//glDisable(GL_COLOR_2D);
 		glEnable(GL_TEXTURE_2D);
-		condDisplayGLError("renderTxtr 2");
+		//condDisplayGLError("renderTxtr 2");
 		glBindTexture(GL_TEXTURE_2D, txtrId);
 		glBegin(GL_QUADS);
 			glTexCoord2f(txtrCoords[0].s, txtrCoords[0].t);	glVertex2i(rect->getRight(), rect->getBottom());
 			glTexCoord2f(txtrCoords[1].s, txtrCoords[1].t);	glVertex2i(rect->getRight(), rect->getTop());
 			glTexCoord2f(txtrCoords[2].s, txtrCoords[2].t);	glVertex2i(rect->getLeft(), rect->getTop());
 			glTexCoord2f(txtrCoords[3].s, txtrCoords[3].t);	glVertex2i(rect->getLeft(), rect->getBottom());
-		
-		//	glTexCoord2f(txtrCoords[0].s, txtrCoords[0].t);	glVertex2i(rect->getRight(), rect->getBottom());
-		//	glTexCoord2f(txtrCoords[1].s, txtrCoords[1].t);	glVertex2i(rect->getRight(), rect->getTop());
-		//	glTexCoord2f(txtrCoords[2].s, txtrCoords[2].t);	glVertex2i(rect->getLeft(), rect->getTop());
-		//	glTexCoord2f(txtrCoords[3].s, txtrCoords[3].t);	glVertex2i(rect->getLeft(), rect->getBottom());			
-		//	//glTexCoord2f(txtrCoords[3].s, txtrCoords[3].t);	glVertex2i(rect->getLeft(), rect->getBottom());
-		//	//glTexCoord2f(txtrCoords[2].s, txtrCoords[2].t);	glVertex2i(rect->getLeft(), rect->getTop());
-		//	//glTexCoord2f(txtrCoords[1].s, txtrCoords[1].t);	glVertex2i(rect->getRight(), rect->getTop());
-		//	//glTexCoord2f(txtrCoords[0].s, txtrCoords[0].t);	glVertex2i(rect->getRight(), rect->getBottom());
 		glEnd();
-		condDisplayGLError("renderTxtr 4");
+		//condDisplayGLError("renderTxtr 4");
 		//glBegin(GL_TRIANGLES);
 		//	glTexCoord2f(0.0f, 1.0f);	glVertex2i(rect->getRight(), rect->getBottom());
 		//	glTexCoord2f(1.0f, 1.0f);	glVertex2i(rect->getRight(), rect->getTop());
@@ -259,8 +258,9 @@ namespace SGui
 
 	gl_uint GLRenderContext::createDisplayList()
 	{
+		gl_uint displayListId = glGenLists(1);
 		condDisplayGLError("createDisplayList 1");
-		return glGenLists(1);
+		return displayListId;
 	}
 
 	void GLRenderContext::renderBox(const RectIfc *rect, const Color4f &color, int lineWidth)
@@ -271,7 +271,7 @@ namespace SGui
 		// If border is too wide, the gl implementation might not have an appropriate linewidth range for it.
 		// So check if we should render in "veryFatBorderMode" or not.
 
-		condDisplayGLError("renderBox 1");
+		//condDisplayGLError("renderBox 1");
 
 		GLfloat glLineWidthRange[2];
 		glGetFloatv(GL_LINE_WIDTH_RANGE, glLineWidthRange);
@@ -347,11 +347,11 @@ namespace SGui
 		else
 		{
 
-			condDisplayGLError("renderBox 4");
+			//condDisplayGLError("renderBox 4");
 
 			if (lineWidth > 0) glLineWidth(lineWidthf);	
 
-			condDisplayGLError("renderBox 5");
+			//condDisplayGLError("renderBox 5");
 
 			if (lineWidth <= 1)
 			{
@@ -409,9 +409,9 @@ namespace SGui
 
 	void GLRenderContext::renderBoxToDisplayList(gl_uint displayList, bool execute, const RectIfc *rect, const Color4f &color, int lineWidth)
 	{
-		condDisplayGLError("renderBoxToDisplayList 1");
+		//condDisplayGLError("renderBoxToDisplayList 1");
 		glDisable(GL_TEXTURE_2D);
-		condDisplayGLError("renderBoxToDisplayList 2");
+		//condDisplayGLError("renderBoxToDisplayList 2");
 		glNewList(displayList, execute ? GL_COMPILE_AND_EXECUTE : GL_COMPILE);			
 			renderBox(rect, color, lineWidth);
 		glEndList();
@@ -420,9 +420,9 @@ namespace SGui
 
 	void GLRenderContext::renderDisplayList(gl_uint displayList)
 	{
-		condDisplayGLError("renderDisplayList 1");
+		//condDisplayGLError("renderDisplayList 1");
 		glDisable(GL_TEXTURE_2D);
-		condDisplayGLError("renderDisplayList 2");
+		//condDisplayGLError("renderDisplayList 2");
 		glCallList(displayList);
 		condDisplayGLError("renderDisplayList 3");
 	}
@@ -431,22 +431,22 @@ namespace SGui
 	{ 		
 		if (nVtx > 0)
 		{
-			condDisplayGLError("renderText 1");
+			//condDisplayGLError("renderText 1");
 			glEnable(GL_TEXTURE_2D);
-			condDisplayGLError("renderText 2");
+			//condDisplayGLError("renderText 2");
 			glBindTexture(GL_TEXTURE_2D, fontTxtrId);
-			condDisplayGLError("renderText 3");
+			//condDisplayGLError("renderText 3");
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-			condDisplayGLError("renderText 4");
+			//condDisplayGLError("renderText 4");
 			glTexCoordPointer(2, GL_FLOAT, 0, txtrCoordArr);
-			condDisplayGLError("renderText 5");
+			//condDisplayGLError("renderText 5");
 			glEnableClientState(GL_COLOR_ARRAY);
-			condDisplayGLError("renderText 6");
+			//condDisplayGLError("renderText 6");
 			glColorPointer(3, GL_FLOAT, 0, colorArr);
-			condDisplayGLError("renderText 7");
+			//condDisplayGLError("renderText 7");
 			glVertexPointer(3, GL_FLOAT, 0, vtxArr);
 			
-			condDisplayGLError("renderText 9");
+			//condDisplayGLError("renderText 9");
 			glDrawArrays(GL_QUADS, 0, nVtx);
 
 			glDisableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -458,7 +458,7 @@ namespace SGui
 
 	void GLRenderContext::setClipping(const Pos &pos, const Rect &clipRect)
 	{
-		condDisplayGLError("setClipping 1");
+		//condDisplayGLError("setClipping 1");
 		glScissor(pos.x + clipRect.getX(), pos.y + clipRect.getY(),
 				  clipRect.getWidth(), clipRect.getHeight());
 		condDisplayGLError("setClipping 2");
