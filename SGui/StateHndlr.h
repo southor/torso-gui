@@ -101,6 +101,8 @@ namespace SGui
 		 */
 		void setStateTree(State *root);
 
+		inline bool hasStateTree()						{ return root != NULL; }
+
 		inline State* getState(int stateId)				{ return commonFathers->get(stateId, stateId); }
 
 		// @Return NULL if no State have been 

@@ -2,6 +2,7 @@
 #define _STATE_GUI_MACROS_H_
 
 #include "declares.h"
+#include <iostream>
 
 
 inline void sGuiDebugBreak()
