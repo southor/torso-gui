@@ -50,7 +50,7 @@ namespace SGui
 
 	template<typename T> int bSignFun(T a);
 
-	template<typename T> T xor(T a, T b)			{ return (a && !b) || (!a && b); }
+	template<typename T> T xor(T a, T b)		{ return (a && !b) || (!a && b); }
 
 	template<typename T> T bitXOr(T a, T b)		{ return (a & ~b) | (~a & b); }
 	
@@ -107,7 +107,7 @@ namespace SGui
 	 * @param arrTo The array to copy to.
 	 * @param nElements number of elements to copy.
 	 */
-	template<typename T> void copyFun(const T *fromArr, T *toArr, uint nElements);
+	template<typename T> void copyFun(const T *fromArr, T *toArr, size_t nElements);
 
 	/**
 	 * Copys nElements elements from arrFrom to arrTo, uses operator= .
@@ -115,14 +115,14 @@ namespace SGui
 	 * @param arrTo The array to copy to.
 	 * @param nElements number of elements to copy.
 	 */
-	template<typename T> void copyFun(const T *fromArr, uint fromElementStride, T *toArr, uint toElementStride, uint nElements);
+	template<typename T> void copyFun(const T *fromArr, size_t fromElementStride, T *toArr, size_t toElementStride, size_t nElements);
 
 	/**
 	 * assigns every element in the array to zero.
 	 * @param arr The array
 	 * @param nElements Number of elements in the array.
 	 */
-	template<typename T> void zeroFun(T *arr, uint nElements);
+	template<typename T> void zeroFun(T *arr, size_t nElements);
 
 	/**
 	 * Assigns all elements in the array to value.
@@ -130,7 +130,7 @@ namespace SGui
 	 * @param value The value that all elements should be assigned to.
 	 * @param nElements Number of elements in the array.
 	 */
-	template<typename T> void assignAll(T *arr, T value, uint nElements);
+	template<typename T> void assignAll(T *arr, T value, size_t nElements);
 
 	/**
 	 * Assigns all elements in the array to value.
@@ -138,7 +138,7 @@ namespace SGui
 	 * @param value The value that all elements should be assigned to.
 	 * @param nElements Number of elements in the array.
 	 */
-	template<typename T> void assignAll(T *arr, uint stride, T value, uint nElements);
+	template<typename T> void assignAll(T *arr, size_t stride, T value, size_t nElements);
 
 
 	template<typename T> T randFun(T min, T max);

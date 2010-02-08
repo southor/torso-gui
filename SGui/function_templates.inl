@@ -92,44 +92,44 @@ namespace SGui
 		b = tmp;
 	}
 
-	template<typename T> void copyFun(const T *fromArr, T *toArr, uint nElements)
+	template<typename T> void copyFun(const T *fromArr, T *toArr, size_t nElements)
 	{
-		for(uint i=0; i<nElements; ++i)
+		for(size_t i=0; i<nElements; ++i)
 		{
 			toArr[i] = fromArr[i];
 		}
 	}
 
-	template<typename T> void copyFun(const T *fromArr, uint fromElementStride, T *toArr, uint toElementStride, uint nElements)
+	template<typename T> void copyFun(const T *fromArr, size_t fromElementStride, T *toArr, size_t toElementStride, size_t nElements)
 	{
-		uint fromElementInterval = fromElementStride + 1;
-		uint toElementInterval = toElementStride + 1;
+		size_t fromElementInterval = fromElementStride + 1;
+		size_t toElementInterval = toElementStride + 1;
 		
-		for(uint i=0; i<nElements; ++i)
+		for(size_t i=0; i<nElements; ++i)
 		{
 			toArr[i*toElementInterval] = fromArr[i*fromElementInterval];
 		}
 	}
 
-	template<typename T> void zeroFun(T *arr, uint nElements)
+	template<typename T> void zeroFun(T *arr, size_t nElements)
 	{
-		for(uint i=0; i<nElements; i++)
+		for(size_t i=0; i<nElements; i++)
 		{
 			arr[i] = 0;
 		}
 	}
 
-	template<typename T> void assignAll(T *arr, T value, uint nElements)
+	template<typename T> void assignAll(T *arr, T value, size_t nElements)
 	{
-		for(uint i=0; i<nElements; ++i)
+		for(size_t i=0; i<nElements; ++i)
 		{
 			arr[i] = value;
 		}
 	}
 
-	template<typename T> void assignAll(T *arr, uint stride, T value, uint nElements)
+	template<typename T> void assignAll(T *arr, size_t stride, T value, size_t nElements)
 	{
-		for(uint i=0; i<nElements; ++i)
+		for(size_t i=0; i<nElements; ++i)
 		{
 			size_t j = i*stride;
 			arr[j] = value;

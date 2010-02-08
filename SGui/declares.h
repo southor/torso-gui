@@ -57,6 +57,24 @@ namespace SGui
 	//#define UINT_MSB 0x00000001;
 
 
+#ifdef _M_X64
+	typedef int64 fint;
+	typedef int32 hint;
+	typedef int16 qint;
+
+	typedef uint64 ufint;
+	typedef uint32 uhint;
+	typedef uint16 uqint;
+#else
+	typedef int32 fint;
+	typedef int16 hint;
+	typedef int8 qint;
+
+	typedef uint32 ufint;
+	typedef uint16 uhint;
+	typedef uint8 uqint;
+#endif
+
 
 
 

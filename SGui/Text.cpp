@@ -304,8 +304,10 @@ namespace SGui
 				if (xAlign != ALIGN_LEFT) // if xAlign == ALIGN_LEFT, nothing to do
 				{
 					int xOffset = (fieldSize.x - lPos.x);
-					if (xAlign == ALIGN_MIDDLE) xOffset /= 2;					
-					moveVtxsX(rowStartVtxArr, currVtxArr - rowStartVtxArr, xOffset);
+					if (xAlign == ALIGN_MIDDLE) xOffset /= 2;
+					fint nFloats = currVtxArr - rowStartVtxArr;					
+					dAssert(nFloats == static_cast<fint>(static_cast<int>(nFloats)));
+					moveVtxsX(rowStartVtxArr, static_cast<int>(nFloats), xOffset);
 				}
 
 				// check if end of the field area
