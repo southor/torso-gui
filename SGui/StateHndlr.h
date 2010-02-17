@@ -3,6 +3,7 @@
 
 #include "State.h"
 #include "declares.h"
+#include "Event.h"
 
 #include <deque>
 
@@ -143,6 +144,22 @@ namespace SGui
 		{
 			handleMouseMoveEvent(mousePos, indirect);
 			handleMouseButtonEvent(mouseButtonEvent);			
+		}
+
+		inline void handleEvent(Event &ev, bool indirect = false)
+		{
+			switch(ev.generalType)
+			{
+			case SGUI_MOUSE_BUTTON_EVENT:
+				handleMouseButtonEvent(ev.subType, ev.mousePos, indirect);
+				break;
+			case SGUI_MOUSE_MOVE_EVENT:
+				handleMouseMoveEvent(ev.mousePos, indirect);
+				break;
+			default:
+				dAssert(false);
+				break;
+			}
 		}
 
 	};

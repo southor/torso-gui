@@ -3,15 +3,29 @@
 
 #include "declares.h"
 
+// test define collissions
+#define SGUI_MOUSE_BUTTON_EVENT SGUI_MOUSE_BUTTON_EVENT
+#define SGUI_MOUSE_MOVE_EVENT SGUI_MOUSE_MOVE_EVENT
+
+// test define collissions
+#define LEFT_MOUSE_DOWN LEFT_MOUSE_DOWN
+#define LEFT_MOUSE_UP LEFT_MOUSE_UP
+#define RIGHT_MOUSE_DOWN RIGHT_MOUSE_DOWN
+#define RIGHT_MOUSE_UP RIGHT_MOUSE_UP
+#define MOUSE_OVER_TILE MOUSE_OVER_TILE
+#define MOUSE_AWAY_FROM_TILE MOUSE_AWAY_FROM_TILE
+
 namespace SGui
 {
 	// General Event types (used by State)
-	static const int N_EVENT_TYPES = 3;
+	static const int N_EVENT_TYPES = 2;
 	enum
 	{
 		SGUI_MOUSE_BUTTON_EVENT,
 		SGUI_MOUSE_MOVE_EVENT,
-		SGUI_KEY_EVENT
+		//SGUI_KEY_EVENT
+
+		// More events with higher values can be added by client?
 	};
 	
 	// Grid Events and Mouse Button Events (used by ActionSurface)
