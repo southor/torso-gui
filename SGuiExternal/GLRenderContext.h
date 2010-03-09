@@ -16,9 +16,12 @@ namespace SGui
 
 		bool glExtensionAvailible(const char *extensionName);
 
+		//uint viewportWidth;
+		//uint viewportHeight;
+
 	public:
 
-		void initGL(uint w, uint h);
+		void initGL(uint w, uint h, const SGui::Color3f &bgColor);
 		void uninitGL();
 
 		//virtual bool isTextureNonPowerOfTwoExtensionAvailible();
@@ -27,7 +30,8 @@ namespace SGui
 
 		virtual void flush();
 
-		virtual void startNewRendering(const SGui::Color3f &color);
+		//virtual void startNewRendering(const SGui::Color3f &color);
+		virtual void startNewRendering();
 
 		virtual void pushMatrix();
 		virtual void popMatrix();

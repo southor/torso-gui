@@ -138,7 +138,8 @@ bool WinWindow::init()
 	EnableOpenGL((HWND)hwnd, (HDC*)&hDC, (HGLRC*)&hRC);
 	
 
-	renderContext.initGL(windowWidth, windowHeight);
+	SGui::Color3f bgColor(0.3f, 0.3f, 0.5f);
+	renderContext.initGL(windowWidth, windowHeight, bgColor);
 
 	return true;
 

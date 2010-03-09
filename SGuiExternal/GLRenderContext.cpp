@@ -98,8 +98,11 @@ namespace SGui
 #endif
 	}
 
-	void GLRenderContext::initGL(uint w, uint h)
+	void GLRenderContext::initGL(uint w, uint h, const SGui::Color3f &bgColor)
 	{
+
+		//this->viewportWidth = w;
+		//this->viewportHeight = h;
 
 		glViewport(0, 0, w, h);
 
@@ -127,6 +130,9 @@ namespace SGui
 		////glEnable(GL_VERTEX_ARRAY);
 		glEnableClientState(GL_VERTEX_ARRAY);
 
+		
+		glClearColor(bgColor.r, bgColor.g, bgColor.b, 1.0f);
+
 		//condDisplayGLError("initGL 19");
 
 		////glEnableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -146,7 +152,11 @@ namespace SGui
 
 		//condDisplayGLError("initGL 20");
 
+		glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+
 		setFeature(FEATURE_TEXTURE_NON_POWER_OF_TWO_AVAILIBLE, glExtensionAvailible("GL_ARGB_texture_non_power_of_two"));
+
+		
 
 		condDisplayGLError("initGL 21");
 		
@@ -159,26 +169,36 @@ namespace SGui
 		// TODO: anything?
 	}
 
-	void GLRenderContext::startNewRendering(const SGui::Color3f &color)
-	{
+	//void GLRenderContext::startNewRendering(const SGui::Color3f &color)
+	void GLRenderContext::startNewRendering()
+	{		
+
+		//glClearColor(color.r, color.b, color.g, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		//condDisplayGLError("start New Rendering 2");
 
-		glColor4f(color.r, color.g, color.b, 1.0f);
+		//glColor4f(color.r, color.g, color.b, 1.0f);
 
 		//condDisplayGLError("start New Rendering 3");
 
-		glBegin(GL_QUADS);
-			glVertex3i(0, 0, 0);
-			glVertex3i(500, 0, 0);
-			glVertex3i(500, 500, 0);
-			glVertex3i(0, 500, 0);
-		glEnd();
+		//glBegin(GL_QUADS);
+		//	glVertex3i(0, 0, 0);
+		//	glVertex3i(viewportWidth, 0, 0);
+		//	glVertex3i(viewportWidth, viewportHeight, 0);
+		//	glVertex3i(0, viewportHeight, 0);
+		//glEnd();
+
+		//glBegin(GL_QUADS);
+		//	glVertex3i(0, 0, 0);
+		//	glVertex3i(500, 0, 0);
+		//	glVertex3i(500, 500, 0);
+		//	glVertex3i(0, 500, 0);
+		//glEnd();
 
 		//condDisplayGLError("start New Rendering 4");
 
-		glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+		//glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 
 		condDisplayGLError("start New Rendering 5");
 	}

@@ -133,7 +133,8 @@ bool SDLWindow::init()
 	}
 	
 
-	renderContext.initGL(w, h);
+	SGui::Color3f bgColor(0.3f, 0.3f, 0.5f);
+	renderContext.initGL(w, h, bgColor);
 
 	return true;
 }

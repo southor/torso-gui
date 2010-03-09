@@ -36,14 +36,28 @@ inline void sGuiDebugBreak()
 
 
 
-#define rAssert(x) if (!(x)) { printf("%s(%d): %s failed\n",  __FILE__, __LINE__, #x); fflush(stdout); sGuiDebugBreak(); }
+#define rAssert(x)  { if (!(x)) { printf("%s(%d): %s failed\n",  __FILE__, __LINE__, #x); fflush(stdout); sGuiDebugBreak(); } }
 
 
 #ifdef _DEBUG	
-	#define dAssert(x) if (!(x)) { printf("%s(%d): %s failed\n",  __FILE__, __LINE__, #x); fflush(stdout); sGuiDebugBreak(); }
+	#define dAssert(x) { if (!(x)) { printf("%s(%d): %s failed\n",  __FILE__, __LINE__, #x); fflush(stdout); sGuiDebugBreak(); } }
 #else
-	#define dAssert(x);
+	#define dAssert(x) {}
 #endif
+
+//template <typename T>
+//inline void dAssert(T x)
+//{
+//#ifdef _DEBUG
+//	if (!(x)) { printf("%s(%d): %s failed\n",  __FILE__, __LINE__, #x); fflush(stdout); sGuiDebugBreak(); }
+//#endif
+//}
+//
+//template <typename T>
+//inline void rAssert(T x)
+//{
+//	if (!(x)) { printf("%s(%d): %s failed\n",  __FILE__, __LINE__, #x); fflush(stdout); sGuiDebugBreak(); }
+//}
 
 
 

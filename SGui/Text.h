@@ -3,6 +3,7 @@
 
 #include "font.h"
 #include "functions.h"
+#include "basic_converters.h"
 
 namespace SGui
 {
@@ -135,10 +136,15 @@ namespace SGui
 
 			inline int writeToVtxArr(const Font *font, gl_float*& vtxArr, gl_float*& colorArr, gl_float*& txtrCoordArr, Pos pos, float size = 1.0f) const
 			{
-				int returnVal =  font->writeCharToVtxArr(c, mods, Color3f(static_cast<float>(color.r) / 255.0f,
-																		  static_cast<float>(color.g) / 255.0f,
-																		  static_cast<float>(color.b) / 255.0f),
-																		  vtxArr, colorArr, txtrCoordArr, pos, size);
+				Color3f color3f;
+				color3bToColor3f(color, color3f);
+
+				//int returnVal = font->writeCharToVtxArr(c, mods, Color3f(static_cast<float>(color.r) / 255.0f,
+				//														  static_cast<float>(color.g) / 255.0f,
+				//														  static_cast<float>(color.b) / 255.0f),
+				//														  vtxArr, colorArr, txtrCoordArr, pos, size);
+				int returnVal = font->writeCharToVtxArr(c, mods, color3f, vtxArr, colorArr, txtrCoordArr, pos, size);
+				
 				vtxArr += Font::N_VTX_FLOATS_PER_CHAR;
 				colorArr += Font::N_COLOR_FLOATS_PER_CHAR;
 				txtrCoordArr += Font::N_TXTR_COORD_FLOATS_PER_CHAR;
