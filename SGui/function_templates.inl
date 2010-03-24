@@ -92,6 +92,8 @@ namespace SGui
 		b = tmp;
 	}
 
+	// Suggestion: Use assembler to speed up these functions, use for example SSE
+
 	template<typename T> void copyFun(const T *fromArr, T *toArr, size_t nElements)
 	{
 		for(size_t i=0; i<nElements; ++i)
@@ -133,6 +135,14 @@ namespace SGui
 		{
 			size_t j = i*stride;
 			arr[j] = value;
+		}
+	}
+
+	template<typename T> void multiplyAll(T *arr, T value, size_t nElements)
+	{
+		for(size_t i=0; i<nElements; ++i)
+		{
+			arr[i] *= value;
 		}
 	}
 

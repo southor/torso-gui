@@ -28,9 +28,9 @@ namespace SGui
 	
 	protected:
 		
-		inline void nextRecieve(const GridEventInfo &info)
+		inline void nextRecieve(const GridEventInfo &info, fint extra = 0)
 		{
-			if (next) next->recieveEvent(info);
+			if (next) next->recieveEvent(info, extra);
 		}
 
 	public:
@@ -43,7 +43,7 @@ namespace SGui
 		//void chainRecieveEvent(const GridEventInfo &info);
 
 		// Lets this EventReciever chain recieve the event
-		virtual void recieveEvent(const GridEventInfo &info) = 0;
+		virtual void recieveEvent(const GridEventInfo &info, fint extra = 0) = 0;
 
 		//void setNext(EventReciever *next);
 	};

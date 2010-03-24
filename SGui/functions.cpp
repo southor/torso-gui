@@ -2,10 +2,12 @@
 #define _STATE_GUI_FUNCTIONS_CPP_
 
 #include "functions.h"
-#include <iostream>
+#include "function_templates.h"
 
 #include "basic_includes.h"
 #include "macros.h"
+
+#include <iostream>
 
 namespace SGui
 {
@@ -75,6 +77,13 @@ namespace SGui
 		}
 	}
 
+	char getHexChar(int n)
+	{
+		restrain(n, 0, 15);
+		if (n < 10) return static_cast<char>('0' + n);
+		else return static_cast<char>('a' + n - 10);
+	}
+
 	int readHexByte(const char *str)
 	{
 		dAssert(atLeastLength(str, 2));
@@ -84,6 +93,13 @@ namespace SGui
 		returnVal += readHexChar(str[1]);
 
 		return returnVal;
+	}
+
+	void writeHexByte(int n, char *str)
+	{
+		dAssert(atLeastLength(str, 2));
+		str[0] = getHexChar(n / 16);
+		str[1] = getHexChar(n % 16);
 	}
 
 	void pln(const char *str)

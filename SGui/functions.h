@@ -28,8 +28,10 @@ namespace SGui
 	bool atLeastLength(const char *str, int lengthToCheck);
 
 	int readHexChar(char hexChar);
+	char getHexChar(int n);
 
 	int readHexByte(const char *str);
+	void writeHexByte(int n, char *str);
 
 	void pln(const char *str);
 

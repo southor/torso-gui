@@ -51,7 +51,7 @@ namespace SGui
 		~StateSwitcher()			{}
 		
 		// must have a valid StateHndlr if the action uses it.
-		void recieveEvent(const GridEventInfo &info);
+		void recieveEvent(const GridEventInfo &info, fint extra = 0);
 		
 		inline void resetActions()				{ actionList.resetActions(); }
 

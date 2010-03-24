@@ -37,7 +37,7 @@ namespace SGui
 
 		~ValueSetter()				{}
 		
-		void recieveEvent(const GridEventInfo &info);
+		void recieveEvent(const GridEventInfo &info, fint extra = 0);
 
 		inline void resetActions()				{ actionList.resetActions(); }
 

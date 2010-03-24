@@ -130,7 +130,7 @@ namespace SGui
 	 * @param value The value that all elements should be assigned to.
 	 * @param nElements Number of elements in the array.
 	 */
-	template<typename T> void assignAll(T *arr, T value, size_t nElements);
+	template<typename T> void assignAll(T *arr, T value, size_t nElements);	
 
 	/**
 	 * Assigns all elements in the array to value.
@@ -140,6 +140,7 @@ namespace SGui
 	 */
 	template<typename T> void assignAll(T *arr, size_t stride, T value, size_t nElements);
 
+	template<typename T> void multiplyAll(T *arr, T value, size_t nElements);
 
 	template<typename T> T randFun(T min, T max);
 

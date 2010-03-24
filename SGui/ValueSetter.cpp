@@ -10,7 +10,7 @@ namespace SGui
 	//const ValueSetter<T>::Action ValueSetter<T>::Action::DEFAULT = ValueSetter<T>::Action(NULL);
 
 	template <typename T>
-	void ValueSetter<T>::recieveEvent(const GridEventInfo &info)
+	void ValueSetter<T>::recieveEvent(const GridEventInfo &info, fint extra)
 	{
 		dAssert(between(info.gridEvent, 0, N_GRID_EVENTS-1));		
 

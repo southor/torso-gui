@@ -20,7 +20,7 @@ namespace SGui
 		}
 	}
 
-	void StateSwitcher::recieveEvent(const GridEventInfo &info)
+	void StateSwitcher::recieveEvent(const GridEventInfo &info, fint extra)
 	{
 		dAssert(between(info.gridEvent, 0, N_GRID_EVENTS-1));		
 
