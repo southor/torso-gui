@@ -49,3 +49,13 @@
 
 -  Bugg med action surfaces. Om 2 st ligger brevid varandra så kan den blanda ihop dem när man för musen mellan dom.
    Kanske även påverkar med clippning vilket förstör så att mouse_away inte skickas.
+   
+-  Color bör ej ta strängar som argument det funkar bara för byte just nu. Istället bör en separat konverteringsfunktion användas.
+
+-  TextBox läser från otillåten minnesposition om man skickar en alltför lång sträng till textboxen, fixa!
+
+-  Textbox med alphakanal på färgen, (nu bara 3 färger)?
+
+-  De som tar EventReciever som argument borde kanske ta ett till argument också?
+   Då skulle flera olika knappar kunna dela på samam eventReciever.
+   
