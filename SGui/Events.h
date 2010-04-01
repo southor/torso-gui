@@ -22,10 +22,10 @@ namespace SGui
 	enum
 	{
 		SGUI_MOUSE_BUTTON_EVENT,
-		SGUI_MOUSE_MOVE_EVENT,
+		SGUI_MOUSE_MOVE_EVENT
 		//SGUI_KEY_EVENT
 
-		// More events with higher values can be added by client?
+		// More events with higher values can be introduced by client
 	};
 	
 	// Grid Events and Mouse Button Events (used by ActionSurface)
@@ -46,6 +46,8 @@ namespace SGui
 	//static const int ALL_GRID_EVENTS_BITS = TWO_TO_POWER_OF(ALL_MOUSE_BUTTON_EVENTS_BITS) |
 	//											TWO_TO_POWER_OF(MOUSE_OVER_TILE) |
 	//											TWO_TO_POWER_OF(MOUSE_AWAY_FROM_TILE);
+
+
 };
 
 #endif

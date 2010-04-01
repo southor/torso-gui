@@ -59,3 +59,13 @@
 -  De som tar EventReciever som argument borde kanske ta ett till argument också?
    Då skulle flera olika knappar kunna dela på samam eventReciever.
    
+-  IDÉ: Vid behov: Namna om mousePos i "Event structure" till pos, för generell användning, sedan kan man lägga till en klientPosEvent som
+        drar nytta av den medlemmen. Denna event typ skickas då likt mouseClick events endast till de states som överlappar med eventen.
+		
+-   Lägg in event filter i States? Så att ett stort state can cancla ut events som den inte är intresserad av. (default är kanske cancla ut?)
+
+-   Event Handling:  T.ex. 'handleKlientEvent' kan ju delas upp i 'handleKlientEventPre' och 'handleKlientEventPost'
+                     Detta gör att föräldern kan hantera ett meddelande både före och efter att barnen hanterade meddelandet.
+					 
+-   Låta event receiver ha två stycken? virtual calls, en som tar emot action surface meddelanden och en som tar emot klient meddelanden?
+    Detta skulle göra argumentet 'extra' överflödigt?

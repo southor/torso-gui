@@ -146,6 +146,11 @@ namespace SGui
 			handleMouseButtonEvent(mouseButtonEvent);			
 		}
 
+		inline void handleKlientEvent(int klientEvent, int arg, bool indirect = false)
+		{
+			if (root) root->handleKlientEventRec(klientEvent, arg, indirect);
+		}
+
 		inline void handleEvent(Event &ev, bool indirect = false)
 		{
 			switch(ev.generalType)
@@ -157,7 +162,7 @@ namespace SGui
 				handleMouseMoveEvent(ev.mousePos, indirect);
 				break;
 			default:
-				dAssert(false);
+				handleKlientEvent(ev.generalType, ev.subType, indirect);
 				break;
 			}
 		}

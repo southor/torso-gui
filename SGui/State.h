@@ -345,6 +345,10 @@ namespace SGui
 		 */
 		//virtual void actionHit(int action, int actionSurfaceId, const Pos &actionPos);
 
+		void handleKlientEventRec(int klientEvent, int arg, bool indirect = false);
+
+		virtual void handleKlientEvent(int klientEvent, int arg, bool indirect = false)				{}
+
 
 		//debug
 		bool isConsistent();

@@ -139,6 +139,7 @@ namespace SGui
 		//	glColor3f(1.0f, 1.0f, 1.0f);
 		//}
 
+		//std::cout << "renderContext = " << renderContext << std::endl;
 		dAssert(renderContext);
 
 		renderContext->renderText(font->getTxtrId(), nVtx, vtxArr, colorArr, txtrCoordArr);	

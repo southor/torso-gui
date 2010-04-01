@@ -8,6 +8,7 @@
 	     Då behövs ingen vektor för att spara barnen i dessa states.
 	3.2. Kanske inte ha RenderObj att lagra i State så som det är nu utan istället använda States som "RenderObj"
 	     Alltså dedikerade States för olika typer av uppritning.
+	3.3. State behöver inte ärva ifrån ConcreteWRectIfc?
 4.  Mer dynamiskt StateTree:  State trädet behöver bli mer dynamiskt med möjlighet att lägga till och ta bort states under körningen.
     Tillåt dock inte att lägga till states under tiden man går in och ut ur states. Då läggs istället dessa state på kö för att läggas in i trädet så snart det genomfört byten klart.
     Hm.. eller det beror kanske på.. man kanske vill att det är det nya statet som skall "entras"
@@ -24,7 +25,7 @@
 6.  Många grafiska objekt brukar ha borders. Se till att borders inte blir alltför omständigt.
 7.  "EventRecievers" Är det möjlight att använda t.ex. en slags EventReciever (kanske samma som som finns nu) som har minst ett ensamt integer värde som kan tolkas som "vad som helst"
     Sändare och mottagare kan t.ex. använda samma enum lista och därmed ändå använda symboliska namn.
-8.  Skall positioner verkligen vara en dela av objekten själva? Ifall det inte är det så kan samma renderbara objekt vara medlem av flera andra.
+8.  Skall positioner verkligen vara en del av objekten själva? Ifall det inte är det så kan samma renderbara objekt vara medlem av flera andra.
     (Men om vi byter till states-only blir det inte svårt att göra det möjligt för ett state att vara medlem av flera andra states (krångligt med funktionella medlemsvariabler)
 9.  Håll fula C bibliotek utanför SGui projektet genom att använda en "gränssnitts-dll" som sköter kommunikation med opengl (Då kan den dll filen bytas ut också om man vill mot ett helt annat interface)
 10. Fundera på i vilken riktning y positionerna skall öka. (enklast igentligen att ha från toppen och nedåt som windows, istället för som openGL)

@@ -555,6 +555,24 @@ namespace SGui
 	//	if (eventReciever) eventReciever->recieveAction(this, action, actionSurfaceId, actionPos);
 	//}
 
+	void State::handleKlientEventRec(int klientEvent, int arg, bool indirect)
+	{
+		if (parallel)
+		{
+			ChildrenRL::reverse_iterator iter = childrenRL.rbegin();
+			ChildrenRL::reverse_iterator end = childrenRL.rend();
+			for(; (iter != end); ++iter)
+			{
+				(*iter)->handleKlientEventRec(klientEvent, arg, indirect);
+			}
+		}
+		else
+		{
+			if (activeChild != NULL) activeChild->handleKlientEventRec(klientEvent, arg, indirect); 
+		}
+
+		handleKlientEvent(klientEvent, arg, indirect);
+	}
 
 
 
