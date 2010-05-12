@@ -494,7 +494,9 @@ namespace SGui
 		bool hitOccured = false;
 
 		Rect usedClipRect(parentUsedClipRect);
-		if (clipping) usedClipRect.intersectWith(this->getRect());		
+		if (clipping) usedClipRect.intersectWith(this->getRect());
+
+		// TODO introduce two kinds of clipping, mousemove clipping and draw clipping.
 		
 		if (/*usedClipRect.covering(mousePos)*/ true)
 		{
@@ -555,23 +557,34 @@ namespace SGui
 	//	if (eventReciever) eventReciever->recieveAction(this, action, actionSurfaceId, actionPos);
 	//}
 
-	void State::handleKlientEventRec(int klientEvent, int arg, bool indirect)
+	//void State::handleClientEventRec(int clientEvent, int arg, bool indirect)
+	//void State::handleClientEvent(int clientEvent, int arg, bool indirect)
+	void State::handleClientEvent(const Event &ev, bool indirect)
 	{
+		if (ev.generalType < SGUI_FIRST_CLIENT_EVENT)
+			return; // not a correct event
+
 		if (parallel)
 		{
 			ChildrenRL::reverse_iterator iter = childrenRL.rbegin();
 			ChildrenRL::reverse_iterator end = childrenRL.rend();
 			for(; (iter != end); ++iter)
 			{
-				(*iter)->handleKlientEventRec(klientEvent, arg, indirect);
+				//(*iter)->handleClientEventRec(clientEvent, arg, indirect);
+				//(*iter)->handleClientEvent(clientEvent, arg, indirect);
+				(*iter)->handleClientEvent(ev, indirect);
 			}
 		}
 		else
 		{
-			if (activeChild != NULL) activeChild->handleKlientEventRec(klientEvent, arg, indirect); 
+			//if (activeChild != NULL) activeChild->handleClientEventRec(clientEvent, arg, indirect); 
+			//if (activeChild != NULL) activeChild->handleClientEvent(clientEvent, arg, indirect); 
+			if (activeChild != NULL) activeChild->handleClientEvent(ev, indirect); 
 		}
 
-		handleKlientEvent(klientEvent, arg, indirect);
+		//handleClientEvent(clientEvent, arg, indirect);
+		//handleClientEventState(clientEvent, arg, indirect);
+		clientHandleEvent(ev, indirect);
 	}
 
 

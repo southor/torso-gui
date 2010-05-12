@@ -26,13 +26,13 @@ inline void sGuiDebugBreak()
 #define PRI_R_MEMBER(type, name, Name) private: type name; public: inline type get ## Name() const { return name; } private:
 
 // Generates a class member with get and set functions. Use in the private section.
-#define PRI_RW_MEMBER(type, name, Name) private: type name; public: inline type get ## Name() { return name; } inline void set ## Name(type name) { this-> ## name = name; } private:
+#define PRI_RW_MEMBER(type, name, Name) private: type name; public: inline type get ## Name() const { return name; } inline void set ## Name(type name) { this-> ## name = name; } private:
 
 // Generates a class member with a get function. Use in the protected section.
 #define PRO_R_MEMBER(type, name, Name) protected: type name; public: inline type get ## Name() const { return name; } protected:
 
 // Generates a class member with get and set functions. Use in the protected section.
-#define PRO_RW_MEMBER(type, name, Name) protected: type name; public: inline type get ## Name() { return name; } inline void set ## Name(type name) { this-> ## name = name; } protected:
+#define PRO_RW_MEMBER(type, name, Name) protected: type name; public: inline type get ## Name() const { return name; } inline void set ## Name(type name) { this-> ## name = name; } protected:
 
 
 

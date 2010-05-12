@@ -146,23 +146,33 @@ namespace SGui
 			handleMouseButtonEvent(mouseButtonEvent);			
 		}
 
-		inline void handleKlientEvent(int klientEvent, int arg, bool indirect = false)
+		//inline void handleClientEvent(int clientEvent, int arg, bool indirect = false)
+		//{
+		//	//if (root) root->handleClientEventRec(clientEvent, arg, indirect);
+		//	if (root) root->handleClientEvent(clientEvent, arg, indirect);
+		//}
+
+		inline void handleClientEvent(const Event &ev, bool indirect = false)
 		{
-			if (root) root->handleKlientEventRec(klientEvent, arg, indirect);
+			//if (root) root->handleClientEventRec(clientEvent, arg, indirect);
+			if (root) root->handleClientEvent(ev, indirect);
 		}
 
-		inline void handleEvent(Event &ev, bool indirect = false)
+		inline void handleEvent(const Event &ev, bool indirect = false)
 		{
 			switch(ev.generalType)
 			{
+			//case SGUI_NULL_EVENT:
+			//	break;
 			case SGUI_MOUSE_BUTTON_EVENT:
-				handleMouseButtonEvent(ev.subType, ev.mousePos, indirect);
+				handleMouseButtonEvent(ev.subType, ev.getArgAsPos(), indirect);
 				break;
 			case SGUI_MOUSE_MOVE_EVENT:
-				handleMouseMoveEvent(ev.mousePos, indirect);
+				handleMouseMoveEvent(ev.getArgAsPos(), indirect);
 				break;
 			default:
-				handleKlientEvent(ev.generalType, ev.subType, indirect);
+				//handleClientEvent(ev.generalType, ev.subType, indirect);
+				handleClientEvent(ev, indirect);
 				break;
 			}
 		}

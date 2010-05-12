@@ -7,7 +7,8 @@
 	3.1. Ha flera varianter på states som är 1 children, 2 children, 3 children  o.s.v.
 	     Då behövs ingen vektor för att spara barnen i dessa states.
 	3.2. Kanske inte ha RenderObj att lagra i State så som det är nu utan istället använda States som "RenderObj"
-	     Alltså dedikerade States för olika typer av uppritning.
+	     Alltså dedikerade States för olika typer av uppritning. Även dedikera states för event-listening.
+		 States som har children kan inte lyssna på events eller rita upp någonting själv, de får dedikerade barn göra.
 	3.3. State behöver inte ärva ifrån ConcreteWRectIfc?
 4.  Mer dynamiskt StateTree:  State trädet behöver bli mer dynamiskt med möjlighet att lägga till och ta bort states under körningen.
     Tillåt dock inte att lägga till states under tiden man går in och ut ur states. Då läggs istället dessa state på kö för att läggas in i trädet så snart det genomfört byten klart.

@@ -16,6 +16,7 @@
 -  HItta på nytt namn till funktionen Rect::intersectWidth
 -  Eventuellt skippa glTranslate i State::renderTree och istället använda globalPos som skickas med.
 -  Lägg till möjlighet till clipping för mouse events också (använd samma clipping rektangle)
+   Men använd två olika clipping paramerrar, en för drwaclipping och en för mouseclipping.
 
 -  Fixa antingen multipelt arv med gemensam stamfader angående Rect och CRect
    eller använda bara CRect överallt fast med virtuella funktuioner så man kan overrida setPos mm.
@@ -46,7 +47,6 @@
    (Använd virtuella funktioner för att hämta psotion och size)
    Då kan man skapa en variant av en sådan bas-rektangel som bara länkar vidare en annan rektangel.
 
-
 -  Bugg med action surfaces. Om 2 st ligger brevid varandra så kan den blanda ihop dem när man för musen mellan dom.
    Kanske även påverkar med clippning vilket förstör så att mouse_away inte skickas.
    
@@ -69,3 +69,8 @@
 					 
 -   Låta event receiver ha två stycken? virtual calls, en som tar emot action surface meddelanden och en som tar emot klient meddelanden?
     Detta skulle göra argumentet 'extra' överflödigt?
+	
+-   Alla handleEvent funktioner i State, gör om till en enda funktion som tar en event referens som argument?
+    Använd sedan switch-case för att anropa rätt object (ActionSerface t.ex.)
+	
+-   Start using boost::GIL for image loading and processing

@@ -33,9 +33,9 @@ namespace SGui
 			if (next) next->recieveEvent(info, extra);
 		}
 
-		//inline void nextRecieve(int klientEvent, int arg, fint extra = 0)
+		//inline void nextRecieve(int clientEvent, int arg, fint extra = 0)
 		//{
-		//	if (next) next->recieveEvent(klientEvent, arg, extra);
+		//	if (next) next->recieveEvent(clientEvent, arg, extra);
 		//}
 
 	public:
@@ -51,7 +51,7 @@ namespace SGui
 		virtual void recieveEvent(const GridEventInfo &info, fint extra = 0) = 0; //	{}
 
 		// Lets this EventReciever chain recieve the event
-		//virtual void recieveEvent(int klientEvent, int arg, fint extra = 0)		{}
+		//virtual void recieveEvent(int clientEvent, int arg, fint extra = 0)		{}
 
 		//void setNext(EventReciever *next);
 	};

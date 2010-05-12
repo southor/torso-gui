@@ -1,7 +1,7 @@
 #ifndef _STATE_GUI_STATE_H_
 #define _STATE_GUI_STATE_H_
 
-#include "basic.h"
+#include "Event.h"
 #include "Slot.h"
 #include "ActionSurface.h"
 #include "SGui.h"
@@ -345,10 +345,21 @@ namespace SGui
 		 */
 		//virtual void actionHit(int action, int actionSurfaceId, const Pos &actionPos);
 
-		void handleKlientEventRec(int klientEvent, int arg, bool indirect = false);
+		//void handleClientEventRec(int clientEvent, int arg, bool indirect = false);
+		//void handleClientEvent(int clientEvent, int arg, bool indirect = false);
+		void handleClientEvent(const Event &ev, bool indirect = false);
 
-		virtual void handleKlientEvent(int klientEvent, int arg, bool indirect = false)				{}
+		//virtual void handleClientEvent(int clientEvent, int arg, bool indirect = false)			{}
 
+		//void handleClientEventState(int clientEvent, int arg, bool indirect)
+		//{
+		//	Event ev;
+		//	ev.generalType = clientEvent;
+		//	ev.subType = arg;
+		//	clientHandleEvent(ev, indirect);
+		//}
+
+		virtual void clientHandleEvent(const Event &ev, bool indirect)								{}
 
 		//debug
 		bool isConsistent();

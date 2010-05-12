@@ -49,7 +49,7 @@ namespace SGui
 
 	};
 
-	typedef VecTempl<int> Veci;
+	typedef VecTempl<int32> Veci;
 	typedef VecTempl<float> Vecf;
 	typedef VecTempl<double> Vecd;
 	typedef Veci Vec;

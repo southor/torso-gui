@@ -17,16 +17,24 @@
 
 namespace SGui
 {
+
 	// General Event types (used by State)
-	static const int N_EVENT_TYPES = 2;
+	//static const int N_EVENT_TYPES = 3;
 	enum
 	{
-		SGUI_MOUSE_BUTTON_EVENT,
-		SGUI_MOUSE_MOVE_EVENT
+		//SGUI_NULL_EVENT = 0,
+		//SGUI_MOUSE_BUTTON_EVENT = 1,
+		//SGUI_MOUSE_MOVE_EVENT = 2
+		
+		SGUI_MOUSE_BUTTON_EVENT = 0,
+		SGUI_MOUSE_MOVE_EVENT = 1
+		
 		//SGUI_KEY_EVENT
 
 		// More events with higher values can be introduced by client
 	};
+
+	static const int SGUI_FIRST_CLIENT_EVENT = 2;
 	
 	// Grid Events and Mouse Button Events (used by ActionSurface)
 	static const int N_GRID_EVENTS = 6;
