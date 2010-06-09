@@ -25,6 +25,10 @@ namespace SGui
 			: generalType(generalType), subType(subType), arg(static_cast<int64>(arg))
 		{}
 
+		Event(int32 generalType, int32 subType, bool arg)
+			: generalType(generalType), subType(subType), arg(static_cast<int64>(arg))
+		{}
+
 		Event(int32 generalType, int32 subType, std::pair<int32, int32> pairArg)
 			: generalType(generalType), subType(subType), arg(0)
 		{
@@ -48,7 +52,15 @@ namespace SGui
 		}
 
 
+		inline int getArgAsInt() const
+		{
+			return static_cast<int>(arg);
+		}
 
+		inline bool getArgAsBool() const
+		{
+			return static_cast<bool>(arg);
+		}
 
 		inline std::pair<int32, int32> getArgAsPair() const
 		{
@@ -85,6 +97,16 @@ namespace SGui
 		}
 
 		
+
+		inline void setArgAsInt(int arg)
+		{
+			arg = static_cast<int64>(arg);
+		}
+
+		inline void setArgAsBool(bool arg)
+		{
+			arg = static_cast<int64>(arg);
+		}
 		
 		inline void setArgAsPair(std::pair<int32, int32> pairArg)
 		{

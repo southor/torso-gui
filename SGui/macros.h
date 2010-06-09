@@ -28,12 +28,17 @@ inline void sGuiDebugBreak()
 // Generates a class member with get and set functions. Use in the private section.
 #define PRI_RW_MEMBER(type, name, Name) private: type name; public: inline type get ## Name() const { return name; } inline void set ## Name(type name) { this-> ## name = name; } private:
 
+// Generates a class member with get and set functions (Set function with limits). Use in the private section.
+#define PRI_RWL_MEMBER(type, name, Name, min, max) private: type name; public: inline type get ## Name() const { return name; } inline void set ## Name(type name) { this-> ## name = limit<type>(name, min, max); } private:
+
 // Generates a class member with a get function. Use in the protected section.
 #define PRO_R_MEMBER(type, name, Name) protected: type name; public: inline type get ## Name() const { return name; } protected:
 
 // Generates a class member with get and set functions. Use in the protected section.
 #define PRO_RW_MEMBER(type, name, Name) protected: type name; public: inline type get ## Name() const { return name; } inline void set ## Name(type name) { this-> ## name = name; } protected:
 
+// Generates a class member with get and set functions (Set function with limits). Use in the protected section.
+#define PRO_RWL_MEMBER(type, name, Name, min, max) protected: type name; public: inline type get ## Name() const { return name; } inline void set ## Name(type name) { this-> ## name = limit<type>(name, min, max); } protected:
 
 
 #define rAssert(x)  { if (!(x)) { printf("%s(%d): %s failed\n",  __FILE__, __LINE__, #x); fflush(stdout); sGuiDebugBreak(); } }

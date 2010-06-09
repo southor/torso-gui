@@ -1,4 +1,4 @@
-#ifndef _STATE_GUIE_FUNCTION_TEMPLATES_CPP_
+#ifndef _STATE_GUI_FUNCTION_TEMPLATES_CPP_
 #define _STATE_GUI_FUNCTION_TEMPLATES_CPP_
 
 #include "function_templates.h"
@@ -117,7 +117,7 @@ namespace SGui
 	{
 		for(size_t i=0; i<nElements; i++)
 		{
-			arr[i] = 0;
+			arr[i] = static_cast<T>(0);
 		}
 	}
 
