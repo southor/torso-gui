@@ -31,16 +31,15 @@ namespace SGui
 			
 		public:
 
-
-
 			Unit() : width(0), nReturns(0)				{}
+			virtual ~Unit()								{}
 
 			//virtual bool isWord()						{ return false; }
 
-			//virtual Word* toWord()						{ dAssert(false);
+			//virtual Word* toWord()					{ dAssert(false);
 			//											  return NULL; }
 
-			virtual bool isSpace()						{return false; }
+			virtual bool isSpace()						{ return false; }
 
 			inline int getWidth() const					{ return width; }
 

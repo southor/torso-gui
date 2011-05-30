@@ -88,8 +88,8 @@ namespace SGui
 
 	void Text::deleteTextUnits()
 	{
-		int ntextUnits = static_cast<int>(textUnits.size());
-		for(int i=0; i<ntextUnits; ++i)
+		int nTextUnits = static_cast<int>(textUnits.size());
+		for(int i=0; i<nTextUnits; ++i)
 		{
 			delete textUnits[i];
 		}
@@ -286,6 +286,7 @@ namespace SGui
 						Unit *newUnit = textUnit->split(fieldSize.x);
 						lPos.x += textUnit->writeToVtxArr(currVtxArr, currColorArr, currTxtrCoordArr, pos + lPos, size);
 						dAssert(textUnit->getNReturns() == 0);
+						std::cout << "splitting..." << std::endl;
 						
 						textUnits[i] = newUnit;
 					}
