@@ -20,6 +20,7 @@ namespace SGui
 
 		// ------ vtx array stuff --------
 		int nVtx;
+		int nVtxCapacity;
 
 		gl_float *vtxArr;
 		gl_float *colorArr;

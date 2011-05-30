@@ -15,7 +15,7 @@ namespace SGui
 
 	TextBox::TextBox(const Pos &pos, const Vec &size, Font *font, int xAlign, int yAlgin, bool autoUpdate, const std::string &textString)
 		: RenderObj(pos, size), font(font), xAlign(xAlign), yAlign(yAlgin), textString(textString), autoUpdate(autoUpdate),  updateNeeded(true),
-		  nVtx(0), vtxArr(NULL), colorArr(NULL), txtrCoordArr(NULL)
+		  nVtx(0), nVtxCapacity(0), vtxArr(NULL), colorArr(NULL), txtrCoordArr(NULL)
 	{
 		//dAssert(checkFlags(xAlign, ALLOWED_X_ALIGNS));
 		//dAssert(checkFlags(yAlign, ALLOWED_Y_ALIGNS));
@@ -27,7 +27,7 @@ namespace SGui
 
 	TextBox::~TextBox()
 	{
-		if (nVtx > 0)
+		if (nVtxCapacity > 0)
 		{
 			delete[] vtxArr;
 			delete[] colorArr;
@@ -39,23 +39,22 @@ namespace SGui
 	{						
 		dAssert(isConsistent());
 		
-		if (nVtx > 0)
-		{
-			delete[] vtxArr;
-			delete[] colorArr;
-			delete[] txtrCoordArr;
-		}
-		
 		if (font)
 		{
 			Text text(font, textString.c_str());
-			
 			nVtx = text.getVtxArrNVtx();
-			if (nVtx > 0)
+			if (nVtx > nVtxCapacity)
 			{
+				delete[] vtxArr;
+				delete[] colorArr;
+				delete[] txtrCoordArr;
 				vtxArr = new gl_float[text.getVtxArrNFloats()];
 				colorArr = new gl_float[text.getColorArrNFloats()];
 				txtrCoordArr = new gl_float[text.getTxtrCoordArrNFloats()];
+				nVtxCapacity = nVtx;
+			}
+			if (nVtx > 0)
+			{
 				text.writeFieldToVtxArr(vtxArr, colorArr, txtrCoordArr, getPos(), getSize(), xAlign, yAlign);
 			}
 		}
@@ -64,11 +63,15 @@ namespace SGui
 			nVtx = 0;
 		}
 
-		if (nVtx == 0)
+		if ((nVtx == 0) && (vtxArr != NULL))
 		{
+			delete[] vtxArr;
+			delete[] colorArr;
+			delete[] txtrCoordArr;
 			vtxArr = NULL;
 			colorArr = NULL;
 			txtrCoordArr = NULL;
+			nVtxCapacity = 0;
 		}
 		
 		bool oldUpdateNeeded = updateNeeded;

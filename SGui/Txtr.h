@@ -123,7 +123,7 @@ namespace SGui
 		
 		/**
 		 * @return Returns true if it did not have an
-		 * image beofre this call, otherwise false.
+		 * image before this call, otherwise false.
 		 */
 		bool createImage(gl_uint w, gl_uint h);
 

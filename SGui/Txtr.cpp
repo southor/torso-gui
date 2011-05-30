@@ -643,7 +643,7 @@ namespace SGui
 			for(i=0;i<18;i++)
 			{
 				imageFile.read((char*)&in,sizeof(char));
-			}			
+			}
 
 			// read width
 			imageFile.read((char*)w,sizeof(int));
