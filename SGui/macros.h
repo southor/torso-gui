@@ -40,6 +40,14 @@ inline void sGuiDebugBreak()
 // Generates a class member with get and set functions (Set function with limits). Use in the protected section.
 #define PRO_RWL_MEMBER(type, name, Name, min, max) protected: type name; public: inline type get ## Name() const { return name; } inline void set ## Name(type name) { this-> ## name = limit<type>(name, min, max); } protected:
 
+// Generates a class member with a get function. Use in the public section.
+#define PUB_R_MEMBER(type, name, Name) type name; inline type get ## Name() const { return name; }
+
+// Generates a class member with get and set functions. Use in the public section.
+#define PUB_RW_MEMBER(type, name, Name) type name; inline type get ## Name() const { return name; } inline void set ## Name(type name) { this-> ## name = name; }
+
+// Generates a class member with get and set functions (Set function with limits). Use in the public section.
+#define PUB_RWL_MEMBER(type, name, Name, min, max) type name; inline type get ## Name() const { return name; } inline void set ## Name(type name) { this-> ## name = limit<type>(name, min, max); }
 
 #define rAssert(x)  { if (!(x)) { printf("%s(%d): %s failed\n",  __FILE__, __LINE__, #x); fflush(stdout); sGuiDebugBreak(); } }
 

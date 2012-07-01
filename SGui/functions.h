@@ -33,6 +33,7 @@ namespace SGui
 	int readHexByte(const char *str);
 	void writeHexByte(int n, char *str);
 
+	void pln(const std::string &str);
 	void pln(const char *str);
 
 };

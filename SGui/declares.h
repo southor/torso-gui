@@ -76,6 +76,17 @@ namespace SGui
 #endif
 
 
+	// A different name for integers if you want them to represent a true/false value.
+	typedef int ibool;
+	
+	typedef int64 ibool64;
+	typedef int32 ibool32;
+	typedef int16 ibool16;
+	typedef int8 ibool8;
+	
+	typedef fint fbool;
+	typedef hint hbool;
+	
 
 
 	//enum

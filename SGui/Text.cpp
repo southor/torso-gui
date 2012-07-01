@@ -286,8 +286,6 @@ namespace SGui
 						Unit *newUnit = textUnit->split(fieldSize.x);
 						lPos.x += textUnit->writeToVtxArr(currVtxArr, currColorArr, currTxtrCoordArr, pos + lPos, size);
 						dAssert(textUnit->getNReturns() == 0);
-						std::cout << "splitting..." << std::endl;
-						
 						textUnits[i] = newUnit;
 					}
 				}				

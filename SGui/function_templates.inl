@@ -1,8 +1,10 @@
-#ifndef _STATE_GUI_FUNCTION_TEMPLATES_CPP_
-#define _STATE_GUI_FUNCTION_TEMPLATES_CPP_
+#ifndef _STATE_GUI_FUNCTION_TEMPLATES_INL_
+#define _STATE_GUI_FUNCTION_TEMPLATES_INL_
 
 #include "function_templates.h"
 //#include "Font.h" // test include
+
+#include <fstream>
 
 namespace SGui
 {
@@ -53,7 +55,7 @@ namespace SGui
 
 	template<typename T> T absFun(T a)
 	{
-		if (a>0) return a;
+		if (a>=0) return a;
 		return -a;
 	}
 
@@ -119,6 +121,9 @@ namespace SGui
 		{
 			arr[i] = static_cast<T>(0);
 		}
+		//uint8 *beginAddr = reinterpret_cast<uint8*>(&(arr[0]));
+		//uint8 *endAddr = reinterpret_cast<uint8*>(&(arr[nElements]));
+		//memsetFun(beginAddr, 0, endAddr - beginAddr);
 	}
 
 	template<typename T> void assignAll(T *arr, T value, size_t nElements)

@@ -102,6 +102,11 @@ namespace SGui
 		str[1] = getHexChar(n % 16);
 	}
 
+	void pln(const std::string &str)
+	{
+		std::cout << str << std::endl;
+	}
+
 	void pln(const char *str)
 	{
 		std::cout << str << std::endl;
