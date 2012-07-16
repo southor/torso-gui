@@ -94,8 +94,6 @@ namespace SGui
 		b = tmp;
 	}
 
-	// Suggestion: Use assembler to speed up these functions, use for example SSE
-
 	template<typename T> void copyFun(const T *fromArr, T *toArr, size_t nElements)
 	{
 		for(size_t i=0; i<nElements; ++i)

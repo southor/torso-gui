@@ -102,7 +102,8 @@ namespace SGui
 	template<typename T> void swap(T& a, T& b);
 
 	/**
-	 * Copys nElements elements from arrFrom to arrTo, uses operator= .
+	 * Copys nElements elements one at a time from arrFrom to arrTo in forward order, uses operator= .
+	 * Note that in some cases with overlapping, some elements will be duplicated and some elements will be lost.
 	 * @param arrFrom The array to copy from.
 	 * @param arrTo The array to copy to.
 	 * @param nElements number of elements to copy.
@@ -110,7 +111,8 @@ namespace SGui
 	template<typename T> void copyFun(const T *fromArr, T *toArr, size_t nElements);
 
 	/**
-	 * Copys nElements elements from arrFrom to arrTo, uses operator= .
+	 * Copys nElements elements one at a time from arrFrom to arrToin forward order, uses operator= .
+	 * Note that in some cases with overlapping, some elements will be duplicated and some elements will be lost.
 	 * @param arrFrom The array to copy from.
 	 * @param arrTo The array to copy to.
 	 * @param nElements number of elements to copy.

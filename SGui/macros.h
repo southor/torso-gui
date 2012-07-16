@@ -49,14 +49,16 @@ inline void sGuiDebugBreak()
 // Generates a class member with get and set functions (Set function with limits). Use in the public section.
 #define PUB_RWL_MEMBER(type, name, Name, min, max) type name; inline type get ## Name() const { return name; } inline void set ## Name(type name) { this-> ## name = limit<type>(name, min, max); }
 
-#define rAssert(x)  { if (!(x)) { printf("%s(%d): %s failed\n",  __FILE__, __LINE__, #x); fflush(stdout); sGuiDebugBreak(); } }
+#define rAssert(x)  { if (!(x)) { sguiPerformAssertFailed(#x, __FILE__, __LINE__); } }
 
 
 #ifdef _DEBUG	
-	#define dAssert(x) { if (!(x)) { printf("%s(%d): %s failed\n",  __FILE__, __LINE__, #x); fflush(stdout); sGuiDebugBreak(); } }
+	#define dAssert(x) { if (!(x)) { sguiPerformAssertFailed(#x, __FILE__, __LINE__); } }
 #else
 	#define dAssert(x) {}
 #endif
+
+void sguiPerformAssertFailed(const char *expression, const char *file, int line);
 
 //template <typename T>
 //inline void dAssert(T x)
