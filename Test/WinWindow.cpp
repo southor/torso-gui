@@ -54,13 +54,13 @@ void EnableOpenGL(HWND hwnd, HDC* hDC, HGLRC* hRC)
 
 void DisableOpenGL(HWND hwnd, HDC hDC, HGLRC hRC)
 {
-	wglMakeCurrent( NULL, NULL);
+	wglMakeCurrent( nullptr, nullptr);
 	wglDeleteContext(hRC);
 	ReleaseDC(hwnd, hDC);
 }
 
 
-WinWindow::WinWindow() : Window() //, font(NULL)
+WinWindow::WinWindow() : Window() //, font(nullptr)
 {		
 	wasError = !init();
 }
@@ -75,7 +75,7 @@ void WinWindow::run()
 	MSG Msg;
 
 	//meassage loop
-	while(GetMessage(&Msg, NULL, 0, 0) > 0)
+	while(GetMessage(&Msg, nullptr, 0, 0) > 0)
 	{
 		TranslateMessage(&Msg);
 		DispatchMessage(&Msg);
@@ -91,7 +91,7 @@ void WinWindow::run()
 bool WinWindow::init()
 {
 
-	HINSTANCE hInstance = GetModuleHandle(NULL);
+	HINSTANCE hInstance = GetModuleHandle(nullptr);
 
 	wchar_t g_szClassName[] = L"myWindowClass\0";
 	
@@ -106,16 +106,16 @@ bool WinWindow::init()
 	wc.cbClsExtra = 0;
 	wc.cbWndExtra = 0;
 	wc.hInstance = hInstance;
-	wc.hIcon = LoadIcon(NULL, IDI_APPLICATION);
-	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
+	wc.hIcon = LoadIcon(nullptr, IDI_APPLICATION);
+	wc.hCursor = LoadCursor(nullptr, IDC_ARROW);
 	wc.hbrBackground = (HBRUSH) (COLOR_WINDOW+1);
-	wc.lpszMenuName = NULL;
+	wc.lpszMenuName = nullptr;
 	wc.lpszClassName = g_szClassName;
-	wc.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
+	wc.hIconSm = LoadIcon(nullptr, IDI_APPLICATION);
 
 	if(!RegisterClassEx(&wc))
 	{
-		MessageBox(NULL, L"window register failed", L"Error", MB_ICONEXCLAMATION | MB_OK);
+		MessageBox(nullptr, L"window register failed", L"Error", MB_ICONEXCLAMATION | MB_OK);
 		return false;
 	}
 
@@ -124,11 +124,11 @@ bool WinWindow::init()
 
 	// creating window
 	hwnd = (win_hwnd)CreateWindowEx(WS_EX_CLIENTEDGE, g_szClassName, L"SGui Test",WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT, windowWidth, windowHeight, NULL, NULL, hInstance, NULL);
+		CW_USEDEFAULT, CW_USEDEFAULT, windowWidth, windowHeight, nullptr, nullptr, hInstance, nullptr);
 
-	if(hwnd == NULL)
+	if(hwnd == nullptr)
 	{
-		MessageBox(NULL, L"window creation failed", L"Error", MB_ICONEXCLAMATION | MB_OK);
+		MessageBox(nullptr, L"window creation failed", L"Error", MB_ICONEXCLAMATION | MB_OK);
 		return false;
 	}
 

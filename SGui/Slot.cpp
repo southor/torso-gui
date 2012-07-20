@@ -17,9 +17,9 @@ namespace SGui
 	
 	void Slot::removeChild()
 	{
-		obj = NULL;
-		slot = NULL;
-		slotSequence = NULL;
+		obj = nullptr;
+		slot = nullptr;
+		slotSequence = nullptr;
 	}
 	
 	WRectIfc* Slot::getChild() const

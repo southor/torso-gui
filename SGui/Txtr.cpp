@@ -28,11 +28,11 @@ namespace SGui
 	// **************************************************************************************************************
 
 
-	Txtr::Txtr() : pixels(NULL), width(0), height(0)
+	Txtr::Txtr() : pixels(nullptr), width(0), height(0)
 	{
 	}
 
-	Txtr::Txtr(const Txtr &txtr) : pixels(NULL), width(txtr.getWidth()), height(txtr.getHeight())
+	Txtr::Txtr(const Txtr &txtr) : pixels(nullptr), width(txtr.getWidth()), height(txtr.getHeight())
 	{
 		dAssert(txtr.isConsistent());
 		
@@ -46,27 +46,27 @@ namespace SGui
 		}
 	}
 
-	Txtr::Txtr(gl_uint w, gl_uint h) : pixels(NULL), width(0), height(0)
+	Txtr::Txtr(gl_uint w, gl_uint h) : pixels(nullptr), width(0), height(0)
 	{
 		createImage(w, h);
 	}
 
-	Txtr::Txtr(const wchar_t *colorsFileName, gl_ubyte alpha) : pixels(NULL), width(0), height(0)
+	Txtr::Txtr(const wchar_t *colorsFileName, gl_ubyte alpha) : pixels(nullptr), width(0), height(0)
 	{
 		load(colorsFileName, alpha);
 	}
 
-	Txtr::Txtr(const wchar_t *colorsFileName, gl_ubyte alpha, Pixel3 transparentColor, uint antiAliasing) : pixels(NULL), width(0), height(0)
+	Txtr::Txtr(const wchar_t *colorsFileName, gl_ubyte alpha, Pixel3 transparentColor, uint antiAliasing) : pixels(nullptr), width(0), height(0)
 	{
 		load(colorsFileName, alpha, transparentColor, antiAliasing);
 	}
 
-	Txtr::Txtr(const wchar_t *colorsFileName, const wchar_t *alphaFileName) : pixels(NULL), width(0), height(0)
+	Txtr::Txtr(const wchar_t *colorsFileName, const wchar_t *alphaFileName) : pixels(nullptr), width(0), height(0)
 	{
 		load(colorsFileName, alphaFileName);
 	}
 
-	Txtr::Txtr(Pixel3 color, const wchar_t *alphaFileName) : pixels(NULL), width(0), height(0)
+	Txtr::Txtr(Pixel3 color, const wchar_t *alphaFileName) : pixels(nullptr), width(0), height(0)
 	{
 		load(color, alphaFileName);
 	}
@@ -95,7 +95,7 @@ namespace SGui
 
 	Txtr::~Txtr(void)
 	{
-		if (pixels != NULL) delete[] pixels;
+		if (pixels != nullptr) delete[] pixels;
 	}
 
 	void Txtr::fillArea(int x, int y, int width, int height, const Pixel4 &pixel)
@@ -194,7 +194,7 @@ namespace SGui
 		if (hasImage())
 		{
 			delete[] pixels;
-			pixels = NULL;
+			pixels = nullptr;
 			width = 0;
 			height = 0;
 			return true;
@@ -251,7 +251,7 @@ namespace SGui
 				gl_uint width2 = width;
 				gl_uint height2 = height;
 
-				Txtr *enlargedTxtr = NULL;
+				Txtr *enlargedTxtr = nullptr;
 				Vecd txtrCoordRescale;
 
 				if ( ! renderContext->hasFeature(RenderContext::FEATURE_TEXTURE_NON_POWER_OF_TWO_AVAILIBLE))
@@ -366,13 +366,13 @@ namespace SGui
 
 	bool Txtr::isConsistent() const
 	{
-		if ((pixels == NULL) || (width == 0) || (height == 0))
+		if ((pixels == nullptr) || (width == 0) || (height == 0))
 		{
-			return (pixels == NULL) && (width == 0) && (height == 0);
+			return (pixels == nullptr) && (width == 0) && (height == 0);
 		}
 		else
 		{
-			return (pixels != NULL) && (width > 0) && (height > 0);
+			return (pixels != nullptr) && (width > 0) && (height > 0);
 		}
 	}
 
@@ -627,15 +627,15 @@ namespace SGui
 		long in;
 		uint i;
 
-		Pixel3 *pixels = NULL;
+		Pixel3 *pixels = nullptr;
 
 		std::ifstream imageFile;
-		//if(filename != NULL) imageFile.open(fileName, ios::nocreate | ios::binary);
-		if(fileName != NULL) imageFile.open(fileName, std::ios::binary);
+		//if(filename != nullptr) imageFile.open(fileName, ios::nocreate | ios::binary);
+		if(fileName != nullptr) imageFile.open(fileName, std::ios::binary);
 
-		if((!(imageFile.good())) || fileName == NULL)
+		if((!(imageFile.good())) || fileName == nullptr)
 		{
-			pixels = NULL;
+			pixels = nullptr;
 			dAssert(false);
 		}
 		else
@@ -671,7 +671,7 @@ namespace SGui
 					imageFile.read((char*)&((pixels+i)->g),sizeof(char));
 					imageFile.read((char*)&((pixels+i)->r),sizeof(char));
 					
-					//if(transparent == NULL) (pixels+i)->alpha = 255;
+					//if(transparent == nullptr) (pixels+i)->alpha = 255;
 					//else if(((pixels+i)->red == transparent->red) && 
 					//	((pixels+i)->green == transparent->green) &&
 					//	((pixels+i)->blue == transparent->blue))
@@ -777,7 +777,7 @@ namespace SGui
 
 	gl_uint Txtr::createDefaultTxtr(RenderContext *renderContext)
 	{
-		//dAssert(defaultTxtr == NULL);
+		//dAssert(defaultTxtr == nullptr);
 		
 		//Pixel4 pixel(127, 127, 127, 255);
 

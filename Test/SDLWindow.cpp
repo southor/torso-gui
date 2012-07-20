@@ -9,7 +9,7 @@
 
 
 
-SDLWindow::SDLWindow() : screen(NULL), Window() //, font(NULL)
+SDLWindow::SDLWindow() : screen(nullptr), Window() //, font(nullptr)
 {
 	wasError = !init();
 }
@@ -112,7 +112,7 @@ bool SDLWindow::init()
 			SDL_GetError( ) );
 		SDL_Quit( );
 	}
-	SDL_WM_SetCaption("SGui Test", NULL);
+	SDL_WM_SetCaption("SGui Test", nullptr);
 	
 	unsigned int flags = SDL_HWSURFACE | SDL_OPENGL;
 #ifndef _DEBUG

@@ -102,11 +102,11 @@ namespace SGui
 		 */
 		void setStateTree(State *root);
 
-		inline bool hasStateTree()						{ return root != NULL; }
+		inline bool hasStateTree()						{ return root != nullptr; }
 
 		inline State* getState(int stateId)				{ return commonFathers->get(stateId, stateId); }
 
-		// @Return NULL if no State have been 
+		// @Return nullptr if no State have been 
 		State* getState(const std::string &name);
 
 		State* getCommonFather(State *a, State *b)		{ State *state = commonFathers->get(a, b);

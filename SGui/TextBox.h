@@ -35,7 +35,7 @@ namespace SGui
 		
 		TextBox();
 
-		TextBox(const Pos &pos, const Vec &size, Font *font = NULL, int xAlign = ALIGN_LEFT, int yAlign = ALIGN_TOP, bool autoUpdate = false, const std::string &textString = std::string());			
+		TextBox(const Pos &pos, const Vec &size, Font *font = nullptr, int xAlign = ALIGN_LEFT, int yAlign = ALIGN_TOP, bool autoUpdate = false, const std::string &textString = std::string());			
 
 		~TextBox();
 

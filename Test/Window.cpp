@@ -5,7 +5,7 @@
 //#include "External\gl_includes.h"
 
 
-Window::Window() : stateHndlr(), wasError(false) //, font(NULL)
+Window::Window() : stateHndlr(), wasError(false) //, font(nullptr)
 {	
 }
 

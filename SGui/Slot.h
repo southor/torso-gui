@@ -56,32 +56,32 @@ namespace SGui
 	public:
 
 		//Slot(WRectIfc *obj, int xAlign, int yAlign, const Color4f &color = DEFAULT_COLOR) 
-		//	: Box(Pos(0, 0), Vec(0, 0), false, color), obj(obj), slot(NULL), slotSequence(NULL), xAlign(xAlign), yAlign(yAlign)
+		//	: Box(Pos(0, 0), Vec(0, 0), false, color), obj(obj), slot(nullptr), slotSequence(nullptr), xAlign(xAlign), yAlign(yAlign)
 		//{
 		//	kValue = DEFAULT_K_VALUE;
 		//}
 
 		//Slot(Slot *slot, int xAlign, int yAlign, const Color4f &color = DEFAULT_COLOR) 
-		//	: Box(Pos(0, 0), Vec(0, 0), false, color), obj(obj), slot(slot), slotSequence(NULL), xAlign(xAlign), yAlign(yAlign)
+		//	: Box(Pos(0, 0), Vec(0, 0), false, color), obj(obj), slot(slot), slotSequence(nullptr), xAlign(xAlign), yAlign(yAlign)
 		//{
 		//	kValue = DEFAULT_K_VALUE;
 		//}
 
 		//Slot(SlotSequence *slotSequence, int xAlign, int yAlign, const Color4f &color = DEFAULT_COLOR) 
-		//	: Box(Pos(0, 0), Vec(0, 0), false, color), obj(NULL), slot(NULL), slotSequence(slotSequence), xAlign(xAlign), yAlign(yAlign)
+		//	: Box(Pos(0, 0), Vec(0, 0), false, color), obj(nullptr), slot(nullptr), slotSequence(slotSequence), xAlign(xAlign), yAlign(yAlign)
 		//{
 		//	kValue = DEFAULT_K_VALUE;
 		//}
 
 		Slot(int xAlign = DEFAULT_X_ALIGN, int yAlign = DEFAULT_Y_ALIGN, const Color4f &color = DEFAULT_COLOR)
-			: Box(DEFAULT_POS, DEFAULT_SIZE, color, 1), obj(NULL), slot(NULL), slotSequence(NULL), xAlign(xAlign), yAlign(yAlign)
+			: Box(DEFAULT_POS, DEFAULT_SIZE, color, 1), obj(nullptr), slot(nullptr), slotSequence(nullptr), xAlign(xAlign), yAlign(yAlign)
 		{
 			kValue = DEFAULT_K_VALUE;
 		}
 
 		WRectIfc* getChild() const;
 
-		inline bool hasChild() const				{ return getChild() != NULL; }
+		inline bool hasChild() const				{ return getChild() != nullptr; }
 
 		void setChild(WRectIfc *obj)				{ removeChild();
 													  this->obj = obj; }

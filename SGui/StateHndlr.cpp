@@ -62,7 +62,7 @@ namespace SGui
 		dAssert(a && b && commonFather);
 		dAssert(commonFathers);
 		
-		if (commonFathers->get(a, b) == NULL)
+		if (commonFathers->get(a, b) == nullptr)
 		{
 
 			commonFathers->insert(a, b, commonFather);
@@ -107,7 +107,7 @@ namespace SGui
 		if (a->partOf(b)) commonFather = b;
 		else if (b->partOf(a)) commonFather = a;
 		
-		if (storedCommonFather == NULL)
+		if (storedCommonFather == nullptr)
 			recFillCommonFathers(a, b, commonFather);
 		else	
 			dAssert(storedCommonFather == commonFather);
@@ -232,7 +232,7 @@ namespace SGui
 	// -------------------------------------------- public ----------------------------------------------
 	// ---------------------------------------------------------------------------------------------------
 
-	StateHndlr::StateHndlr() : root(NULL), commonFathers(NULL), stateNames(), activeStateLeaves()
+	StateHndlr::StateHndlr() : root(nullptr), commonFathers(nullptr), stateNames(), activeStateLeaves()
 	{
 	}
 
@@ -291,7 +291,7 @@ namespace SGui
 	State* StateHndlr::getState(const std::string &name)
 	{
 		std::map<std::string, State*>::iterator it = stateNames.find(name);
-		if (it == stateNames.end()) return NULL;
+		if (it == stateNames.end()) return nullptr;
 		else return it->second;
 	}
 

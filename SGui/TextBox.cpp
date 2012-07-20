@@ -7,15 +7,15 @@
 
 namespace SGui
 {
-	TextBox::TextBox() : RenderObj(), font(NULL), xAlign(ALIGN_LEFT), yAlign(ALIGN_TOP), textString(), autoUpdate(false), updateNeeded(true),
-					nVtx(0), vtxArr(NULL), colorArr(NULL), txtrCoordArr(NULL)
+	TextBox::TextBox() : RenderObj(), font(nullptr), xAlign(ALIGN_LEFT), yAlign(ALIGN_TOP), textString(), autoUpdate(false), updateNeeded(true),
+					nVtx(0), vtxArr(nullptr), colorArr(nullptr), txtrCoordArr(nullptr)
 	{
 		updateVtxArrs();
 	}
 
 	TextBox::TextBox(const Pos &pos, const Vec &size, Font *font, int xAlign, int yAlgin, bool autoUpdate, const std::string &textString)
 		: RenderObj(pos, size), font(font), xAlign(xAlign), yAlign(yAlgin), textString(textString), autoUpdate(autoUpdate),  updateNeeded(true),
-		  nVtx(0), nVtxCapacity(0), vtxArr(NULL), colorArr(NULL), txtrCoordArr(NULL)
+		  nVtx(0), nVtxCapacity(0), vtxArr(nullptr), colorArr(nullptr), txtrCoordArr(nullptr)
 	{
 		//dAssert(checkFlags(xAlign, ALLOWED_X_ALIGNS));
 		//dAssert(checkFlags(yAlign, ALLOWED_Y_ALIGNS));
@@ -63,14 +63,14 @@ namespace SGui
 			nVtx = 0;
 		}
 
-		if ((nVtx == 0) && (vtxArr != NULL))
+		if ((nVtx == 0) && (vtxArr != nullptr))
 		{
 			delete[] vtxArr;
 			delete[] colorArr;
 			delete[] txtrCoordArr;
-			vtxArr = NULL;
-			colorArr = NULL;
-			txtrCoordArr = NULL;
+			vtxArr = nullptr;
+			colorArr = nullptr;
+			txtrCoordArr = nullptr;
 			nVtxCapacity = 0;
 		}
 		

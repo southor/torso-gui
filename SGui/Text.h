@@ -37,7 +37,7 @@ namespace SGui
 			//virtual bool isWord()						{ return false; }
 
 			//virtual Word* toWord()					{ dAssert(false);
-			//											  return NULL; }
+			//											  return nullptr; }
 
 			virtual bool isSpace()						{ return false; }
 
@@ -62,7 +62,7 @@ namespace SGui
 			{
 				// A unit have zero width, split should not be called.
 				dAssert(false);
-				return NULL;
+				return nullptr;
 			}
 
 			//inline void addReturns(int nReturns)		{ this->nReturns += nReturns; }

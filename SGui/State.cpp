@@ -35,7 +35,7 @@ namespace SGui
 		}
 	}
 
-	State::TreeIter::TreeIter() : root(NULL), statesStack(), endStack()
+	State::TreeIter::TreeIter() : root(nullptr), statesStack(), endStack()
 	{
 	}
 
@@ -44,7 +44,7 @@ namespace SGui
 		if (statesStack.empty())
 		{
 			dAssert(root); // Is not allowed to call ++ if this is the end iterator.
-			root = NULL;
+			root = nullptr;
 		}
 		else
 		{					
@@ -258,8 +258,8 @@ namespace SGui
 	State::State(std::string name) : 
 					 ConcreteWRectIfc(0, 0, INT_MAX, INT_MAX),
 					 //Slot(0, 0, INT_MAX, INT_MAX),
-					 name(name), parent(NULL), children(), childrenRL(),
-					 active(false), childActivity(0), activeChild(NULL),
+					 name(name), parent(nullptr), children(), childrenRL(),
+					 active(false), childActivity(0), activeChild(nullptr),
 					 renderContext(renderContext),
 					 id(0), clipping(false), parallel(false),
 					 callEnterExit(true), actionSurfaces()
@@ -271,8 +271,8 @@ namespace SGui
 		
 	}
 
-	//State::State(int id) : parent(NULL), children(), childrenRL(), active(false), childActivity(0),
-	//				 activeChild(NULL), Rect(0, 0, INT_MAX, INT_MAX), id(id), clipping(false),
+	//State::State(int id) : parent(nullptr), children(), childrenRL(), active(false), childActivity(0),
+	//				 activeChild(nullptr), Rect(0, 0, INT_MAX, INT_MAX), id(id), clipping(false),
 	//				 parallel(false), actionSurfaces()
 	//{}
 
@@ -368,7 +368,7 @@ namespace SGui
 	bool State::partOf(State *state)
 	{
 		State *currState = this;
-		while((currState != state) && (currState != NULL))
+		while((currState != state) && (currState != nullptr))
 			currState = currState->parent;
 		return (currState == state);
 	}
@@ -541,7 +541,7 @@ namespace SGui
 		}
 		else
 		{
-			if (activeChild != NULL) activeChild->handleMouseButtonEvent(mouseButtonEvent);
+			if (activeChild != nullptr) activeChild->handleMouseButtonEvent(mouseButtonEvent);
 		}
 
 		// action surfaces
@@ -577,9 +577,9 @@ namespace SGui
 		}
 		else
 		{
-			//if (activeChild != NULL) activeChild->handleClientEventRec(clientEvent, arg, indirect); 
-			//if (activeChild != NULL) activeChild->handleClientEvent(clientEvent, arg, indirect); 
-			if (activeChild != NULL) activeChild->handleClientEvent(ev, indirect); 
+			//if (activeChild != nullptr) activeChild->handleClientEventRec(clientEvent, arg, indirect); 
+			//if (activeChild != nullptr) activeChild->handleClientEvent(clientEvent, arg, indirect); 
+			if (activeChild != nullptr) activeChild->handleClientEvent(ev, indirect); 
 		}
 
 		//handleClientEvent(clientEvent, arg, indirect);

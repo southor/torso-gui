@@ -132,7 +132,7 @@ namespace SGui
 		 */
 		bool removeImage();
 
-		inline bool hasImage() const		{ return (pixels != NULL); }
+		inline bool hasImage() const		{ return (pixels != nullptr); }
 
 		
 		void load(const wchar_t *colorsFileName, gl_ubyte alpha = 255);

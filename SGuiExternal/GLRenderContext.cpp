@@ -67,7 +67,7 @@ namespace SGui
 	bool GLRenderContext::glExtensionAvailible(const char *extensionName)
 	{
 		const char *glExtensions = reinterpret_cast<const char*>(glGetString(GL_EXTENSIONS)); //opengl returns a static string
-		return strstr(glExtensions, "GL_ARGB_texture_non_power_of_two") != NULL;
+		return strstr(glExtensions, "GL_ARGB_texture_non_power_of_two") != nullptr;
 	}
 
 	void GLRenderContext::flush()

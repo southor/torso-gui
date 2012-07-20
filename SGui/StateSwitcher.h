@@ -44,7 +44,7 @@ namespace SGui
 
 	public:
 
-		inline StateSwitcher(StateHndlr *stateHndlr, EventReciever *next = NULL)
+		inline StateSwitcher(StateHndlr *stateHndlr, EventReciever *next = nullptr)
 			: EventReciever(next), stateHndlr(stateHndlr)
 		{}
 

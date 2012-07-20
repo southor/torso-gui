@@ -144,7 +144,7 @@ namespace SGui
 		Color currentColor(static_cast<uchar>(0));
 
 		//newWord();
-		Word *lastWord = NULL;
+		Word *lastWord = nullptr;
 		addUnit(new Unit());
 
 		bool acceptSpecialChar = false;
@@ -154,7 +154,7 @@ namespace SGui
 			{					
 				textUnits.back()->addReturn();
 				textString += returnLength;
-				lastWord = NULL;
+				lastWord = nullptr;
 			}
 			else if ((*textString == SPECIAL_CHAR) && !acceptSpecialChar)
 			{

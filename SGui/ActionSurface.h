@@ -66,11 +66,11 @@ namespace SGui
 		 * Grid with one grid rectangle for each pixel.
 		 */
 		ActionSurface() : ConcreteRectIfc(INT_MIN/2, INT_MIN/2, INT_MAX, INT_MAX), gridRectSize(1, 1),
-							gridEventFilter(DEFAULT_GRID_EVENT_FILTER), eventReciever(NULL), mouseGridPos(-1, -1), acceptIndirectEvents(false)
+							gridEventFilter(DEFAULT_GRID_EVENT_FILTER), eventReciever(nullptr), mouseGridPos(-1, -1), acceptIndirectEvents(false)
 		{}
 
 		ActionSurface(const Pos &pos, const Vec &gridRectSize, const Vec &nGridRects,
-						EventReciever *eventReciever = NULL)
+						EventReciever *eventReciever = nullptr)
 			: eventReciever(eventReciever), mouseGridPos(-1, -1), gridEventFilter(DEFAULT_GRID_EVENT_FILTER), acceptIndirectEvents(false)
 		{
 			//dAssert(checkFlags(gridEventFilter, ALL_GRID_EVENTS_BITS));			
@@ -82,7 +82,7 @@ namespace SGui
 		 * @param size The size of the action surface in pixels. Since gridRectSize
 		 * will be equal to the size nGridRects will be (1, 1).
 		 */
-		ActionSurface(const Pos &pos, const Vec &size, EventReciever *eventReciever = NULL)
+		ActionSurface(const Pos &pos, const Vec &size, EventReciever *eventReciever = nullptr)
 			: ConcreteRectIfc(pos, size), gridRectSize(size), eventReciever(eventReciever), gridEventFilter(DEFAULT_GRID_EVENT_FILTER), acceptIndirectEvents(false)
 		{
 			//dAssert(checkFlags(gridEventFilter, ALL_GRID_EVENTS_BITS));

@@ -7,7 +7,7 @@ namespace SGui
 {
 
 	//template <typename T>
-	//const ValueSetter<T>::Action ValueSetter<T>::Action::DEFAULT = ValueSetter<T>::Action(NULL);
+	//const ValueSetter<T>::Action ValueSetter<T>::Action::DEFAULT = ValueSetter<T>::Action(nullptr);
 
 	template <typename T>
 	void ValueSetter<T>::recieveEvent(const GridEventInfo &info, fint extra)

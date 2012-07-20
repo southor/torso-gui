@@ -21,10 +21,10 @@ namespace SGui
 			T value;
 
 			Action()														{}
-			Action(T *target) : target(NULL)								{ dAssert(target == NULL); }
+			Action(T *target) : target(nullptr)								{ dAssert(target == nullptr); }
 			Action(T *target, T value) : target(target), value(value)		{}
 
-			inline static Action getDefaultAction()							{ return Action(NULL); }
+			inline static Action getDefaultAction()							{ return Action(nullptr); }
 
 			//static const Action DEFAULT;
 		};
@@ -33,7 +33,7 @@ namespace SGui
 
 	public:
 
-		inline ValueSetter(EventReciever *next = NULL) : EventReciever(next)	{}
+		inline ValueSetter(EventReciever *next = nullptr) : EventReciever(next)	{}
 
 		~ValueSetter()				{}
 		

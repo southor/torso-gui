@@ -40,7 +40,7 @@ namespace SGui
 
 	public:
 
-		EventReciever(EventReciever *next = NULL) : next(next)					{}
+		EventReciever(EventReciever *next = nullptr) : next(next)					{}
 
 		virtual ~EventReciever()												{}
 

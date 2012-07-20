@@ -156,7 +156,7 @@ namespace SGui
 		private:
 			/**
 			 * When statesStack is empty then root is the current element.
-			 * When root is NULL then this is an end iterator.		 
+			 * When root is nullptr then this is an end iterator.		 
 			 */
 			State *root;			
 			std::vector<ChildrenIter> statesStack;
@@ -265,7 +265,7 @@ namespace SGui
 
 		//inline bool isActive() const				{ return active; }
 
-		inline bool isRoot() const					{ return (parent == NULL); }
+		inline bool isRoot() const					{ return (parent == nullptr); }
 
 		//inline int getId() const					{ return id; }
 
