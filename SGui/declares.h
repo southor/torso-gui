@@ -11,7 +11,7 @@
 //
 //#include "dAssert.h"
 
-#define nullptr 0
+//#define NULL 0
 
 namespace SGui
 {
