@@ -1,7 +1,7 @@
 #ifndef _STATE_GUI_VALUE_SETTER_H_
 #define _STATE_GUI_VALUE_SETTER_H_
 
-#include "EventReciever.h"
+#include "EventReceiver.h"
 #include "ActionList.h"
 
 //#include "gl_includes.h"
@@ -11,7 +11,7 @@ namespace SGui
 {
 
 	template <typename T>
-	class ValueSetter : public EventReciever
+	class ValueSetter : public EventReceiver
 	{
 	protected:
 
@@ -33,7 +33,7 @@ namespace SGui
 
 	public:
 
-		inline ValueSetter(EventReciever *next = nullptr) : EventReciever(next)	{}
+		inline ValueSetter(EventReceiver *next = nullptr) : EventReceiver(next)	{}
 
 		~ValueSetter()				{}
 		

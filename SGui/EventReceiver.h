@@ -1,5 +1,5 @@
-#ifndef _STATE_GUI_EVENT_RECIEVER_H_
-#define _STATE_GUI_EVENT_RECIEVER_H_
+#ifndef _STATE_GUI_EVENT_RECEIVER_H_
+#define _STATE_GUI_EVENT_RECEIVER_H_
 
 #include "Events.h"
 #include "basic.h"
@@ -21,10 +21,10 @@ namespace SGui
 		{}
 	};
 
-	class EventReciever
+	class EventReceiver
 	{
 	private:
-		PRI_RW_MEMBER(EventReciever*, next, Next)
+		PRI_RW_MEMBER(EventReceiver*, next, Next)
 	
 	protected:
 		
@@ -40,21 +40,25 @@ namespace SGui
 
 	public:
 
-		EventReciever(EventReciever *next = nullptr) : next(next)					{}
+		EventReceiver(EventReceiver *next = nullptr) : next(next)					{}
 
-		virtual ~EventReciever()												{}
+		virtual ~EventReceiver()												{}
 
-		// Lets the hole EventReciever chain recieve the event
+		// Lets the hole EventReceiver chain recieve the event
 		//void chainRecieveEvent(const GridEventInfo &info);
 
-		// Lets this EventReciever chain recieve the event
+		// Lets this EventReceiver chain recieve the event
 		virtual void recieveEvent(const GridEventInfo &info, fint extra = 0) = 0; //	{}
 
-		// Lets this EventReciever chain recieve the event
+		// Lets this EventReceiver chain recieve the event
 		//virtual void recieveEvent(int clientEvent, int arg, fint extra = 0)		{}
 
-		//void setNext(EventReciever *next);
+		//void setNext(EventReceiver *next);
 	};
+
+	// Allows the use of the old missspelled name.
+	typedef EventReceiver EventReciever;
+
 };
 
 #endif

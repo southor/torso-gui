@@ -554,7 +554,7 @@ namespace SGui
 
 	//void State::actionHit(int action, int actionSurfaceId, const Pos &actionPos)
 	//{
-	//	if (eventReciever) eventReciever->recieveAction(this, action, actionSurfaceId, actionPos);
+	//	if (eventReceiver) eventReceiver->recieveAction(this, action, actionSurfaceId, actionPos);
 	//}
 
 	//void State::handleClientEventRec(int clientEvent, int arg, bool indirect)

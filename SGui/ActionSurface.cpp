@@ -52,9 +52,9 @@ namespace SGui
 	//						mouseOverSurfaces.insert(this);
 	//					}
 	//					
-	//					if (eventReciever && filter(MOUSE_OVER_TILE))
+	//					if (eventReceiver && filter(MOUSE_OVER_TILE))
 	//					{
-	//						eventReciever->recieveAction(state, id, MOUSE_OVER_TILE, mouseGridPos);
+	//						eventReceiver->recieveAction(state, id, MOUSE_OVER_TILE, mouseGridPos);
 	//					}
 	//				}
 	//			}
@@ -64,9 +64,9 @@ namespace SGui
 	//				dAssert(checkFlags(ALL_MOUSE_BUTTON_EVENTS, ALL_GRID_EVENTS)); // Should be grid events
 	//				
 	//				int filteredGridEvent = filter(mouseEvent);
-	//				if (eventReciever && filteredGridEvent)
+	//				if (eventReceiver && filteredGridEvent)
 	//				{
-	//					eventReciever->recieveAction(state, id, filteredGridEvent, gridPos);
+	//					eventReceiver->recieveAction(state, id, filteredGridEvent, gridPos);
 	//				}
 	//			}
 
@@ -80,9 +80,9 @@ namespace SGui
 	//			// TODO Remove from global list of ActionSurfaces
 	//			mouseOverSurfaces.erase(this);
 	//			
-	//			if (eventReciever && filter(MOUSE_AWAY_FROM_TILE))
+	//			if (eventReceiver && filter(MOUSE_AWAY_FROM_TILE))
 	//			{					
-	//				eventReciever->recieveAction(state, id, MOUSE_AWAY_FROM_TILE, mouseGridPos);
+	//				eventReceiver->recieveAction(state, id, MOUSE_AWAY_FROM_TILE, mouseGridPos);
 	//			}
 
 	//			return false;
@@ -102,10 +102,10 @@ namespace SGui
 		
 		if (mouseIsOver())
 		{
-			if (eventReciever && accept(mouseButtonEvent))
+			if (eventReceiver && accept(mouseButtonEvent))
 			{
 				GridEventInfo info(state, id, mouseButtonEvent, mouseGridPos);
-				eventReciever->recieveEvent(info);
+				eventReceiver->recieveEvent(info);
 			}
 		}
 	}
@@ -132,10 +132,10 @@ namespace SGui
 					//	mouseOverSurfaces.insert(this);
 					//}
 					
-					if (eventReciever && accept(MOUSE_OVER_TILE))
+					if (eventReceiver && accept(MOUSE_OVER_TILE))
 					{
 						GridEventInfo info(state, id, MOUSE_OVER_TILE, newMouseGridPos);
-						eventReciever->recieveEvent(info);
+						eventReceiver->recieveEvent(info);
 					}
 				}
 
@@ -150,10 +150,10 @@ namespace SGui
 				//// TODO Remove from global list of ActionSurfaces
 				//mouseOverSurfaces.erase(this);
 				
-				if (eventReciever && accept(MOUSE_AWAY_FROM_TILE))
+				if (eventReceiver && accept(MOUSE_AWAY_FROM_TILE))
 				{
 					GridEventInfo info(state, id, MOUSE_AWAY_FROM_TILE, oldMouseGridPos);
-					eventReciever->recieveEvent(info);
+					eventReceiver->recieveEvent(info);
 				}
 
 				return false;

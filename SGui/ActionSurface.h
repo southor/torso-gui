@@ -2,7 +2,7 @@
 #define _STATE_GUI_ACTION_SURFACE_H
 
 #include "ConcreteRectIfc.h"
-#include "EventReciever.h"
+#include "EventReceiver.h"
 #include <limits>
 #include <set>
 
@@ -26,7 +26,7 @@ namespace SGui
 		//static std::set<ActionSurface*> mouseOverSurfaces;
 
 		//Event Reciver
-		PRI_RW_MEMBER(EventReciever*, eventReciever, EventReciever);
+		PRI_RW_MEMBER(EventReceiver*, eventReceiver, EventReceiver);
 
 		static const int ALL_MOUSE_BUTTON_EVENTS_BITS = TWO_TO_POWER_OF(LEFT_MOUSE_DOWN) |
 														TWO_TO_POWER_OF(LEFT_MOUSE_UP) |
@@ -62,16 +62,16 @@ namespace SGui
 
 		/**
 		 * Creates an over all covering action surface
-		 * which accepts all mouse button events. No action reciever.
+		 * which accepts all mouse button events. No action receiver.
 		 * Grid with one grid rectangle for each pixel.
 		 */
 		ActionSurface() : ConcreteRectIfc(INT_MIN/2, INT_MIN/2, INT_MAX, INT_MAX), gridRectSize(1, 1),
-							gridEventFilter(DEFAULT_GRID_EVENT_FILTER), eventReciever(nullptr), mouseGridPos(-1, -1), acceptIndirectEvents(false)
+							gridEventFilter(DEFAULT_GRID_EVENT_FILTER), eventReceiver(nullptr), mouseGridPos(-1, -1), acceptIndirectEvents(false)
 		{}
 
 		ActionSurface(const Pos &pos, const Vec &gridRectSize, const Vec &nGridRects,
-						EventReciever *eventReciever = nullptr)
-			: eventReciever(eventReciever), mouseGridPos(-1, -1), gridEventFilter(DEFAULT_GRID_EVENT_FILTER), acceptIndirectEvents(false)
+						EventReceiver *eventReceiver = nullptr)
+			: eventReceiver(eventReceiver), mouseGridPos(-1, -1), gridEventFilter(DEFAULT_GRID_EVENT_FILTER), acceptIndirectEvents(false)
 		{
 			//dAssert(checkFlags(gridEventFilter, ALL_GRID_EVENTS_BITS));			
 			setPos(pos);
@@ -82,8 +82,8 @@ namespace SGui
 		 * @param size The size of the action surface in pixels. Since gridRectSize
 		 * will be equal to the size nGridRects will be (1, 1).
 		 */
-		ActionSurface(const Pos &pos, const Vec &size, EventReciever *eventReciever = nullptr)
-			: ConcreteRectIfc(pos, size), gridRectSize(size), eventReciever(eventReciever), gridEventFilter(DEFAULT_GRID_EVENT_FILTER), acceptIndirectEvents(false)
+		ActionSurface(const Pos &pos, const Vec &size, EventReceiver *eventReceiver = nullptr)
+			: ConcreteRectIfc(pos, size), gridRectSize(size), eventReceiver(eventReceiver), gridEventFilter(DEFAULT_GRID_EVENT_FILTER), acceptIndirectEvents(false)
 		{
 			//dAssert(checkFlags(gridEventFilter, ALL_GRID_EVENTS_BITS));
 		}
@@ -121,7 +121,7 @@ namespace SGui
 		//inline void gridEventHit(State *state, int id, int gridEvent, const Pos &gridPos)
 		//{
 		//	int filteredGridEvent = filter(gridEvent);
-		//	if (eventReciever && filteredGridEvent) eventReciever->recieveEvent(state, id, filteredGridEvent, gridPos);
+		//	if (eventReceiver && filteredGridEvent) eventReceiver->recieveEvent(state, id, filteredGridEvent, gridPos);
 		//}
 
 		//Pos getPos() const;

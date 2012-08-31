@@ -1,7 +1,7 @@
 #ifndef _STATE_GUI_STATE_SWITCHER_H_
 #define _STATE_GUI_STATE_SWITCHER_H_
 
-#include "EventReciever.h"
+#include "EventReceiver.h"
 #include "ActionList.h"
 
 namespace SGui
@@ -9,7 +9,7 @@ namespace SGui
 
 	class StateHndlr;
 
-	class StateSwitcher : public EventReciever
+	class StateSwitcher : public EventReceiver
 	{
 	public:
 
@@ -44,8 +44,8 @@ namespace SGui
 
 	public:
 
-		inline StateSwitcher(StateHndlr *stateHndlr, EventReciever *next = nullptr)
-			: EventReciever(next), stateHndlr(stateHndlr)
+		inline StateSwitcher(StateHndlr *stateHndlr, EventReceiver *next = nullptr)
+			: EventReceiver(next), stateHndlr(stateHndlr)
 		{}
 
 		~StateSwitcher()			{}
