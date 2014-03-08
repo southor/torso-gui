@@ -9,7 +9,7 @@
 
 
 
-SDLWindow::SDLWindow() : screen(nullptr), Window() //, font(nullptr)
+SDLWindow::SDLWindow() : screen(nullptr), Window(), fullscreenOn(false)
 {
 	wasError = !init();
 }
@@ -26,7 +26,8 @@ void SDLWindow::run()
 		
 		render();
 
-		SDL_GL_SwapBuffers();
+		//SDL_GL_SwapBuffers();
+		SDL_GL_SwapWindow(screen);
 	}
 }	
 
@@ -62,8 +63,12 @@ bool SDLWindow::pollEvents()
 			  break;
               
 			case SDLK_f:					
-			  if (event.key.keysym.mod & KMOD_CTRL)
-				SDL_WM_ToggleFullScreen(screen);
+				if (event.key.keysym.mod & KMOD_CTRL) {
+					//SDL_WM_ToggleFullScreen(screen); // SDL 1.2
+					Uint32 flags = fullscreenOn ? 0 : SDL_WINDOW_FULLSCREEN;
+					SDL_SetWindowFullscreen(screen, flags);
+					fullscreenOn = !fullscreenOn;
+				}
 			  break;
               
 			default:
@@ -112,9 +117,10 @@ bool SDLWindow::init()
 			SDL_GetError( ) );
 		SDL_Quit( );
 	}
-	SDL_WM_SetCaption("SGui Test", nullptr);
+	//SDL_WM_SetCaption("SGui Test", nullptr); // SDl 1.2
 	
-	unsigned int flags = SDL_HWSURFACE | SDL_OPENGL;
+	//unsigned int flags = SDL_HWSURFACE | SDL_OPENGL; // SDL 1.2
+	unsigned int flags = SDL_WINDOW_OPENGL;
 #ifndef _DEBUG
 	//flags |= SDL_FULLSCREEN;
 #endif
@@ -123,8 +129,12 @@ bool SDLWindow::init()
 	SGui::uint &h = windowHeight = 480;
 	unsigned int bpp = 32;	
 
-	screen = SDL_SetVideoMode(w, h, bpp, flags);
-	if (screen == 0)
+	//screen = SDL_SetVideoMode(w, h, bpp, flags); // SDl 1.2
+
+	screen = SDL_CreateWindow("SGui Test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, flags);
+	SDL_GL_CreateContext(screen);
+
+	if (screen == nullptr)
 	{
 		rAssert(false);
 		//throw EXCEPTION("Failed to set video mode");
