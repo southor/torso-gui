@@ -11,7 +11,7 @@ class SDLWindow : public Window
 
 	private:
 		
-		SDL_Window *screen;
+		SDL_Window *sdlWindow;
 		bool fullscreenOn;
 		
 		bool init();
