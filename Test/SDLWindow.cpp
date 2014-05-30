@@ -1,7 +1,7 @@
 #ifndef _STATE_GUI_TEST_SDL_WINDOW_CPP_
 #define _STATE_GUI_TEST_SDL_WINDOW_CPP_
 
-#ifndef _M_X64
+//#ifndef _M_X64
 
 #include "SDLWindow.h"
 #include "SGui\Txtr.h"
@@ -152,6 +152,6 @@ bool SDLWindow::init()
 	return true;
 }
 
-#endif
+//#endif
 
 #endif

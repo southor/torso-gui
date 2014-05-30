@@ -1,7 +1,7 @@
 #ifndef _STATE_GUI_TEST_WIN_WINDOW_CPP_
 #define _STATE_GUI_TEST_WIN_WINDOW_CPP_
 
-#ifdef _M_X64
+//#ifdef _M_X64
 
 #include "WinWindow.h"
 #include "SGui\Txtr.h"
@@ -152,6 +152,6 @@ void WinWindow::uninit()
 
 }
 
-#endif
+//#endif
 
 #endif
