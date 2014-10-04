@@ -50,9 +50,9 @@ namespace SGui
 
 	template<typename T> int bSignFun(T a);
 
-	template<typename T> T xor(T a, T b)		{ return (a && !b) || (!a && b); }
+	//template<typename T> T xor(T a, T b)		{ return (a && !b) || (!a && b); }
 
-	template<typename T> T bitXOr(T a, T b)		{ return (a & ~b) | (~a & b); }
+	//template<typename T> T bitXOr(T a, T b)		{ return (a & ~b) | (~a & b); }
 	
 
 	/**
