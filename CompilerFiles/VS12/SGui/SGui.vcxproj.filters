@@ -124,6 +124,9 @@
     <ClCompile Include="..\..\..\SGui\Txtr.cpp">
       <Filter>Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\SGuiExternal\gl_declares.cpp">
+      <Filter>Files\External</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\SGui\Event.h">

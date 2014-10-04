@@ -100,6 +100,7 @@ namespace SGui
 
 	void GLRenderContext::initGL(uint w, uint h, const SGui::Color3f &bgColor)
 	{
+		rAssert(glDeclaresCorrect());
 
 		//this->viewportWidth = w;
 		//this->viewportHeight = h;
@@ -171,10 +172,10 @@ namespace SGui
 
 	//void GLRenderContext::startNewRendering(const SGui::Color3f &color)
 	void GLRenderContext::startNewRendering()
-	{		
-
-		//glClearColor(color.r, color.b, color.g, 1.0f);
+	{
+		glDisable(GL_SCISSOR_TEST);
 		glClear(GL_COLOR_BUFFER_BIT);
+		glEnable(GL_SCISSOR_TEST);
 
 		//condDisplayGLError("start New Rendering 2");
 

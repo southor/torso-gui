@@ -161,6 +161,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\SGuiExternal\GLRenderContext.cpp" />
+    <ClCompile Include="..\..\..\SGuiExternal\gl_declares.cpp" />
     <ClCompile Include="..\..\..\SGui\ActionList.cpp" />
     <ClCompile Include="..\..\..\SGui\ActionSurface.cpp" />
     <ClCompile Include="..\..\..\SGui\basic.cpp" />
