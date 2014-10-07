@@ -53,8 +53,8 @@ namespace SGui
 		Image(gl_uint txtrId, Pos pos, Vec size, TxtrCoord posWithinTxtr, TxtrCoord sizeWithinTxtr, int operations1 = 0, int operations2 = 0);		
 		Image(gl_uint txtrId, Pos pos, Vec size, int operations1 = 0, int operation2 = 0);
 
-		Image(RenderContext *renderContext, const wchar_t *fileName, Pos pos, Vec size, TxtrCoord posWithinTxtr, TxtrCoord sizeWithinTxtr, int operations1 = 0, int operations2 = 0);
-		Image(RenderContext *renderContext, const wchar_t *fileName, Pos pos, Vec size, int operations1 = 0, int operations2 = 0);
+		Image(RenderContext *renderContext, const fschar *fileName, Pos pos, Vec size, TxtrCoord posWithinTxtr, TxtrCoord sizeWithinTxtr, int operations1 = 0, int operations2 = 0);
+		Image(RenderContext *renderContext, const fschar *fileName, Pos pos, Vec size, int operations1 = 0, int operations2 = 0);
 
 
 		

@@ -3,12 +3,11 @@
 
 #include <string>
 #include <fstream>
+#include <iostream>
 
 #include "Font.h"
 #include "Txtr.h"
-//#include "function_templates.h"
-
-#include <iostream>
+#include "functions.h"
 
 
 // solving LNK error
@@ -24,7 +23,7 @@ namespace SGui
 	// *------------------------------------------------------------------------------------------------------------*
 	// **************************************************************************************************************
 
-	void Font::loadCharWidths(const wchar_t *filename, uchar maxWidth, uchar *charWidths)
+	void Font::loadCharWidths(const fschar *filename, uchar maxWidth, uchar *charWidths)
 	{
 		std::ifstream file(filename);
 		dAssert(file.good());
@@ -54,10 +53,11 @@ namespace SGui
 	const char Font::MOD_SYMBOLS[] = "bui";
 
 	
-	Font::Font(RenderContext *renderContext, const wchar_t *fontDirectory, Vec fontImageNCharacters)
+	Font::Font(RenderContext *renderContext, const fschar *fontDirectory, Vec fontImageNCharacters)
 		: fontImageNCharacters(fontImageNCharacters), txtrCoordRescaleVec(1.0, 1.0)
 	{
-		dAssert(std::strlen(MOD_SYMBOLS) == N_MODS);
+	
+		dAssert(strlenLimit(MOD_SYMBOLS, 256) == N_MODS);
 
 		const int &B = B_BIT;
 		const int &U = U_BIT;
@@ -105,17 +105,17 @@ namespace SGui
 		}
 
 		// Load all fonts which will make up the combined font
-		std::wstring baseFileName = fontDirectory;
-		baseFileName += L"/image_";		
+		fsstring baseFileName = fontDirectory;
+		baseFileName += FSSTRING("/image_");		
 		const Txtr::Pixel3 WHITE = Txtr::Pixel3(255, 255, 255);
-		Txtr image(WHITE, (baseFileName + L".bmp").c_str());
-		Txtr imageB(WHITE, (baseFileName + L"b.bmp").c_str());
-		Txtr imageU(WHITE, (baseFileName + L"u.bmp").c_str());
-		Txtr imageBU(WHITE, (baseFileName + L"bu.bmp").c_str());
-		Txtr imageI(WHITE, (baseFileName + L"i.bmp").c_str());
-		Txtr imageBI(WHITE, (baseFileName + L"bi.bmp").c_str());
-		Txtr imageUI(WHITE, (baseFileName + L"ui.bmp").c_str());
-		Txtr imageBUI(WHITE, (baseFileName + L"bui.bmp").c_str());
+		Txtr image(WHITE, (baseFileName + FSSTRING(".bmp")).c_str());
+		Txtr imageB(WHITE, (baseFileName + FSSTRING("b.bmp")).c_str());
+		Txtr imageU(WHITE, (baseFileName + FSSTRING("u.bmp")).c_str());
+		Txtr imageBU(WHITE, (baseFileName + FSSTRING("bu.bmp")).c_str());
+		Txtr imageI(WHITE, (baseFileName + FSSTRING("i.bmp")).c_str());
+		Txtr imageBI(WHITE, (baseFileName + FSSTRING("bi.bmp")).c_str());
+		Txtr imageUI(WHITE, (baseFileName + FSSTRING("ui.bmp")).c_str());
+		Txtr imageBUI(WHITE, (baseFileName + FSSTRING("bui.bmp")).c_str());
 
 		// Set the font image size
 		this->fontImageSize = Vec(image.getWidth(), image.getHeight());
@@ -168,7 +168,7 @@ namespace SGui
 		usingTxtrCoordRescale = Txtr::getTxtrCoordRescale(this->combinedFontTxtrId, this->txtrCoordRescaleVec);		
 
 		// Load character widths
-		std::wstring charWidthsFilename;				
+		fsstring charWidthsFilename;
 		for(int b=0; b<2; ++b)
 		{			
 			for(int u=0; u<2; ++u)
@@ -176,11 +176,11 @@ namespace SGui
 				for(int i=0; i<2; ++i)
 				{					
 					charWidthsFilename = fontDirectory;
-					charWidthsFilename += L"\\char_widths_";
-					if (b) charWidthsFilename += L'b';					
-					if (u) charWidthsFilename += L'u';
-					if (i) charWidthsFilename += L'i';
-					charWidthsFilename += L".dat";
+					charWidthsFilename += FSSTRING("\\char_widths_");
+					if (b) charWidthsFilename += FSCHAR('b');
+					if (u) charWidthsFilename += FSCHAR('u');
+					if (i) charWidthsFilename += FSCHAR('i');
+					charWidthsFilename += FSSTRING(".dat");
 					
 					loadCharWidths(charWidthsFilename.c_str(), charBaseWidth, &(this->charWidths[b*B | u*U | i*I][0]));			
 				}
@@ -301,7 +301,8 @@ namespace SGui
 	int Font::isConsistent() const
 	{
 		// Must be one mod symbol for each mod.
-		if (std::strlen(MOD_SYMBOLS) != N_MODS) return false;
+		
+		if (strlenLimit(MOD_SYMBOLS, 256) != N_MODS) return false;
 		
 		// Must be space for at least one font image for each mod combination.
 		if (nFontImagesCombined.x * nFontImagesCombined.y >= N_MOD_COMBINATIONS) return false;

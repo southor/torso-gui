@@ -99,7 +99,7 @@ namespace SGui
 		 * @param filename The file to load from.
 		 * @param charWidths The array to store the character widths to.
 		 */
-		static void loadCharWidths(const wchar_t *filename, uchar maxWidth, uchar *charWidths);
+		static void loadCharWidths(const fschar *filename, uchar maxWidth, uchar *charWidths);
 
 
 	public:
@@ -112,7 +112,7 @@ namespace SGui
 		 *                      These images must have a size of 2^n otherwise it might
 		 *                      not work depending on the implementation.
 		 */
-		Font(RenderContext *renderContext, const wchar_t *fontDirectory, Vec fontImageNCharacters = Vec(16, 16));
+		Font(RenderContext *renderContext, const fschar *fontDirectory, Vec fontImageNCharacters = Vec(16, 16));
 
 		inline gl_uint getTxtrId() const					{ return combinedFontTxtrId; }
 		

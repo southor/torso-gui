@@ -13,9 +13,20 @@
 
 //#define NULL 0
 
+#include <stdint.h>
+#include <string>
+
 namespace SGui
 {
 
+#if defined _WIN32
+	typedef wchar_t fschar;
+	typedef std::wstring fsstring;
+#else
+	typedef char fschar;
+	typedef std::string fsstring;
+#endif
+	
 	//typedef signed char int8;
 	//typedef unsigned char uint8;
 
@@ -25,26 +36,20 @@ namespace SGui
 	//typedef int int32;
 	//typedef unsigned int uint32;
 
-	typedef signed __int8 int8;
-	typedef unsigned __int8 uint8;
+	typedef int8_t int8;
+	typedef uint8_t uint8;
 
-	typedef signed __int16 int16;
-	typedef unsigned __int16 uint16;
+	typedef int16_t int16;
+	typedef uint16_t uint16;
 
-	typedef signed __int32 int32;
-	typedef unsigned __int32 uint32;
+	typedef int32_t int32;
+	typedef uint32_t uint32;
 
-	typedef signed __int64 int64;
-	typedef unsigned __int64 uint64;
+	typedef int64_t int64;
+	typedef uint64_t uint64;
 
 	//typedef signed __int128 int128;
 	//typedef unsigned __int128 uint128;
-	
-
-	
-	
-	
-
 	typedef int8 byte;
 	typedef uint8 ubyte;
 

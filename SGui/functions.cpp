@@ -1,8 +1,5 @@
-#ifndef _STATE_GUI_FUNCTIONS_CPP_
-#define _STATE_GUI_FUNCTIONS_CPP_
-
 #include "functions.h"
-#include "function_templates.h"
+#include "function_templates.inl"
 
 #include "basic_includes.h"
 #include "macros.h"
@@ -29,7 +26,7 @@ namespace SGui
 
 	bool beginEq(const char *shortStr, const char *longStr)
 	{
-		return (strNEq(shortStr, longStr) == std::strlen(shortStr));
+		return (strNEq(shortStr, longStr) == strlenLimit(shortStr));
 	}
 
 	bool beginEq(const char *shortStr, int shortStrLength, const char *longStr)
@@ -40,11 +37,11 @@ namespace SGui
 		return (strNEq(shortStr, longStr) == shortStrLength);
 	}
 
-	int strLenLimit(const char *str, int limit)
+	int strlenLimit(const char *str, int limit)
 	{
 		dAssert(str);
 		int i;
-		for(i=0; i<limit; ++i)
+		for (i = 0; i<limit; ++i)
 		{
 			if (str[i] == 0) break;
 		}
@@ -53,7 +50,7 @@ namespace SGui
 
 	bool atLeastLength(const char *str, int lengthToCheck)
 	{
-		return (strLenLimit(str, lengthToCheck) == lengthToCheck);
+		return (strlenLimit(str, lengthToCheck) == lengthToCheck);
 	}
 
 	int readHexChar(char hexChar)
@@ -113,5 +110,3 @@ namespace SGui
 	}
 
 };
-
-#endif

@@ -1,7 +1,7 @@
 #ifndef _STATE_GUI_TEXT_H_
 #define _STATE_GUI_TEXT_H_
 
-#include "font.h"
+#include "Font.h"
 #include "functions.h"
 #include "basic_converters.h"
 
@@ -79,7 +79,7 @@ namespace SGui
 			enum
 			{
 				SPACE = ' ',
-				TAB = '/t'
+				TAB = '\t'
 			};
 
 		public:

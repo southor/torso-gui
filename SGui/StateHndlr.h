@@ -25,7 +25,7 @@ namespace SGui
 			
 			void insert(State *state1, State *state2, State *mapState);
 			
-			inline State* StateHndlr::StatePairArr::get(int stateId1, int stateId2)
+			inline State* get(int stateId1, int stateId2)
 			{
 				return arr[stateId1 * nStates + stateId2];
 			}

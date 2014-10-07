@@ -5,7 +5,7 @@
 
 namespace SGui
 {
-	void testFiles(RenderContext *renderContext, const wchar_t *fontsPath)
+	void testFiles(RenderContext *renderContext, const fschar *fontsPath)
 	{
 
 		std::cout << "sizeof(void*) = " << sizeof(void*) << std::endl;

@@ -25,8 +25,8 @@ namespace SGui
 		while (state->getNChildren() > 0)
 		{
 		
-			ChildrenIter &current = state->childrenBegin();
-			ChildrenIter &end = state->childrenEnd();
+			const ChildrenIter &current = state->childrenBegin();
+			const ChildrenIter &end = state->childrenEnd();
 
 			statesStack.push_back(current);
 			endStack.push_back(end);

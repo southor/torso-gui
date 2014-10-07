@@ -123,9 +123,9 @@ namespace SGui
 	template <typename T> 
 	Color3<T>& Color3<T>::operator -=(const Color3<T>& c)
 	{
-		x -= v.x;
-		y -= v.y;
-		z -= v.z;		
+		r -= c.r;
+		g -= c.g;
+		b -= c.b;
 		return *this;
 	}
 
@@ -224,9 +224,9 @@ namespace SGui
 	template <typename T> 
 	Color4<T>& Color4<T>::operator -=(const Color4<T>& c)
 	{
-		x -= v.x; 
-		y -= v.y; 
-		z -= v.z; 
+		r -= c.r; 
+		g -= c.g; 
+		b -= c.b; 
 		a -= c.a;
 		return *this;
 	}

@@ -65,8 +65,9 @@ namespace SGui
 		 * which accepts all mouse button events. No action receiver.
 		 * Grid with one grid rectangle for each pixel.
 		 */
-		ActionSurface() : ConcreteRectIfc(INT_MIN/2, INT_MIN/2, INT_MAX, INT_MAX), gridRectSize(1, 1),
-							gridEventFilter(DEFAULT_GRID_EVENT_FILTER), eventReceiver(nullptr), mouseGridPos(-1, -1), acceptIndirectEvents(false)
+	ActionSurface() : ConcreteRectIfc(std::numeric_limits<int>::min()/2, std::numeric_limits<int>::min()/2,
+					  std::numeric_limits<int>::max(), std::numeric_limits<int>::max()),
+		  gridRectSize(1, 1), gridEventFilter(DEFAULT_GRID_EVENT_FILTER), eventReceiver(nullptr), mouseGridPos(-1, -1), acceptIndirectEvents(false)
 		{}
 
 		ActionSurface(const Pos &pos, const Vec &gridRectSize, const Vec &nGridRects,
@@ -138,7 +139,7 @@ namespace SGui
 		 */
 		inline bool mouseIsOver() const								{ return (mouseGridPos.x >= 0); }
 				
-		static inline Pos getOutsidePos()							{ return Pos(INT_MIN/2, INT_MIN/2); }
+		static inline Pos getOutsidePos()							{ return Pos(std::numeric_limits<int>::min()/2, std::numeric_limits<int>::min()/2); }
 
 		
 

@@ -4,6 +4,7 @@
 #include "declares.h"
 
 #include <string>
+#include <limits>
 
 namespace SGui
 {
@@ -12,6 +13,7 @@ namespace SGui
 	/**
 	 * tests if the begin of long string is equal to short string.
 	 * If the short string has length zero true is returned.
+	 * Max string length that can be tested is equal to max of int 
 	 */
 	bool beginEq(const char *shortStr, const char *longStr);
 
@@ -22,7 +24,7 @@ namespace SGui
 	 * If string is shorter than limit, the length wil be returned.
 	 * If string is at least as long as limit, limit will be returned.
 	 */
-	int strLenLimit(const char *str, int limit);
+	int strlenLimit(const char *str, int limit = std::numeric_limits<int>::max());
 
 	// returns true if the string is at least as long as lengthToCheck
 	bool atLeastLength(const char *str, int lengthToCheck);

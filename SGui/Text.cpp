@@ -136,9 +136,9 @@ namespace SGui
 		dAssert(textString);
 		
 		static const char RETURN[] = "/n";
-		int returnLength = static_cast<int>(std::strlen(RETURN));
-		int onLength = static_cast<int>(std::strlen(ON_STRING));
-		int offLength = static_cast<int>(std::strlen(OFF_STRING));
+		int returnLength = static_cast<int>(strlenLimit(RETURN));
+		int onLength = static_cast<int>(strlenLimit(ON_STRING));
+		int offLength = static_cast<int>(strlenLimit(OFF_STRING));
 
 		int currentMods(0);
 		Color currentColor(static_cast<uchar>(0));
@@ -229,7 +229,8 @@ namespace SGui
 					addUnit(lastWord);
 				}
 				
-				lastWord->addChar(Char(*textString, currentMods, currentColor));
+				Char c(*textString, currentMods, currentColor);
+				lastWord->addChar(c);
 				++textString;
 
 				acceptSpecialChar = false;
