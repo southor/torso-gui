@@ -1,7 +1,7 @@
 #ifndef _STATE_GUI_GL_RENDER_CONTEXT_H_
 #define _STATE_GUI_GL_RENDER_CONTEXT_H_
 
-#include "SGui\RenderContext.h"
+#include "SGui/RenderContext.h"
 
 namespace SGui
 {

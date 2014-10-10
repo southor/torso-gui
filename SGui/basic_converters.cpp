@@ -6,6 +6,8 @@
 
 namespace SGui
 {
+
+
 	void color3bToColor3f(const Color3b &from, Color3f &to)
 	{
 		to.r = static_cast<float>(from.r) / 255.0f;
@@ -43,6 +45,7 @@ namespace SGui
 
 		str = tmpStr;
 	}
+
 };
 
 #endif

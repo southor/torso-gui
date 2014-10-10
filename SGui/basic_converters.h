@@ -3,8 +3,6 @@
 
 #include "basic.h"
 
-#include <iostream>
-
 namespace SGui
 {
 	void color3bToColor3f(const Color3b &from, Color3f &to);

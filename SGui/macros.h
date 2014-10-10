@@ -5,24 +5,19 @@
 #include "asm_int_3.h"
 
 
-#include <iostream>
-
-
-
 inline void sGuiDebugBreak()
 {
-	sGuiAsmInt3();
-//#ifdef _M_X64
-//	sGuiAsmInt3();
-//#else
-//	__asm int 3
-//#endif
+#if defined SGUI_VISUL_STUDIO
+  sGuiAsmInt3();
+#elif defined SGUI_GCC
+  __asm__("int $3");
+#endif
 }
 
-#if defined _WIN32
+#if defined SGUI_VISUAL_STUDIO
 #define FSCHAR(x) ( L ## x )
 #define FSSTRING(x) ( L ## x )
-#else
+#elif defined SGUI_GCC
 #define FSCHAR(x) ( x )
 #define FSSTRING(x) ( x )
 #endif

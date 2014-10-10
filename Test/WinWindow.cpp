@@ -4,10 +4,10 @@
 //#ifdef _M_X64
 
 #include "WinWindow.h"
-#include "SGui\Txtr.h"
-#include "SGui\macros.h"
+#include "SGui/Txtr.h"
+#include "SGui/macros.h"
 
-#include "SGuiExternal\win_includes.h"
+#include "SGuiExternal/win_includes.h"
 
 
 //the window procedure

@@ -1,19 +1,21 @@
 // Test.cpp : Defines the entry point for the console application.
 //
 
+#if defined _WIN32
 #include "stdafx.h"
+#endif
 
-#include "SGui\files.h"
-#include "SGui\files_test.h"
+#include "SGui/files.h"
+#include "SGui/files_test.h"
 
-//#ifdef _M_X64
-	#include "WinWindow.h"
-//#else
-	#include "SDLWindow.h"
-//#endif
+#ifdef _WIN32
+#include "WinWindow.h"
+#endif
+
+#include "SDLWindow.h"
 
 
-#include "SGui\SGui.h"
+#include "SGui/SGui.h"
 
 #include <iostream>
 

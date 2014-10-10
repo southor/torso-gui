@@ -1,7 +1,7 @@
 #ifndef _STATE_GUI_COLOR_H_
 #define _STATE_GUI_COLOR_H_
 
-#include "declares.h"
+#include "functions.h"
 
 namespace SGui
 {

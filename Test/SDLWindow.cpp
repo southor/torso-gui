@@ -4,8 +4,8 @@
 //#ifndef _M_X64
 
 #include "SDLWindow.h"
-#include "SGui\Txtr.h"
-#include "SGui\macros.h"
+#include "SGui/Txtr.h"
+#include "SGui/macros.h"
 
 
 

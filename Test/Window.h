@@ -1,10 +1,10 @@
 #ifndef _STATE_GUI_TEST_WINDOW_H_
 #define _STATE_GUI_TEST_WINDOW_H_
 
-#include "SGui\files.h"
-#include "SGui\StateHndlr.h"
+#include "SGui/files.h"
+#include "SGui/StateHndlr.h"
 
-#include "SGuiExternal\GLRenderContext.h"
+#include "SGuiExternal/GLRenderContext.h"
 
 //#ifdef WIN32
 //#pragma comment(lib, "SDL.lib")

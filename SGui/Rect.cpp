@@ -2,8 +2,8 @@
 #define _STATE_GUI_RECTANGLE_CPP
 
 #include "Rect.h"
-#include <limits>
 
+#include <limits>
 
 
 namespace SGui
@@ -11,9 +11,9 @@ namespace SGui
 
 	int Rect::area() const
 	{
-		__int64 area = size.x * size.y;
-		return static_cast<int>(limit(area, static_cast<__int64>(INT_MIN),
-								static_cast<__int64>(INT_MAX)));
+		int64 area = size.x * size.y;
+		return static_cast<int>(limit<int64>(area, std::numeric_limits<int>::min(),
+					      std::numeric_limits<int>::max()));
 	}
 
 	void Rect::intersectWith(const Rect &rect)

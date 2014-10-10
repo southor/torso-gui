@@ -1,17 +1,7 @@
 #ifndef _STATE_GUI_DECLARES_H_
 #define _STATE_GUI_DECLARES_H_
 
-//#if defined _WIN32
-//	#define WIN32_LEAN_AND_MEAN
-//	#include <windows.h>
-//#endif
-//
-//#include <GL/gl.h>
-//#include <GL/glu.h>
-//
-//#include "dAssert.h"
-
-//#define NULL 0
+#include "which_compiler.h"
 
 #include <stdint.h>
 #include <string>
@@ -19,10 +9,10 @@
 namespace SGui
 {
 
-#if defined _WIN32
+#if defined SGUI_VISUAL_STUDIO
 	typedef wchar_t fschar;
 	typedef std::wstring fsstring;
-#else
+#elif defined SGUI_GCC
 	typedef char fschar;
 	typedef std::string fsstring;
 #endif

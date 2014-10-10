@@ -59,9 +59,9 @@ namespace SGui
 	
 		dAssert(strlenLimit(MOD_SYMBOLS, 256) == N_MODS);
 
-		const int &B = B_BIT;
-		const int &U = U_BIT;
-		const int &I = I_BIT;
+		const int B = B_BIT;
+		const int U = U_BIT;
+		const int I = I_BIT;
 		
 		switch(N_MODS)
 		{
