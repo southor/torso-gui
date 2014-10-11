@@ -9,10 +9,10 @@
 namespace SGui
 {
 
-#if defined SGUI_VISUAL_STUDIO
+#if defined(SGUI_VISUAL_STUDIO)
 	typedef wchar_t fschar;
 	typedef std::wstring fsstring;
-#elif defined SGUI_GCC
+#elif defined(SGUI_GCC)
 	typedef char fschar;
 	typedef std::string fsstring;
 #endif

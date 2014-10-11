@@ -7,17 +7,17 @@
 
 inline void sGuiDebugBreak()
 {
-#if defined SGUI_VISUL_STUDIO
+#if defined(SGUI_VISUL_STUDIO)
   sGuiAsmInt3();
-#elif defined SGUI_GCC
+#elif defined(SGUI_GCC)
   __asm__("int $3");
 #endif
 }
 
-#if defined SGUI_VISUAL_STUDIO
+#if defined(SGUI_VISUAL_STUDIO)
 #define FSCHAR(x) ( L ## x )
 #define FSSTRING(x) ( L ## x )
-#elif defined SGUI_GCC
+#elif defined(SGUI_GCC)
 #define FSCHAR(x) ( x )
 #define FSSTRING(x) ( x )
 #endif

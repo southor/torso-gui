@@ -239,6 +239,7 @@
     <ClInclude Include="..\..\..\SGui\TextBox.h" />
     <ClInclude Include="..\..\..\SGui\Txtr.h" />
     <ClInclude Include="..\..\..\SGui\ValueSetter.h" />
+    <ClInclude Include="..\..\..\SGui\which_compiler.h" />
     <ClInclude Include="..\..\..\SGui\WRectIfc.h" />
   </ItemGroup>
   <ItemGroup>

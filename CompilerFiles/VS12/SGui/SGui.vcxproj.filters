@@ -270,6 +270,9 @@
     <ClInclude Include="..\..\..\SGui\files_test.h">
       <Filter>Files_Test</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\SGui\which_compiler.h">
+      <Filter>Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
