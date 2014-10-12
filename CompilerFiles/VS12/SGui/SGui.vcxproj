@@ -160,8 +160,6 @@
     </MASM>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\SGuiExternal\GLRenderContext.cpp" />
-    <ClCompile Include="..\..\..\SGuiExternal\gl_declares.cpp" />
     <ClCompile Include="..\..\..\SGui\ActionList.cpp" />
     <ClCompile Include="..\..\..\SGui\ActionSurface.cpp" />
     <ClCompile Include="..\..\..\SGui\basic.cpp" />
@@ -198,6 +196,7 @@
     <ClInclude Include="..\..\..\SGuiExternal\win_includes.h" />
     <ClInclude Include="..\..\..\SGui\ActionList.h" />
     <ClInclude Include="..\..\..\SGui\ActionSurface.h" />
+    <ClInclude Include="..\..\..\SGui\asm_int_3.h" />
     <ClInclude Include="..\..\..\SGui\basic.h" />
     <ClInclude Include="..\..\..\SGui\basic_converters.h" />
     <ClInclude Include="..\..\..\SGui\basic_includes.h" />

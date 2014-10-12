@@ -36,6 +36,9 @@
     <ClCompile Include="..\..\..\Test\WinWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\SGuiExternal\gl_declares.cpp">
+      <Filter>SGuiExternal</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />

@@ -16,9 +16,6 @@
     <Filter Include="Files\Rect">
       <UniqueIdentifier>{09ff97fe-9e47-4073-8193-7366ef48ac8d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Files\External">
-      <UniqueIdentifier>{4ae15fdc-e34b-48c4-aab1-b40f38644361}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Files\EventHandling">
       <UniqueIdentifier>{93f20b8d-6525-4698-99c6-2ea2bcfb63af}</UniqueIdentifier>
     </Filter>
@@ -31,6 +28,9 @@
     </Filter>
     <Filter Include="Files\EventReceivers">
       <UniqueIdentifier>{9fc3f473-e2d9-45ea-8c24-a4b4339df93c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Files\External">
+      <UniqueIdentifier>{f309637d-ddbd-40cf-821b-e0afd75bbcc6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -45,9 +45,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\SGui\ValueSetter.cpp">
       <Filter>Files\EventReceivers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\SGuiExternal\GLRenderContext.cpp">
-      <Filter>Files\External</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\SGui\Slot.cpp">
       <Filter>Files\ObjectPositioning</Filter>
@@ -124,9 +121,6 @@
     <ClCompile Include="..\..\..\SGui\Txtr.cpp">
       <Filter>Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SGuiExternal\gl_declares.cpp">
-      <Filter>Files\External</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\SGui\Event.h">
@@ -152,15 +146,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\SGui\ValueSetter.h">
       <Filter>Files\EventReceivers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\SGuiExternal\gl_includes.h">
-      <Filter>Files\External</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\SGuiExternal\GLRenderContext.h">
-      <Filter>Files\External</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\SGuiExternal\win_includes.h">
-      <Filter>Files\External</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\SGui\Component.h">
       <Filter>Files\ObjectPositioning</Filter>
@@ -272,6 +257,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\SGui\which_compiler.h">
       <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\asm_int_3.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGuiExternal\gl_includes.h">
+      <Filter>Files\External</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGuiExternal\GLRenderContext.h">
+      <Filter>Files\External</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGuiExternal\win_includes.h">
+      <Filter>Files\External</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
