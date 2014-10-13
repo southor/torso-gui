@@ -191,9 +191,6 @@
     <ClCompile Include="..\..\..\SGui\WRectIfc.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\SGuiExternal\GLRenderContext.h" />
-    <ClInclude Include="..\..\..\SGuiExternal\gl_includes.h" />
-    <ClInclude Include="..\..\..\SGuiExternal\win_includes.h" />
     <ClInclude Include="..\..\..\SGui\ActionList.h" />
     <ClInclude Include="..\..\..\SGui\ActionSurface.h" />
     <ClInclude Include="..\..\..\SGui\asm_int_3.h" />

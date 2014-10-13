@@ -208,6 +208,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\SGuiExternal\GLRenderContext.h" />
+    <ClInclude Include="..\..\..\SGuiExternal\gl_includes.h" />
+    <ClInclude Include="..\..\..\SGuiExternal\win_includes.h" />
     <ClInclude Include="..\..\..\Test\SDLWindow.h" />
     <ClInclude Include="..\..\..\Test\stdafx.h" />
     <ClInclude Include="..\..\..\Test\Window.h" />

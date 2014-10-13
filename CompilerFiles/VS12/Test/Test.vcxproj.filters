@@ -59,5 +59,14 @@
     <ClInclude Include="..\..\..\Test\WinWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\SGuiExternal\gl_includes.h">
+      <Filter>SGuiExternal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGuiExternal\GLRenderContext.h">
+      <Filter>SGuiExternal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGuiExternal\win_includes.h">
+      <Filter>SGuiExternal</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

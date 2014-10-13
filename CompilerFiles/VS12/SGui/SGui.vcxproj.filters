@@ -29,9 +29,6 @@
     <Filter Include="Files\EventReceivers">
       <UniqueIdentifier>{9fc3f473-e2d9-45ea-8c24-a4b4339df93c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Files\External">
-      <UniqueIdentifier>{f309637d-ddbd-40cf-821b-e0afd75bbcc6}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\SGui\ActionList.cpp">
@@ -260,15 +257,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\SGui\asm_int_3.h">
       <Filter>Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\SGuiExternal\gl_includes.h">
-      <Filter>Files\External</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\SGuiExternal\GLRenderContext.h">
-      <Filter>Files\External</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\SGuiExternal\win_includes.h">
-      <Filter>Files\External</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
