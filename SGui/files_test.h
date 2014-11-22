@@ -71,17 +71,17 @@ namespace SGui
 
 		//Font font("../Test/graphics/fonts/arial");
 
-		std::wstring fontsPathStr(fontsPath);
-		std::wstring fontArialPathStr;
+		fsstring fontsPathStr(fontsPath);
+		fsstring fontArialPathStr;
 
 		if (fontsPathStr.length() > 0)
 		{
-			bool slash = (fontsPathStr[fontsPathStr.length()-1] == L'/') || (fontsPathStr[fontsPathStr.length()-1] == L'\\');
-			fontArialPathStr = fontsPathStr + (slash ? L"arial" : L"/arial");
+			bool slash = (fontsPathStr[fontsPathStr.length()-1] == FSCHAR('/')) || (fontsPathStr[fontsPathStr.length()-1] == FSCHAR('\\'));
+			fontArialPathStr = fontsPathStr + (slash ? FSSTRING("arial") : FSSTRING("/arial"));
 		}
 		else
 		{
-			fontArialPathStr = L"arial";
+			fontArialPathStr = FSSTRING("arial");
 		}
 		
 		Font font(renderContext, fontArialPathStr.c_str());

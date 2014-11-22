@@ -2,6 +2,7 @@
 #include "SGuiExternal/GLRenderContext.h"
 #include "SGuiExternal/gl_includes.h"
 
+#include <string.h>
 
 //#define STATE_GUI_DEBUG_GL_LINES
 

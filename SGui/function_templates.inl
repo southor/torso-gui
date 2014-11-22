@@ -77,14 +77,12 @@ namespace SGui
 
 	template<typename T> int bSignFun(T a)
 	{
-		if (a>=0) return 1;
-		else return -1;
+		return (a>=0) ? 1 : -1;
 	}
 
 	template<typename T> bool between(T val, T min, T max)
 	{
-		if (val<min) return false;
-		return (val<=max);
+		return val >= min && val <= max;
 	}
 
 	template<typename T> void swap(T& a, T& b)

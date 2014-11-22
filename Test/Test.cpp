@@ -22,12 +22,18 @@
 
 
 
-
+#if defined SGUI_VISUAL_STUDIO
 int _tmain(int argc, _TCHAR* argv[])
+#elif defined SGUI_GCC
+int main(int argc, char* argv[])
+#endif
 {
 	
-
+#if defined _WIN32
 	static const bool USE_SDL = false;
+#else
+	static const bool USE_SDL = true;
+#endif
 
 	std::cout << "sizeof(void*) = " << sizeof(void*) << std::endl;
 	
@@ -35,15 +41,15 @@ int _tmain(int argc, _TCHAR* argv[])
 	std::cout << "sizeof(short) = " << sizeof(short) << std::endl;
 	std::cout << "sizeof(int) = " << sizeof(int) << std::endl;
 	std::cout << "sizeof(long) = " << sizeof(long) << std::endl;
-	std::cout << "sizeof(loing long) = " << sizeof(long long) << std::endl;
+	std::cout << "sizeof(long long) = " << sizeof(long long) << std::endl;
 	
 	std::cout << "sizeof(float) = " << sizeof(float) << std::endl;
 	std::cout << "sizeof(double) = " << sizeof(double) << std::endl;
 	
-	std::cout << "sizeof(__int8) = " << sizeof(__int8) << std::endl;
-	std::cout << "sizeof(__int16) = " << sizeof(__int16) << std::endl;
-	std::cout << "sizeof(__int32) = " << sizeof(__int32) << std::endl;
-	std::cout << "sizeof(__int64) = " << sizeof(__int64) << std::endl;
+	std::cout << "sizeof(int8_t) = " << sizeof(int8_t) << std::endl;
+	std::cout << "sizeof(int16_t) = " << sizeof(int16_t) << std::endl;
+	std::cout << "sizeof(int32_t) = " << sizeof(int32_t) << std::endl;
+	std::cout << "sizeof(int64_t) = " << sizeof(int64_t) << std::endl;
 	std::cout << std::endl;
 	std::cout << "sizeof(SGui::Font) = " << sizeof(SGui::Font) << std::endl;
 
@@ -58,9 +64,18 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	Window *window;
 	if (USE_SDL)
-		window = new SDLWindow;
+	{
+		window = new SDLWindow();
+	}
 	else
+	{
+#if defined _WIN32
 		window = new WinWindow;
+#else
+		std::cout << "Error: Cannot create a WinWindow on a none-windows platform." << std::endl;
+		return 0;
+#endif
+	}
 	if (window->getWasError()) {
 		delete window;
 		return 0;
@@ -69,12 +84,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	SGui::RenderContext *renderContext = window->getRenderContext();
 
 	std::cout << "Test State Gui" << std::endl;
-	SGui::testFiles(renderContext, L"../../../Test/graphics/fonts"); // TODO, maybe initing opengl should be done before testFiles, otherwise problems with texture ids might appear.
+	SGui::testFiles(renderContext, FSSTRING("../../../Test/graphics/fonts")); // TODO, maybe initing opengl should be done before testFiles, otherwise problems with texture ids might appear.
 
 	SGui::initNamespace(window->getRenderContext());
 
 
-	SGui::Font font(renderContext, L"../../../Test/graphics/fonts/arial");
+	SGui::Font font(renderContext, FSSTRING("../../../Test/graphics/fonts/arial"));
 
 	SGui::GraphState root;
 	SGui::GraphState state1;
@@ -86,13 +101,13 @@ int _tmain(int argc, _TCHAR* argv[])
 	std::cout << "sizeof(root) = " << sizeof(SGui::State) << std::endl;
 
 
-	SGui::Image imageBG(renderContext, L"../../../Test/graphics/bg.bmp", SGui::Pos(0, 0), SGui::Vec(window->getWidth(), window->getHeight()));
+	SGui::Image imageBG(renderContext, FSSTRING("../../../Test/graphics/bg.bmp"), SGui::Pos(0, 0), SGui::Vec(window->getWidth(), window->getHeight()));
 	//SGui::Image imageBG(font.getTxtrId(), SGui::Pos(0, 0), SGui::Vec(window.getWidth(), window.getHeight()));
 	//SGui::Image imageBG("../Test/graphics/fonts/arial/image_.bmp", SGui::Pos(0, 0), SGui::Vec(window.getWidth(), window.getHeight()));
 	root.renderObjs.push_back(&imageBG);
 
-	SGui::Txtr arrowTxtr(SGui::Txtr::Pixel3(127, 64, 255), L"../../../Test/graphics/arrow-alpha.bmp");
-	SGui::gl_uint arrowTxtrId = arrowTxtr.add(renderContext, L"../../../Test/graphics/arrow.bmp");
+	SGui::Txtr arrowTxtr(SGui::Txtr::Pixel3(127, 64, 255), FSSTRING("../../../Test/graphics/arrow-alpha.bmp"));
+	SGui::gl_uint arrowTxtrId = arrowTxtr.add(renderContext, FSSTRING("../../../Test/graphics/arrow.bmp"));
 	//arrowTxtr.add("../Test/graphics/arrow.bmp");
 	SGui::Image arrowDownImage(arrowTxtrId, SGui::Pos(100, 200), SGui::Vec(arrowTxtr.getWidth(), arrowTxtr.getHeight()));	
 	SGui::Box scrollAreaBox(arrowDownImage.getTopLeft(), SGui::Vec(arrowDownImage.getWidth(), 100), SGui::Color4f(0.5f, 0.25f, 1.0f, 1.0f), 1);
@@ -109,8 +124,8 @@ int _tmain(int argc, _TCHAR* argv[])
 
 
 
-	SGui::Txtr windowTxtr(L"../../../Test/graphics/window.bmp", L"../../../Test/graphics/window-alpha.bmp");
-	SGui::Image imageWindow(windowTxtr.add(renderContext, L"window.bmp"), SGui::Pos(0, 0), SGui::Vec(windowTxtr.getWidth(), windowTxtr.getHeight()));
+	SGui::Txtr windowTxtr(FSSTRING("../../../Test/graphics/window.bmp"), FSSTRING("../../../Test/graphics/window-alpha.bmp"));
+	SGui::Image imageWindow(windowTxtr.add(renderContext, FSSTRING("window.bmp")), SGui::Pos(0, 0), SGui::Vec(windowTxtr.getWidth(), windowTxtr.getHeight()));
 	state1.renderObjs.push_back(&imageWindow);
 	state1.WRectIfc::setPos(300, 100);
 	//state1.setPos(300, 100);
@@ -120,13 +135,13 @@ int _tmain(int argc, _TCHAR* argv[])
 	state1.renderObjs.push_back(&textBox);
 
 	SGui::Txtr largeTestTxtr(64, 64);
-	SGui::Txtr colorsTxtr(L"../../../Test/graphics/colors.bmp");
+	SGui::Txtr colorsTxtr(FSSTRING("../../../Test/graphics/colors.bmp"));
 	colorsTxtr.copyTo(&largeTestTxtr, 19, 32, true);
-	SGui::Image imageTest(largeTestTxtr.add(renderContext, L"../../../Test/graphics/window.bmp"), SGui::Pos(20, 20), SGui::Vec(largeTestTxtr.getWidth(), largeTestTxtr.getHeight()));
+	SGui::Image imageTest(largeTestTxtr.add(renderContext, FSSTRING("../../../Test/graphics/window.bmp")), SGui::Pos(20, 20), SGui::Vec(largeTestTxtr.getWidth(), largeTestTxtr.getHeight()));
 	root.renderObjs.push_back(&imageTest);
 
-	SGui::Txtr gronTxtr(L"../../../Test/graphics/gron.bmp");
-	SGui::Image imageGron(gronTxtr.add(renderContext, L"gron.bmp"), SGui::Pos(100, 150), SGui::Vec(gronTxtr.getWidth(), gronTxtr.getHeight()));
+	SGui::Txtr gronTxtr(FSSTRING("../../../Test/graphics/gron.bmp"));
+	SGui::Image imageGron(gronTxtr.add(renderContext, FSSTRING("gron.bmp")), SGui::Pos(100, 150), SGui::Vec(gronTxtr.getWidth(), gronTxtr.getHeight()));
 	state2.renderObjs.push_back(&imageGron);
 
 
