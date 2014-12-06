@@ -9,14 +9,23 @@
 namespace SGui
 {
 
+
 #if defined(SGUI_VISUAL_STUDIO)
+	#define WIDE_STRING
+#elif defined(SGUI_GCC)
+#endif
+
+
+#if defined WIDE_FSSTRING
+#define FSSTRING_IS_WIDE
 	typedef wchar_t fschar;
 	typedef std::wstring fsstring;
-#elif defined(SGUI_GCC)
+#else
 	typedef char fschar;
 	typedef std::string fsstring;
 #endif
-	
+
+
 	//typedef signed char int8;
 	//typedef unsigned char uint8;
 
