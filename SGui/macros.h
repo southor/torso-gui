@@ -8,9 +8,9 @@
 inline void sGuiDebugBreak()
 {
 #if defined(SGUI_VISUL_STUDIO)
-  sGuiAsmInt3();
+	sGuiAsmInt3();
 #elif defined(SGUI_GCC)
-  __asm__("int $3");
+	__asm__("int $3");
 #endif
 }
 

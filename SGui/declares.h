@@ -10,13 +10,13 @@ namespace SGui
 {
 
 
-#if defined(SGUI_VISUAL_STUDIO)
-	#define WIDE_STRING
+#ifdef SGUI_VISUAL_STUDIO
+#define WIDE_FSSTRING
 #elif defined(SGUI_GCC)
 #endif
 
 
-#if defined WIDE_FSSTRING
+#ifdef WIDE_FSSTRING
 #define FSSTRING_IS_WIDE
 	typedef wchar_t fschar;
 	typedef std::wstring fsstring;

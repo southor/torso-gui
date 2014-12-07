@@ -8,7 +8,7 @@
 //#endif
 
 // TODO define win32 lean and mean? only for SDL?
-#if defined _WIN32
+#ifdef _WIN32
 //#define WIN32_LEAN_AND_MEAN
 #include "SGuiExternal/win_includes.h"
 #endif
