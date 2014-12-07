@@ -6,7 +6,7 @@
 #elif defined(__GNUC__) || defined(__GNUG__)
 #define SGUI_GCC
 #else
-unknown_compiler
+SGui_unknown_compiler_error
 #endif
 
 #endif
