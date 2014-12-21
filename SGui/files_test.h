@@ -10,6 +10,8 @@ namespace SGui
 
 		std::cout << "sizeof(void*) = " << sizeof(void*) << std::endl;
 
+		dAssert(sizeof(fint) == sizeof(void*));
+
 		// ----------- testing State ------------
 		
 		State *state1 = new State();

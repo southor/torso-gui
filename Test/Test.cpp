@@ -35,6 +35,8 @@ int main(int argc, char* argv[])
 	static const bool USE_SDL = true;
 #endif
 
+	rAssert(sizeof(SGui::fint) == sizeof(void*));
+
 	std::cout << "sizeof(void*) = " << sizeof(void*) << std::endl;
 	
 	std::cout << "sizeof(char) = " << sizeof(char) << std::endl;
@@ -51,7 +53,12 @@ int main(int argc, char* argv[])
 	std::cout << "sizeof(int32_t) = " << sizeof(int32_t) << std::endl;
 	std::cout << "sizeof(int64_t) = " << sizeof(int64_t) << std::endl;
 	std::cout << std::endl;
+	std::cout << "sizeof(SGui::fint) = " << sizeof(SGui::fint) << std::endl;
+	std::cout << "sizeof(SGui::ufint) = " << sizeof(SGui::ufint) << std::endl;
+	std::cout << std::endl;
 	std::cout << "sizeof(SGui::Font) = " << sizeof(SGui::Font) << std::endl;
+
+	
 
 
 	// opengl init, must be performed before init namespace because loaded opengl textures will be cleared/wasted by opengl, in newer versions.
@@ -90,6 +97,9 @@ int main(int argc, char* argv[])
 
 
 	SGui::Font font(renderContext, FSSTRING("../../../Test/graphics/fonts/arial"));
+
+	SGui::ufint font_address = reinterpret_cast<SGui::ufint>(&font);
+	std::cout << "font_address = " << font_address << std::endl;
 
 	SGui::GraphState root;
 	SGui::GraphState state1;
