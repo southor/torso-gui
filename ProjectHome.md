@@ -1,0 +1,1 @@
+A GUI library for C++ using OpengGL for rendering.
