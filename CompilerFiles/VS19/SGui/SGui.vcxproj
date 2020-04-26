@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{CD1D09C3-CB8D-4B9E-84D4-12AC30111EB7}</ProjectGuid>
+    <RootNamespace>SGui</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AdditionalOptions>/SAFESEH:NO</AdditionalOptions>
+      <AdditionalIncludeDirectories>..\..\..\</AdditionalIncludeDirectories>
+    </ClCompile>
+    <MASM>
+      <UseSafeExceptionHandlers>true</UseSafeExceptionHandlers>
+    </MASM>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_M_X64;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>..\..\..\</AdditionalIncludeDirectories>
+    </ClCompile>
+    <MASM>
+      <UseSafeExceptionHandlers>true</UseSafeExceptionHandlers>
+    </MASM>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <OmitFramePointers>true</OmitFramePointers>
+      <AdditionalIncludeDirectories>..\..\..\</AdditionalIncludeDirectories>
+    </ClCompile>
+    <MASM>
+      <UseSafeExceptionHandlers>true</UseSafeExceptionHandlers>
+    </MASM>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <PreprocessorDefinitions>_M_X64;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <OmitFramePointers>true</OmitFramePointers>
+      <AdditionalIncludeDirectories>..\..\..\</AdditionalIncludeDirectories>
+    </ClCompile>
+    <MASM>
+      <UseSafeExceptionHandlers>true</UseSafeExceptionHandlers>
+    </MASM>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\SGui\ActionList.cpp" />
+    <ClCompile Include="..\..\..\SGui\ActionSurface.cpp" />
+    <ClCompile Include="..\..\..\SGui\basic.cpp" />
+    <ClCompile Include="..\..\..\SGui\basic_converters.cpp" />
+    <ClCompile Include="..\..\..\SGui\Box.cpp" />
+    <ClCompile Include="..\..\..\SGui\ConcreteRectIfc.cpp" />
+    <ClCompile Include="..\..\..\SGui\ConcreteWRectIfc.cpp" />
+    <ClCompile Include="..\..\..\SGui\EventReceiver.cpp" />
+    <ClCompile Include="..\..\..\SGui\Font.cpp" />
+    <ClCompile Include="..\..\..\SGui\functions.cpp" />
+    <ClCompile Include="..\..\..\SGui\GraphState.cpp" />
+    <ClCompile Include="..\..\..\SGui\Hashtable.cpp" />
+    <ClCompile Include="..\..\..\SGui\Image.cpp" />
+    <ClCompile Include="..\..\..\SGui\LinkedRectIfc.cpp" />
+    <ClCompile Include="..\..\..\SGui\LinkedWRectIfc.cpp" />
+    <ClCompile Include="..\..\..\SGui\macros.cpp" />
+    <ClCompile Include="..\..\..\SGui\Rect.cpp" />
+    <ClCompile Include="..\..\..\SGui\RectIfc.cpp" />
+    <ClCompile Include="..\..\..\SGui\SGui.cpp" />
+    <ClCompile Include="..\..\..\SGui\Slot.cpp" />
+    <ClCompile Include="..\..\..\SGui\SlotSequence.cpp" />
+    <ClCompile Include="..\..\..\SGui\State.cpp" />
+    <ClCompile Include="..\..\..\SGui\StateHndlr.cpp" />
+    <ClCompile Include="..\..\..\SGui\StateSwitcher.cpp" />
+    <ClCompile Include="..\..\..\SGui\Text.cpp" />
+    <ClCompile Include="..\..\..\SGui\TextBox.cpp" />
+    <ClCompile Include="..\..\..\SGui\Txtr.cpp" />
+    <ClCompile Include="..\..\..\SGui\ValueSetter.cpp" />
+    <ClCompile Include="..\..\..\SGui\WRectIfc.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\SGui\ActionList.h" />
+    <ClInclude Include="..\..\..\SGui\ActionSurface.h" />
+    <ClInclude Include="..\..\..\SGui\asm_int_3.h" />
+    <ClInclude Include="..\..\..\SGui\basic.h" />
+    <ClInclude Include="..\..\..\SGui\basic_converters.h" />
+    <ClInclude Include="..\..\..\SGui\basic_includes.h" />
+    <ClInclude Include="..\..\..\SGui\Box.h" />
+    <ClInclude Include="..\..\..\SGui\Color.h" />
+    <ClInclude Include="..\..\..\SGui\Component.h" />
+    <ClInclude Include="..\..\..\SGui\ConcreteRectIfc.h" />
+    <ClInclude Include="..\..\..\SGui\ConcreteWRectIfc.h" />
+    <ClInclude Include="..\..\..\SGui\declares.h" />
+    <ClInclude Include="..\..\..\SGui\Event.h" />
+    <ClInclude Include="..\..\..\SGui\EventQueue.h" />
+    <ClInclude Include="..\..\..\SGui\EventReceiver.h" />
+    <ClInclude Include="..\..\..\SGui\Events.h" />
+    <ClInclude Include="..\..\..\SGui\EventStack.h" />
+    <ClInclude Include="..\..\..\SGui\files.h" />
+    <ClInclude Include="..\..\..\SGui\files_test.h" />
+    <ClInclude Include="..\..\..\SGui\Font.h" />
+    <ClInclude Include="..\..\..\SGui\functions.h" />
+    <ClInclude Include="..\..\..\SGui\function_templates.h" />
+    <ClInclude Include="..\..\..\SGui\gl_declares.h" />
+    <ClInclude Include="..\..\..\SGui\GraphState.h" />
+    <ClInclude Include="..\..\..\SGui\Hashtable.h" />
+    <ClInclude Include="..\..\..\SGui\Image.h" />
+    <ClInclude Include="..\..\..\SGui\LinkedRectIfc.h" />
+    <ClInclude Include="..\..\..\SGui\LinkedWRectIfc.h" />
+    <ClInclude Include="..\..\..\SGui\macros.h" />
+    <ClInclude Include="..\..\..\SGui\Rect.h" />
+    <ClInclude Include="..\..\..\SGui\RectIfc.h" />
+    <ClInclude Include="..\..\..\SGui\RenderContext.h" />
+    <ClInclude Include="..\..\..\SGui\RenderObj.h" />
+    <ClInclude Include="..\..\..\SGui\SGui.h" />
+    <ClInclude Include="..\..\..\SGui\Slot.h" />
+    <ClInclude Include="..\..\..\SGui\SlotSequence.h" />
+    <ClInclude Include="..\..\..\SGui\Space.h" />
+    <ClInclude Include="..\..\..\SGui\State.h" />
+    <ClInclude Include="..\..\..\SGui\StateHndlr.h" />
+    <ClInclude Include="..\..\..\SGui\StateSwitcher.h" />
+    <ClInclude Include="..\..\..\SGui\Text.h" />
+    <ClInclude Include="..\..\..\SGui\TextBox.h" />
+    <ClInclude Include="..\..\..\SGui\Txtr.h" />
+    <ClInclude Include="..\..\..\SGui\ValueSetter.h" />
+    <ClInclude Include="..\..\..\SGui\which_compiler.h" />
+    <ClInclude Include="..\..\..\SGui\WRectIfc.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="..\..\..\SGui\asm_int_3_x64.asm">
+      <UseSafeExceptionHandlers Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</UseSafeExceptionHandlers>
+      <UseSafeExceptionHandlers Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</UseSafeExceptionHandlers>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </MASM>
+    <MASM Include="..\..\..\SGui\asm_int_3_x86.asm">
+      <UseSafeExceptionHandlers Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</UseSafeExceptionHandlers>
+      <UseSafeExceptionHandlers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</UseSafeExceptionHandlers>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </MASM>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\SGui\function_templates.inl" />
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
+  </ImportGroup>
+</Project>

@@ -4,6 +4,7 @@
 #include "declares.h"
 
 // test define collissions
+#define SGUI_NULL_EVENT SGUI_NULL_EVENT
 #define SGUI_MOUSE_BUTTON_EVENT SGUI_MOUSE_BUTTON_EVENT
 #define SGUI_MOUSE_MOVE_EVENT SGUI_MOUSE_MOVE_EVENT
 
@@ -23,9 +24,7 @@ namespace SGui
 	enum
 	{
 		//SGUI_NULL_EVENT = 0,
-		//SGUI_MOUSE_BUTTON_EVENT = 1,
-		//SGUI_MOUSE_MOVE_EVENT = 2
-		
+
 		SGUI_MOUSE_BUTTON_EVENT = 0,
 		SGUI_MOUSE_MOVE_EVENT = 1
 		

@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Files">
+      <UniqueIdentifier>{1d4c7ea8-f074-4574-8d85-83bc203a3dc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Files\RenderObjs">
+      <UniqueIdentifier>{c79f1523-4bae-4500-9677-fe8e665891f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Files\States">
+      <UniqueIdentifier>{86b5326a-d2ea-4a65-a49a-b9c99ca345e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Files\ObjectPositioning">
+      <UniqueIdentifier>{2add35be-5b9e-4505-94d4-635e7f5afb51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Files\Rect">
+      <UniqueIdentifier>{09ff97fe-9e47-4073-8193-7366ef48ac8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Files\EventHandling">
+      <UniqueIdentifier>{93f20b8d-6525-4698-99c6-2ea2bcfb63af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Files_Test">
+      <UniqueIdentifier>{b7c8db48-7753-41d2-86ce-228e0b3cb7ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Files\EventReceivers">
+      <UniqueIdentifier>{9fc3f473-e2d9-45ea-8c24-a4b4339df93c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\SGui\ActionList.cpp">
+      <Filter>Files\EventReceivers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\EventReceiver.cpp">
+      <Filter>Files\EventReceivers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\StateSwitcher.cpp">
+      <Filter>Files\EventReceivers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\ValueSetter.cpp">
+      <Filter>Files\EventReceivers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\Slot.cpp">
+      <Filter>Files\ObjectPositioning</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\SlotSequence.cpp">
+      <Filter>Files\ObjectPositioning</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\ConcreteRectIfc.cpp">
+      <Filter>Files\Rect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\ConcreteWRectIfc.cpp">
+      <Filter>Files\Rect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\LinkedRectIfc.cpp">
+      <Filter>Files\Rect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\LinkedWRectIfc.cpp">
+      <Filter>Files\Rect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\Rect.cpp">
+      <Filter>Files\Rect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\RectIfc.cpp">
+      <Filter>Files\Rect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\WRectIfc.cpp">
+      <Filter>Files\Rect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\Box.cpp">
+      <Filter>Files\RenderObjs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\Image.cpp">
+      <Filter>Files\RenderObjs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\TextBox.cpp">
+      <Filter>Files\RenderObjs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\GraphState.cpp">
+      <Filter>Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\State.cpp">
+      <Filter>Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\ActionSurface.cpp">
+      <Filter>Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\basic.cpp">
+      <Filter>Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\basic_converters.cpp">
+      <Filter>Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\Font.cpp">
+      <Filter>Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\functions.cpp">
+      <Filter>Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\Hashtable.cpp">
+      <Filter>Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\macros.cpp">
+      <Filter>Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\SGui.cpp">
+      <Filter>Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\StateHndlr.cpp">
+      <Filter>Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\Text.cpp">
+      <Filter>Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SGui\Txtr.cpp">
+      <Filter>Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\SGui\Event.h">
+      <Filter>Files\EventHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\EventQueue.h">
+      <Filter>Files\EventHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\Events.h">
+      <Filter>Files\EventHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\EventStack.h">
+      <Filter>Files\EventHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\ActionList.h">
+      <Filter>Files\EventReceivers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\EventReceiver.h">
+      <Filter>Files\EventReceivers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\StateSwitcher.h">
+      <Filter>Files\EventReceivers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\ValueSetter.h">
+      <Filter>Files\EventReceivers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\Component.h">
+      <Filter>Files\ObjectPositioning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\Slot.h">
+      <Filter>Files\ObjectPositioning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\SlotSequence.h">
+      <Filter>Files\ObjectPositioning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\Space.h">
+      <Filter>Files\ObjectPositioning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\ConcreteRectIfc.h">
+      <Filter>Files\Rect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\ConcreteWRectIfc.h">
+      <Filter>Files\Rect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\LinkedRectIfc.h">
+      <Filter>Files\Rect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\LinkedWRectIfc.h">
+      <Filter>Files\Rect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\Rect.h">
+      <Filter>Files\Rect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\RectIfc.h">
+      <Filter>Files\Rect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\WRectIfc.h">
+      <Filter>Files\Rect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\Box.h">
+      <Filter>Files\RenderObjs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\Image.h">
+      <Filter>Files\RenderObjs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\RenderObj.h">
+      <Filter>Files\RenderObjs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\TextBox.h">
+      <Filter>Files\RenderObjs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\GraphState.h">
+      <Filter>Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\State.h">
+      <Filter>Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\ActionSurface.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\basic.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\basic_converters.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\basic_includes.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\Color.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\declares.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\files.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\Font.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\function_templates.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\functions.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\gl_declares.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\Hashtable.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\macros.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\RenderContext.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\SGui.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\StateHndlr.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\Text.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\Txtr.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\files_test.h">
+      <Filter>Files_Test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\which_compiler.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SGui\asm_int_3.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+    <None Include="..\..\..\SGui\function_templates.inl">
+      <Filter>Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="..\..\..\SGui\asm_int_3_x86.asm">
+      <Filter>Files</Filter>
+    </MASM>
+    <MASM Include="..\..\..\SGui\asm_int_3_x64.asm">
+      <Filter>Files</Filter>
+    </MASM>
+  </ItemGroup>
+</Project>
